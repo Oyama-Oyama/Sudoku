@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/typeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp48"
+            android:text="@string/classic"
+            android:textColor="@color/ddeepMain"
+            android:textSize="@dimen/sp16"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/beginner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/lightMain"
+            app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="@dimen/dp4"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toTopOf="@id/easy"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/typeTitle"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.8">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dp4"
+                android:drawableLeft="@mipmap/img_1"
+                android:drawableRight="@mipmap/ic_1"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp4"
+                android:paddingRight="@dimen/dp14"
+                android:text="@string/beginner"
+                android:textColor="@color/deepMain"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/easy"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/lightMain"
+            app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="@dimen/dp4"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toTopOf="@id/medium"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/beginner"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.8">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dp4"
+                android:drawableLeft="@mipmap/img_2"
+                android:drawableRight="@mipmap/ic_1"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp4"
+                android:paddingRight="@dimen/dp14"
+                android:text="@string/easy"
+                android:textColor="@color/deepMain"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/medium"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/lightMain"
+            app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="@dimen/dp4"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toTopOf="@id/hard"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/easy"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.8">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dp4"
+                android:drawableLeft="@mipmap/img_4"
+                android:drawableRight="@mipmap/ic_1"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp4"
+                android:paddingRight="@dimen/dp14"
+                android:text="@string/medium"
+                android:textColor="@color/deepMain"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/hard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/lightMain"
+            app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="@dimen/dp4"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toTopOf="@id/expert"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/medium"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.8">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dp4"
+                android:drawableLeft="@mipmap/img_5"
+                android:drawableRight="@mipmap/ic_1"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp4"
+                android:paddingRight="@dimen/dp14"
+                android:text="@string/hard"
+                android:textColor="@color/deepMain"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/expert"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/lightMain"
+            app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="@dimen/dp4"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toTopOf="@id/typeMore"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/hard"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.8">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/dp4"
+                android:drawableLeft="@mipmap/img_3"
+                android:drawableRight="@mipmap/ic_1"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp4"
+                android:paddingRight="@dimen/dp14"
+                android:text="@string/expert"
+                android:textColor="@color/deepMain"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/typeMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp16"
+            android:textColor="@color/ddeepMain"
+            android:textSize="@dimen/sp16"
+            android:textStyle="bold"
+            android:text="@string/more"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/expert" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/lightMain"
+            app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="@dimen/dp4"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/typeMore"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.8">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/dp12">
+
+                <ImageView
+                    android:id="@+id/cStar"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/img_6"
+                    app:layout_constraintBottom_toTopOf="@id/rateUs"
+                    app:layout_constraintDimensionRatio="w,1:1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.3"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.25" />
+
+                <ImageView
+                    android:id="@+id/lStar"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/img_6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="w,1:1"
+                    app:layout_constraintLeft_toRightOf="@id/llStar"
+                    app:layout_constraintRight_toLeftOf="@id/cStar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.15"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.15" />
+
+                <ImageView
+                    android:id="@+id/llStar"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@mipmap/img_6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="w,1:1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/lStar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.12"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.1" />
+
+                <ImageView
+                    android:id="@+id/rStar"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/img_6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="w,1:1"
+                    app:layout_constraintLeft_toRightOf="@id/cStar"
+                    app:layout_constraintRight_toLeftOf="@id/rrStar"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.15"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.15" />
+
+                <ImageView
+                    android:id="@+id/rrStar"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:src="@mipmap/img_6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintDimensionRatio="w,1:1"
+                    app:layout_constraintLeft_toRightOf="@id/rStar"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.12"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.1" />
+
+                <TextView
+                    android:id="@+id/rateTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:gravity="center"
+                    android:text="@string/rateTitle"
+                    android:textColor="@color/deepMain"
+                    android:textSize="@dimen/sp16"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cStar"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.8" />
+
+                <TextView
+                    android:id="@+id/rateDetail"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp2"
+                    android:gravity="center"
+                    android:text="@string/rateDetail"
+                    android:textColor="@color/secondColor"
+                    android:textSize="@dimen/sp12"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rateTitle"
+                    app:layout_constraintWidth_default="percent"
+                    app:layout_constraintWidth_percent="0.8" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/rateUs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rate"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp18"
+                    android:layout_marginTop="@dimen/dp8"
+                    app:backgroundTint="@color/teal_200"
+                    app:icon="@mipmap/ic_1"
+                    app:iconGravity="end"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rateDetail" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

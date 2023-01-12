@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home"
+        android:title="@string/home"
+        android:icon="@mipmap/ic_launcher"
+        />
+    <item
+        android:id="@+id/challenge"
+        android:title="@string/challenge"
+        android:icon="@mipmap/ic_launcher"
+        />
+    <item
+        android:id="@+id/data"
+        android:title="@string/data"
+        android:icon="@mipmap/ic_launcher"
+        />
+</menu>

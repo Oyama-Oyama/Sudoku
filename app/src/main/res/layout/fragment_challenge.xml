@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp48"
+        android:gravity="left"
+        android:text="@string/welcome"
+        android:textColor="@color/lllightMain"
+        android:textSize="@dimen/sp24"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp4"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="left"
+        android:text="@string/leftChange"
+        android:textColor="@color/llightMain"
+        android:textSize="@dimen/sp14"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/lightMain"
+        app:cardCornerRadius="@dimen/dp8"
+        app:cardElevation="@dimen/dp4"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintBottom_toTopOf="@id/img"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtitle"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.95">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/dp6"
+            android:paddingTop="@dimen/dp12"
+            android:paddingRight="@dimen/dp6"
+            android:paddingBottom="@dimen/dp12">
+
+            <TextView
+                android:id="@+id/mon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mon"
+                android:paddingBottom="@dimen/dp6"
+                android:textColor="@color/likeMain"
+                android:textSize="@dimen/sp14"
+                app:layout_constraintBottom_toTopOf="@id/monDate"
+                app:layout_constraintLeft_toLeftOf="@id/monDate"
+                app:layout_constraintRight_toRightOf="@id/monDate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/monDate"
+                android:layout_width="@dimen/dp35"
+                android:layout_height="@dimen/dp35"
+                android:background="@drawable/bg_date"
+                android:gravity="center"
+                android:text="09"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/tuesDate" />
+
+            <TextView
+                android:id="@+id/tues"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tues"
+                android:paddingBottom="@dimen/dp6"
+                android:textColor="@color/likeMain"
+                android:textSize="@dimen/sp14"
+                app:layout_constraintBottom_toTopOf="@id/tuesDate"
+                app:layout_constraintLeft_toLeftOf="@id/tuesDate"
+                app:layout_constraintRight_toRightOf="@id/tuesDate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tuesDate"
+                android:layout_width="@dimen/dp35"
+                android:layout_height="@dimen/dp35"
+                android:background="@drawable/bg_date"
+                android:gravity="center"
+                android:text="09"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/monDate"
+                app:layout_constraintRight_toLeftOf="@id/wedDate" />
+
+            <TextView
+                android:id="@+id/wed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp4"
+                android:text="Wed"
+                android:textColor="@color/likeMain"
+                android:paddingBottom="@dimen/dp6"
+                android:textSize="@dimen/sp14"
+                app:layout_constraintBottom_toTopOf="@id/wedDate"
+                app:layout_constraintLeft_toLeftOf="@id/wedDate"
+                app:layout_constraintRight_toRightOf="@id/wedDate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/wedDate"
+                android:layout_width="@dimen/dp35"
+                android:layout_height="@dimen/dp35"
+                android:background="@drawable/bg_date"
+                android:gravity="center"
+                android:text="09"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/tuesDate"
+                app:layout_constraintRight_toLeftOf="@id/thurDate" />
+
+            <TextView
+                android:id="@+id/thur"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thur"
+                android:paddingBottom="@dimen/dp6"
+                android:textColor="@color/likeMain"
+                android:textSize="@dimen/sp14"
+                app:layout_constraintBottom_toTopOf="@id/thurDate"
+                app:layout_constraintLeft_toLeftOf="@id/thurDate"
+                app:layout_constraintRight_toRightOf="@id/thurDate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/thurDate"
+                android:layout_width="@dimen/dp35"
+                android:layout_height="@dimen/dp35"
+                android:background="@drawable/bg_date"
+                android:gravity="center"
+                android:text="09"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/wedDate"
+                app:layout_constraintRight_toLeftOf="@id/friDate" />
+
+            <TextView
+                android:id="@+id/fri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fri"
+                android:paddingBottom="@dimen/dp6"
+                android:textColor="@color/likeMain"
+                android:textSize="@dimen/sp14"
+                app:layout_constraintBottom_toTopOf="@id/friDate"
+                app:layout_constraintLeft_toLeftOf="@id/friDate"
+                app:layout_constraintRight_toRightOf="@id/friDate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/friDate"
+                android:layout_width="@dimen/dp35"
+                android:layout_height="@dimen/dp35"
+                android:background="@drawable/bg_date"
+                android:gravity="center"
+                android:text="09"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/thurDate"
+                app:layout_constraintRight_toLeftOf="@id/satDate" />
+
+            <TextView
+                android:id="@+id/sat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sat"
+                android:paddingBottom="@dimen/dp6"
+                android:textColor="@color/likeMain"
+                android:textSize="@dimen/sp14"
+                app:layout_constraintBottom_toTopOf="@id/satDate"
+                app:layout_constraintLeft_toLeftOf="@id/satDate"
+                app:layout_constraintRight_toRightOf="@id/satDate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/satDate"
+                android:layout_width="@dimen/dp35"
+                android:layout_height="@dimen/dp35"
+                android:background="@drawable/bg_date"
+                android:gravity="center"
+                android:text="09"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/friDate"
+                app:layout_constraintRight_toLeftOf="@id/sunDate" />
+
+            <TextView
+                android:id="@+id/sun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sun"
+                android:paddingBottom="@dimen/dp6"
+                android:textColor="@color/likeMain"
+                android:textSize="@dimen/sp14"
+                app:layout_constraintBottom_toTopOf="@id/sunDate"
+                app:layout_constraintLeft_toLeftOf="@id/sunDate"
+                app:layout_constraintRight_toRightOf="@id/sunDate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/sunDate"
+                android:layout_width="@dimen/dp35"
+                android:layout_height="@dimen/dp35"
+                android:background="@drawable/bg_date"
+                android:gravity="center"
+                android:text="09"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/satDate"
+                app:layout_constraintRight_toRightOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@mipmap/img_7"
+        app:layout_constraintBottom_toTopOf="@id/start"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/date"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.7" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp24"
+        android:text="@string/rate"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp18"
+        app:backgroundTint="@color/teal_200"
+        app:icon="@mipmap/ic_1"
+        app:iconGravity="end"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

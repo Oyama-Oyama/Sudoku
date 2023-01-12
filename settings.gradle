@@ -1,0 +1,30 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        Properties properties = new Properties()
+        properties.load(file('local.properties').newDataInputStream())
+        def userName = properties.getProperty("USERNAME")
+        def passWord = properties.getProperty("PASSWORD")
+        google()
+        mavenCentral()
+        maven { url 'https://www.jitpack.io' }
+        maven {
+
+            credentials {
+                username userName
+                password passWord
+            }
+            url 'https://packages.aliyun.com/maven/repository/2304310-release-55tkv4/'
+        }
+    }
+}
+rootProject.name = "Sudoku"
+include ':app'
+include ':sudo'

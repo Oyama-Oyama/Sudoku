@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/header"
+            android:layout_width="@dimen/dp82"
+            android:layout_height="@dimen/dp82"
+            android:layout_marginTop="@dimen/dp48"
+            android:gravity="center"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="@dimen/dp41"
+            app:elevation="@dimen/dp8"
+            app:icon="@mipmap/img_male"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="@dimen/dp42"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.roman.gurdan.sudo.pro.view.DataView
+            android:id="@+id/total"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/dp48"
+            app:cardBackgroundColor="@color/lightMain"
+            app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="@dimen/dp4"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintDimensionRatio="h,2:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/totalWin"
+            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintVertical_bias="0.3"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.45"
+            app:vTitle="@string/total" />
+
+        <com.roman.gurdan.sudo.pro.view.DataView
+            android:id="@+id/totalWin"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cardBackgroundColor="@color/lightMain"
+            app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="@dimen/dp4"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintDimensionRatio="h,2:1"
+            app:layout_constraintLeft_toRightOf="@id/total"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/total"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.45"
+            app:vTitle="@string/totalWin" />
+
+        <com.roman.gurdan.sudo.pro.view.ChartView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:chartType="allWinRate"
+            app:cardBackgroundColor="@color/lightMain"
+            app:cardCornerRadius="@dimen/dp8"
+            app:cardElevation="@dimen/dp4"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintDimensionRatio="h,1:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/total" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/weekly"
+    android:id="@+id/nav_data">
+
+    <fragment
+        android:id="@+id/weekly"
+        android:name="com.roman.gurdan.sudo.pro.fragment.DataChallenge"
+        android:label="@string/titleWeekly"
+        tools:layout="@layout/fragment_data_challenge">
+
+        <action
+            android:id="@+id/weekly_to_title4x4"
+            app:destination="@id/title4x4"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/weekly_to_title6x6"
+            app:destination="@id/title6x6"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/weekly_to_title8x8"
+            app:destination="@id/title8x8"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/weekly_to_title9x9"
+            app:destination="@id/title9x9"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/title4x4"
+        android:name="com.roman.gurdan.sudo.pro.fragment.DataFour"
+        android:label="@string/title4x4"
+        tools:layout="@layout/fragment_data_four">
+
+        <action
+            android:id="@+id/action4x4"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/title6x6"
+        android:name="com.roman.gurdan.sudo.pro.fragment.DataSix"
+        android:label="@string/title6x6"
+        tools:layout="@layout/fragment_data_six">
+
+        <action
+            android:id="@+id/action6x6"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/title8x8"
+        android:name="com.roman.gurdan.sudo.pro.fragment.DataEight"
+        android:label="@string/title8x8"
+        tools:layout="@layout/fragment_data_eight">
+
+        <action
+            android:id="@+id/action8x8"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/title9x9"
+        android:name="com.roman.gurdan.sudo.pro.fragment.DataNine"
+        android:label="@string/title9x9"
+        tools:layout="@layout/fragment_data_nine">
+
+        <action
+            android:id="@+id/action9x9"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+</navigation>
