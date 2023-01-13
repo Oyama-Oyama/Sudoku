@@ -8,9 +8,9 @@
 
     <declare-styleable name="ChartView">
         <attr name="chartType" format="enum">
-            <enum name="allWinRate" value="1"/>
-            <enum name="allWinRateDaily" value="2"/>
-            <enum name="weeklyFinishRate" value="3"/>
+            <enum name="totalWinRate" value="1"/>
+            <enum name="type15DayCount" value="2"/>
+            <enum name="type15DayWinRate" value="3"/>
             <enum name="weeklyWinRate" value="4"/>
         </attr>
     </declare-styleable>

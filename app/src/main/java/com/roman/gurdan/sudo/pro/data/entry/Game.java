@@ -1,5 +1,6 @@
 package com.roman.gurdan.sudo.pro.data.entry;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -17,6 +18,7 @@ public class Game {
 
     public String date;
 
+    @ColumnInfo(defaultValue = "0")
     public int result;
 
     public long duration;

@@ -1,5 +1,6 @@
 package com.roman.gurdan.sudo.pro.data.entry;
 
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -15,6 +16,7 @@ public class Weekly {
 
     public long duration;
 
+    @ColumnInfo(defaultValue = "0")
     public int week;
 
 }

@@ -7,6 +7,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.roman.gurdan.sudo.pro.data.entry.Game;
 import com.roman.gurdan.sudo.pro.data.entry.Weekly;
 
 import java.util.List;
@@ -28,6 +29,11 @@ public interface WeekDao {
 
     @Query("select count(id) from weekly where result = :result")
     int getWeeksResult(int result);
+
+    //近30天
+    @Query("select count(id) from weekly where DATE('YYYY-MM-DD', '-15 day') <= :date and result = :result")
+    int getWeekly(String date, int result);
+
 
 
 

@@ -9,22 +9,34 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
-import com.github.aachartmodel.aainfographics.aachartcreator.AAChartModel;
-import com.github.aachartmodel.aainfographics.aachartcreator.AAChartType;
-import com.github.aachartmodel.aainfographics.aachartcreator.AAChartView;
-import com.github.aachartmodel.aainfographics.aachartcreator.AASeriesElement;
+import com.AAChartCore.AAChartCoreLib.AAChartCreator.AAChartModel;
+import com.AAChartCore.AAChartCoreLib.AAChartCreator.AAChartView;
+import com.AAChartCore.AAChartCoreLib.AAChartCreator.AASeriesElement;
+import com.AAChartCore.AAChartCoreLib.AAChartEnum.AAChartSymbolStyleType;
+import com.AAChartCore.AAChartCoreLib.AAChartEnum.AAChartType;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AADataLabels;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAPie;
+import com.roman.gurdan.sudo.game.GameSize;
+import com.roman.gurdan.sudo.pro.DateUtil;
 import com.roman.gurdan.sudo.pro.R;
+import com.roman.gurdan.sudo.pro.data.db.GameData;
+
+import java.util.Random;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ChartView extends CardView {
 
+    private static boolean TEST_MODE = true;
+    private Random random = new Random();
     private int chartType;
     private AAChartView chartView;
+    private CompositeDisposable disposables = new CompositeDisposable();
 
     public ChartView(@NonNull Context context) {
         this(context, null);
@@ -52,33 +64,20 @@ public class ChartView extends CardView {
         }
 
         try {
-            Observable.just(chartType)
+            disposables.add(Observable.just(chartType)
                     .map(new Function<Integer, AAChartModel>() {
                         @Override
                         public AAChartModel apply(Integer integer) throws Throwable {
-                            AAChartModel aaChartModel = new AAChartModel()
-                                    .chartType(AAChartType.Area)
-                                    .title("THE HEAT OF PROGRAMMING LANGUAGE")
-                                    .subtitle("Virtual Data")
-                                    .backgroundColor("#4b2b7f")
-                                    .categories(new String[]{"Java", "Swift", "Python", "Ruby", "PHP", "Go", "C", "C#", "C++"})
-                                    .dataLabelsEnabled(false)
-                                    .yAxisGridLineWidth(0f)
-                                    .series(new AASeriesElement[]{
-                                            new AASeriesElement()
-                                                    .name("Tokyo")
-                                                    .data(new Object[]{7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6}),
-                                            new AASeriesElement()
-                                                    .name("NewYork")
-                                                    .data(new Object[]{0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5}),
-                                            new AASeriesElement()
-                                                    .name("London")
-                                                    .data(new Object[]{0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0}),
-                                            new AASeriesElement()
-                                                    .name("Berlin")
-                                                    .data(new Object[]{3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8})
-                                    });
-                            return aaChartModel;
+                            if (integer == 1) {
+                                return buildTotalWinRate();
+                            } else if (integer == 2) {
+                                return buildRecent15DayCount();
+                            } else if (integer == 3) {
+                                return buildType15DayWinRate();
+                            } else if (integer == 4) {
+                                return buildWeeklyWinRate();
+                            }
+                            return buildTotalWinRate();
                         }
                     })
                     .subscribeOn(Schedulers.io())
@@ -90,37 +89,164 @@ public class ChartView extends CardView {
                                 chartView.aa_drawChartWithChartModel(aaChartModel);
                             }
                         }
-                    });
+                    }));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private AAChartModel buildTotalWinRate(){
+    @Override
+    protected void onDetachedFromWindow() {
+        if (disposables != null && !disposables.isDisposed()) disposables.dispose();
+        super.onDetachedFromWindow();
+    }
+
+    private AAChartModel buildTotalWinRate() {
+        float win = TEST_MODE ? random.nextFloat() : GameData.of(getContext().getApplicationContext()).gameDao().getGamesResultCount(1);
+        float fail = TEST_MODE ? (1 - win) : GameData.of(getContext().getApplicationContext()).gameDao().getGamesResultCount(0);
         AAChartModel aaChartModel = new AAChartModel()
-                .chartType(AAChartType.Area)
-                .title("综合总胜率")
-                .subtitle("Virtual Data")
-                .backgroundColor("#4b2b7f")
-                .categories(new String[]{"Java", "Swift", "Python", "Ruby", "PHP", "Go", "C", "C#", "C++"})
-                .dataLabelsEnabled(false)
-                .yAxisGridLineWidth(0f)
-                .series(new AASeriesElement[]{
-                        new AASeriesElement()
-                                .name("Tokyo")
-                                .data(new Object[]{7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6}),
-                        new AASeriesElement()
-                                .name("NewYork")
-                                .data(new Object[]{0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5}),
-                        new AASeriesElement()
-                                .name("London")
-                                .data(new Object[]{0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0}),
-                        new AASeriesElement()
-                                .name("Berlin")
-                                .data(new Object[]{3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8})
+                .chartType(AAChartType.Pie)
+                .title("综合胜率")
+                .backgroundColor("#c4c6c9")
+                .tooltipEnabled(false)
+                .dataLabelsEnabled(true)
+                .series(new AAPie[]{
+                        new AAPie()
+                                .innerSize("20%")
+                                .size(180)
+                                .allowPointSelect(true)
+                                .dataLabels(new AADataLabels()
+                                        .enabled(true)
+                                        .useHTML(true)
+                                        .distance(5)
+                                        .format("<b>{point.name}</b>: <br> {point.percentage:.1f} %"))
+                                .data(new Object[][]{
+                                {"Win", win},
+                                {"Fail", fail}
+                        })
                 });
         return aaChartModel;
     }
 
+    private AAChartModel buildRecent15DayCount() {
+        String[] categories = new String[15];
+        Object[] four = new Object[15];
+        Object[] six = new Object[15];
+        Object[] eight = new Object[15];
+        Object[] nine = new Object[15];
+        for (int i = 14; i >= 0; i--) {
+            String targetDate = DateUtil.getDate(-1 * i);
+            categories[14 - i] = targetDate;
+            four[14 - i] = TEST_MODE ? random.nextInt(100) : GameData.of(getContext().getApplicationContext()).gameDao().getGames(GameSize.SIZE_FOUR.getValue(), targetDate);
+            six[14 - i] = TEST_MODE ? random.nextInt(200) : GameData.of(getContext().getApplicationContext()).gameDao().getGames(GameSize.SIZE_SIX.getValue(), targetDate);
+            eight[14 - i] = TEST_MODE ? random.nextInt(120) : GameData.of(getContext().getApplicationContext()).gameDao().getGames(GameSize.SIZE_EIGHT.getValue(), targetDate);
+            nine[14 - i] = TEST_MODE ? random.nextInt(250) : GameData.of(getContext().getApplicationContext()).gameDao().getGames(GameSize.SIZE_NINE.getValue(), targetDate);
+        }
+
+        return new AAChartModel()
+                .chartType(AAChartType.Line)
+                .title("最近15天游戏次数")
+                .backgroundColor("#c4c6c9")
+                .categories(categories)
+                .dataLabelsEnabled(false)
+                .series(new AASeriesElement[]{
+                        new AASeriesElement()
+                                .name("Easy")
+                                .data(four),
+                        new AASeriesElement()
+                                .name("Medium")
+                                .data(six),
+                        new AASeriesElement()
+                                .name("Hard")
+                                .data(eight),
+                        new AASeriesElement()
+                                .name("Expert")
+                                .data(nine),
+                });
+    }
+
+    private float getRate(int has, int count) {
+        if (TEST_MODE) return random.nextFloat() * 100;
+        if (count <= 0) return 0;
+        return has * 1.0f / count * 100.0f;
+    }
+
+    private AAChartModel buildType15DayWinRate() {
+        String[] categories = new String[15];
+        Object[] four = new Object[15];
+        Object[] six = new Object[15];
+        Object[] eight = new Object[15];
+        Object[] nine = new Object[15];
+        for (int i = 14; i >= 0; i--) {
+            String targetDate = DateUtil.getDate(-1 * i);
+            categories[14 - i] = targetDate;
+            int win4 = GameData.of(getContext().getApplicationContext()).gameDao().getGames(GameSize.SIZE_FOUR.getValue(), targetDate, 1);
+            int fail4 = GameData.of(getContext().getApplicationContext()).gameDao().getGames(GameSize.SIZE_FOUR.getValue(), targetDate, 0);
+            four[14 - i] = getRate(win4, win4 + fail4);
+            int win6 = GameData.of(getContext().getApplicationContext()).gameDao().getGames(GameSize.SIZE_SIX.getValue(), targetDate, 1);
+            int fail6 = GameData.of(getContext().getApplicationContext()).gameDao().getGames(GameSize.SIZE_SIX.getValue(), targetDate, 0);
+            six[14 - i] = getRate(win6, win6 + fail6);
+            int win8 = GameData.of(getContext().getApplicationContext()).gameDao().getGames(GameSize.SIZE_EIGHT.getValue(), targetDate, 1);
+            int fail8 = GameData.of(getContext().getApplicationContext()).gameDao().getGames(GameSize.SIZE_EIGHT.getValue(), targetDate, 0);
+            eight[14 - i] = getRate(win8, win8 + fail8);
+            int win9 = GameData.of(getContext().getApplicationContext()).gameDao().getGames(GameSize.SIZE_NINE.getValue(), targetDate, 1);
+            int fail9 = GameData.of(getContext().getApplicationContext()).gameDao().getGames(GameSize.SIZE_NINE.getValue(), targetDate, 0);
+            nine[14 - i] = getRate(win9, win9 + fail9);
+        }
+        return new AAChartModel()
+                .chartType(AAChartType.Line)
+                .title("最近15天胜率")
+                .backgroundColor("#c4c6c9")
+                .categories(categories)
+                .dataLabelsEnabled(false)
+                .series(new AASeriesElement[]{
+                        new AASeriesElement()
+                                .name("Easy")
+                                .data(four),
+                        new AASeriesElement()
+                                .name("Medium")
+                                .data(six),
+                        new AASeriesElement()
+                                .name("Hard")
+                                .data(eight),
+                        new AASeriesElement()
+                                .name("Expert")
+                                .data(nine),
+                });
+    }
+
+    private AAChartModel buildWeeklyWinRate() {
+        String[] categories = new String[15];
+        Object[] rate = new Object[15];
+        Object[][] range = new Object[15][2];
+        for (int i = 14; i >= 0; i--) {
+            String targetDate = DateUtil.getDate(-1 * i);
+            categories[14 - i] = targetDate;
+            int win = GameData.of(getContext().getApplicationContext()).weekDao().getWeekly(targetDate, 1);
+            int fail = GameData.of(getContext().getApplicationContext()).weekDao().getWeekly(targetDate, 1);
+            float _rate = getRate(win, win + fail);
+            rate[14 - i] = _rate;
+            range[14 - i] = new Object[]{(_rate - 20), (_rate + 20)};
+        }
+        return new AAChartModel()
+                .chartType(AAChartType.Spline)
+                .title("挑战胜率")
+                .markerSymbolStyle(AAChartSymbolStyleType.BorderBlank)
+                .backgroundColor("#c4c6c9")
+                .tooltipEnabled(false)
+                .categories(categories)
+                .dataLabelsEnabled(false)
+                .series(new AASeriesElement[]{
+                        new AASeriesElement()
+                                .name("挑战胜率")
+                                .type(AAChartType.Columnrange)
+                                .data(range),
+                        new AASeriesElement()
+                                .name("挑战胜率趋势")
+                                .allowPointSelect(true)
+                                .borderRadius(1)
+                                .data(rate)
+                });
+    }
 
 }
