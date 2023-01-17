@@ -12,11 +12,11 @@ public class Weekly {
 
     public String date;
 
+    @ColumnInfo(defaultValue = "0")
     public int result;
 
     public long duration;
 
-    @ColumnInfo(defaultValue = "0")
     public int week;
 
 }

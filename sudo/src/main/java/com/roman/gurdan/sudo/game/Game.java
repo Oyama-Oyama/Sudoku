@@ -12,7 +12,7 @@ public class Game {
     private IGameCreator creator;
     private MirrorManager actionManager;
 
-    private boolean openNote = false;
+    public boolean openNote = false;
 
     private IGameChangeListener listener = null;
 
@@ -63,9 +63,9 @@ public class Game {
         return this.creator.getRelativeCells(cell, highLightLineOrRow, highLightGroup, highLightSameNumber);
     }
 
-    public void toggleNote() {
-        openNote = !openNote;
-        this.recordMirrorImage();
+    public void toggleNote(Cell cell) {
+        this.openNote = !this.openNote;
+        this.recordMirrorImage(cell.row, cell.col);
         if (listener != null) listener.onGameChanged();
     }
 
@@ -73,27 +73,28 @@ public class Game {
         return openNote;
     }
 
-    public void setCellValue(int row, int col, int value) {
+    public boolean setCellValue(int row, int col, int value) {
         if (this.creator == null)
             throw new NullPointerException("Game creator can't be null");
-        this.creator.setValue(row, col, value, openNote);
-        this.recordMirrorImage();
-        if (listener != null) listener.onGameChanged();
+        return this.setCellValue(this.creator.getCell(row, col), value);
     }
 
-    public void setCellValue(Cell cell, int value) {
+    public boolean setCellValue(Cell cell, int value) {
         if (this.creator == null)
             throw new NullPointerException("Game creator can't be null");
-        this.creator.setValue(cell, value, openNote);
-        this.recordMirrorImage();
+        boolean status = this.creator.setValue(cell, value, openNote);
+        this.recordMirrorImage(cell.row, cell.col);
         if (listener != null) listener.onGameChanged();
+        return status;
     }
 
-    private void recordMirrorImage() {
+    private void recordMirrorImage(int row, int col) {
         if (this.actionManager == null)
             throw new NullPointerException("Game Action Manager can't be null");
         AMirror mirror = this.creator.recordMirrorImage();
         mirror.openNote = this.openNote;
+        mirror.touchedRow = row;
+        mirror.touchedCol = col;
         this.actionManager.addMirror(mirror);
     }
 
@@ -109,7 +110,7 @@ public class Game {
         AMirror action = this.actionManager.undo();
         this.creator.recoverMirrorImage(action);
         this.openNote = action.openNote;
-        if (listener != null) listener.onGameChanged();
+        if (listener != null) listener.onUndoAction(action.touchedRow, action.touchedCol);
     }
 
     public void clearMirrorImage() {
@@ -120,6 +121,23 @@ public class Game {
 
     public void printGame() {
         this.creator.printGame();
+    }
+
+    public void resetGame() {
+        if (this.creator == null)
+            throw new NullPointerException("Game creator can't be null");
+        this.creator.resetGame();
+        if (listener != null) listener.onGameChanged();
+    }
+
+    public void solve() {
+
+    }
+
+    public boolean isGameOver() {
+        if (this.creator == null)
+            throw new NullPointerException("Game creator can't be null");
+        return this.creator.isGameOver();
     }
 
     public void destroy() {

@@ -58,6 +58,11 @@ public abstract class IGameCreator {
         this.initCells();
         this.solve();
         this.holeGameData();
+        for (int i = 0; i < getGameSize().getValue(); i++) {
+            for (int j = 0; j < getGameSize().getValue(); j++) {
+                data[i][j].optional.clear();
+            }
+        }
         long end = System.currentTimeMillis();
         LogUtil.e("create" + (end - start) + "ms");
     }
@@ -367,9 +372,13 @@ public abstract class IGameCreator {
         for (int i = 0; i < getGameSize().getValue(); i++) {
             for (int j = 0; j < getGameSize().getValue(); j++) {
                 if (i == row || j == col || group == data[i][j].group) {
-                    if (data[i][j].value == cell.value) {
-                        cell.valid = false;
-                        return false;
+                    if (i == row && j == col && group == data[i][j].group) {
+
+                    } else {
+                        if (data[i][j].value == cell.value) {
+                            cell.valid = false;
+                            return false;
+                        }
                     }
                 }
             }
@@ -381,17 +390,15 @@ public abstract class IGameCreator {
     /**
      * 重置相关单元格状态
      *
-     * @param cell
+     * @param row
+     * @param col
+     * @param group
      */
-    protected void checkRelatedValid(Cell cell) {
-        int row = cell.row;
-        int col = cell.col;
-        int group = cell.group;
+    protected void checkRelatedValid(int row, int col, int group) {
         for (int i = 0; i < getGameSize().getValue(); i++) {
             for (int j = 0; j < getGameSize().getValue(); j++) {
                 if (i == row || j == col || group == data[i][j].group) {
-                    if (data[i][j].value == cell.value)
-                        checkValid(data[i][j]);
+                    checkValid(data[i][j]);
                 }
             }
         }
@@ -453,8 +460,10 @@ public abstract class IGameCreator {
         if (cell.preSet)
             return false;
         if (note) {
-            if (cell.optional.contains(value)) cell.optional.remove(value);
-            else cell.optional.add(value);
+            if (cell.optional.contains(value)) {
+                int index = cell.optional.indexOf(value);
+                cell.optional.remove(index);
+            } else cell.optional.add(value);
             return true;
         }
         int preValue = cell.value;
@@ -462,8 +471,7 @@ public abstract class IGameCreator {
         if (value == 0) {
             //此时置空单元格， 应检测相关单元格状态
             if (preValue != 0) {
-                Cell copy = copyCell(preValue, cell.row, cell.col, cell.group);
-                checkRelatedValid(copy);
+                checkRelatedValid(cell.row, cell.col, cell.group);
             }
             return false;
         }
@@ -511,14 +519,66 @@ public abstract class IGameCreator {
     }
 
     public AMirror recordMirrorImage() {
-        MirrorImpl impl = new MirrorImpl(this.data);
+        MirrorImpl impl = new MirrorImpl(encodeData());
         return impl;
     }
 
     public boolean recoverMirrorImage(AMirror mirror) {
         if (mirror != null && mirror.valid())
-            this.data = mirror.data;
-        return true;
+            return decodeData(mirror.data);
+        return false;
+    }
+
+    private String encodeData() {
+        StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < getGameSize().getValue(); i++) {
+            for (int j = 0; j < getGameSize().getValue(); j++) {
+                Cell cell = data[i][j];
+                builder.append(cell.value);
+                builder.append("@");
+                for (Integer integer : cell.optional) {
+                    builder.append(String.valueOf(integer));
+                }
+                builder.append(",");
+            }
+            builder.deleteCharAt(builder.length() - 1);
+            builder.append(";");
+        }
+        builder.deleteCharAt(builder.length() - 1);
+        return builder.toString();
+    }
+
+    private boolean decodeData(String str) {
+        try {
+            String[] args = str.split(";");
+            if (args.length == getGameSize().getValue()) {
+                for (int i = 0; i < args.length; i++) {
+                    String[] tmp = args[i].split(",");
+                    if (tmp.length != getGameSize().getValue())
+                        throw new IllegalStateException("invalid mirror");
+                }
+                for (int i = 0; i < args.length; i++) {
+                    String[] tmp = args[i].split(",");
+                    for (int j = 0; j < tmp.length; j++) {
+                        Cell cell = data[i][j];
+                        String[] content = tmp[j].split("@");
+                        cell.value = Integer.parseInt(content[0]);
+                        cell.optional.clear();
+                        if (content.length > 1 && !content[1].isEmpty()) {
+                            String[] ops = content[1].split("");
+                            for (int i1 = 0; i1 < ops.length; i1++) {
+                                if (!ops[i1].isEmpty())
+                                    cell.optional.add(Integer.parseInt(ops[i1]));
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 
 
@@ -534,6 +594,7 @@ public abstract class IGameCreator {
                 }
             }
         }
+
     }
 
     /**

@@ -1,18 +1,15 @@
 package com.roman.gurdan.sudo.game.action;
 
-import com.roman.gurdan.sudo.game.cell.Cell;
-
 public class MirrorImpl extends AMirror {
 
 
-    public MirrorImpl(Cell[][] data) {
+    public MirrorImpl(String data) {
         super(data);
     }
 
-    public MirrorImpl(Cell[][] data, boolean openNote) {
+    public MirrorImpl(String data, boolean openNote) {
         super(data, openNote);
     }
-
 
 
 }

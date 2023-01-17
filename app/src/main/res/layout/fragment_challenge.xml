@@ -38,11 +38,7 @@
         android:id="@+id/date"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/lightMain"
-        app:cardCornerRadius="@dimen/dp8"
-        app:cardElevation="@dimen/dp4"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="true"
+        style="@style/Card"
         app:layout_constraintBottom_toTopOf="@id/img"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -59,11 +55,37 @@
             android:paddingBottom="@dimen/dp12">
 
             <TextView
+                android:id="@+id/sun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="@dimen/dp6"
+                android:text="Sun"
+                android:textColor="@color/likeMain"
+                android:textSize="@dimen/sp14"
+                app:layout_constraintBottom_toTopOf="@id/sunDate"
+                app:layout_constraintLeft_toLeftOf="@id/sunDate"
+                app:layout_constraintRight_toRightOf="@id/sunDate"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/sunDate"
+                android:layout_width="@dimen/dp35"
+                android:layout_height="@dimen/dp35"
+                android:background="@drawable/bg_date"
+                android:gravity="center"
+                android:text="09"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/monDate" />
+
+            <TextView
                 android:id="@+id/mon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mon"
                 android:paddingBottom="@dimen/dp6"
+                android:text="Mon"
                 android:textColor="@color/likeMain"
                 android:textSize="@dimen/sp14"
                 app:layout_constraintBottom_toTopOf="@id/monDate"
@@ -81,15 +103,15 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp16"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/sunDate"
                 app:layout_constraintRight_toLeftOf="@id/tuesDate" />
 
             <TextView
                 android:id="@+id/tues"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tues"
                 android:paddingBottom="@dimen/dp6"
+                android:text="Tues"
                 android:textColor="@color/likeMain"
                 android:textSize="@dimen/sp14"
                 app:layout_constraintBottom_toTopOf="@id/tuesDate"
@@ -115,9 +137,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp4"
+                android:paddingBottom="@dimen/dp6"
                 android:text="Wed"
                 android:textColor="@color/likeMain"
-                android:paddingBottom="@dimen/dp6"
                 android:textSize="@dimen/sp14"
                 app:layout_constraintBottom_toTopOf="@id/wedDate"
                 app:layout_constraintLeft_toLeftOf="@id/wedDate"
@@ -141,8 +163,8 @@
                 android:id="@+id/thur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Thur"
                 android:paddingBottom="@dimen/dp6"
+                android:text="Thur"
                 android:textColor="@color/likeMain"
                 android:textSize="@dimen/sp14"
                 app:layout_constraintBottom_toTopOf="@id/thurDate"
@@ -167,8 +189,8 @@
                 android:id="@+id/fri"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fri"
                 android:paddingBottom="@dimen/dp6"
+                android:text="Fri"
                 android:textColor="@color/likeMain"
                 android:textSize="@dimen/sp14"
                 app:layout_constraintBottom_toTopOf="@id/friDate"
@@ -193,8 +215,8 @@
                 android:id="@+id/sat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sat"
                 android:paddingBottom="@dimen/dp6"
+                android:text="Sat"
                 android:textColor="@color/likeMain"
                 android:textSize="@dimen/sp14"
                 app:layout_constraintBottom_toTopOf="@id/satDate"
@@ -213,33 +235,8 @@
                 android:textSize="@dimen/sp16"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@id/friDate"
-                app:layout_constraintRight_toLeftOf="@id/sunDate" />
-
-            <TextView
-                android:id="@+id/sun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sun"
-                android:paddingBottom="@dimen/dp6"
-                android:textColor="@color/likeMain"
-                android:textSize="@dimen/sp14"
-                app:layout_constraintBottom_toTopOf="@id/sunDate"
-                app:layout_constraintLeft_toLeftOf="@id/sunDate"
-                app:layout_constraintRight_toRightOf="@id/sunDate"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/sunDate"
-                android:layout_width="@dimen/dp35"
-                android:layout_height="@dimen/dp35"
-                android:background="@drawable/bg_date"
-                android:gravity="center"
-                android:text="09"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp16"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/satDate"
                 app:layout_constraintRight_toRightOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -263,7 +260,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp24"
-        android:text="@string/rate"
+        android:text="@string/startChallenge"
         android:textColor="@color/white"
         android:textSize="@dimen/sp18"
         app:backgroundTint="@color/teal_200"

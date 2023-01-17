@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.roman.gurdan.sudo.pro.view.GameMenu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toTopOf="@id/gameBoard"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/boardView">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu1"
+        style="@style/MenuItem"
+        app:icon="@mipmap/img_restart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/menu2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu2"
+        style="@style/MenuItem"
+        app:icon="@mipmap/img_redo"
+        app:layout_constraintLeft_toRightOf="@id/menu1"
+        app:layout_constraintRight_toLeftOf="@id/menu3"
+        app:layout_constraintTop_toTopOf="@id/menu1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu3"
+        style="@style/MenuItem"
+        app:icon="@mipmap/img_edit"
+        app:layout_constraintLeft_toRightOf="@id/menu2"
+        app:layout_constraintRight_toLeftOf="@id/menu4"
+        app:layout_constraintTop_toTopOf="@id/menu1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/menu4"
+        style="@style/MenuItem"
+        app:icon="@mipmap/img_delete"
+        app:layout_constraintLeft_toRightOf="@id/menu3"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/menu1" />
+
+</com.roman.gurdan.sudo.pro.view.GameMenu>

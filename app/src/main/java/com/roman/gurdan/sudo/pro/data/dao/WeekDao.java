@@ -18,6 +18,9 @@ public interface WeekDao {
     @Query("select * from weekly")
     List<Weekly> getWeeks();
 
+    @Query("select count(*) from weekly where date = :date")
+    int getWeekly(String date);
+
     @Update
     void update(@NonNull Weekly item);
 

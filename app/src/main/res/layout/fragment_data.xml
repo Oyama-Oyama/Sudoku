@@ -30,14 +30,10 @@
 
         <com.roman.gurdan.sudo.pro.view.DataView
             android:id="@+id/total"
+            style="@style/Card"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="@dimen/dp48"
-            app:cardBackgroundColor="@color/lightMain"
-            app:cardCornerRadius="@dimen/dp8"
-            app:cardElevation="@dimen/dp4"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true"
             app:layout_constraintDimensionRatio="h,2:1"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toLeftOf="@id/totalWin"
@@ -49,13 +45,9 @@
 
         <com.roman.gurdan.sudo.pro.view.DataView
             android:id="@+id/totalWin"
+            style="@style/Card"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:cardBackgroundColor="@color/lightMain"
-            app:cardCornerRadius="@dimen/dp8"
-            app:cardElevation="@dimen/dp4"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true"
             app:layout_constraintDimensionRatio="h,2:1"
             app:layout_constraintLeft_toRightOf="@id/total"
             app:layout_constraintRight_toRightOf="parent"
@@ -66,13 +58,9 @@
 
         <com.roman.gurdan.sudo.pro.view.ChartView
             android:id="@+id/totalWinRate"
+            style="@style/Card"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:cardBackgroundColor="@color/lightMain"
-            app:cardCornerRadius="@dimen/dp8"
-            app:cardElevation="@dimen/dp4"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true"
             app:chartType="totalWinRate"
             app:layout_constraintDimensionRatio="h,1:1"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -81,13 +69,9 @@
 
         <com.roman.gurdan.sudo.pro.view.ChartView
             android:id="@+id/total30DayWinRate"
+            style="@style/Card"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:cardBackgroundColor="@color/lightMain"
-            app:cardCornerRadius="@dimen/dp8"
-            app:cardElevation="@dimen/dp4"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true"
             app:chartType="type15DayCount"
             app:layout_constraintDimensionRatio="h,1:1"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -96,13 +80,9 @@
 
         <com.roman.gurdan.sudo.pro.view.ChartView
             android:id="@+id/type30DayWinRate"
+            style="@style/Card"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:cardBackgroundColor="@color/lightMain"
-            app:cardCornerRadius="@dimen/dp8"
-            app:cardElevation="@dimen/dp4"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true"
             app:chartType="type15DayWinRate"
             app:layout_constraintDimensionRatio="h,1:1"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -111,13 +91,9 @@
 
         <com.roman.gurdan.sudo.pro.view.ChartView
             android:id="@+id/weeklyWinRate"
+            style="@style/Card"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:cardBackgroundColor="@color/lightMain"
-            app:cardCornerRadius="@dimen/dp8"
-            app:cardElevation="@dimen/dp4"
-            app:cardPreventCornerOverlap="false"
-            app:cardUseCompatPadding="true"
             app:chartType="weeklyWinRate"
             app:layout_constraintDimensionRatio="h,1:1"
             app:layout_constraintLeft_toLeftOf="parent"

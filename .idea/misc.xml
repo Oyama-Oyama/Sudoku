@@ -5,7 +5,9 @@
       <map>
         <entry key="../../src_sudo/Sudoku/app/src/main/res/drawable/bg_date.xml" value="0.1345" />
         <entry key="../../src_sudo/Sudoku/app/src/main/res/layout/activity_data.xml" value="0.21240942028985507" />
+        <entry key="../../src_sudo/Sudoku/app/src/main/res/layout/activity_game.xml" value="0.1" />
         <entry key="../../src_sudo/Sudoku/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="../../src_sudo/Sudoku/app/src/main/res/layout/activity_setting.xml" value="0.1" />
         <entry key="../../src_sudo/Sudoku/app/src/main/res/layout/fragment_challenge.xml" value="0.17395833333333333" />
         <entry key="../../src_sudo/Sudoku/app/src/main/res/layout/fragment_data.xml" value="0.1" />
         <entry key="../../src_sudo/Sudoku/app/src/main/res/layout/fragment_data_challenge.xml" value="0.1" />
@@ -17,6 +19,9 @@
         <entry key="../../src_sudo/Sudoku/app/src/main/res/layout/view_data_chart.xml" value="0.16691995947315097" />
         <entry key="../../src_sudo/Sudoku/app/src/main/res/layout/view_data_chart_pie.xml" value="0.7713815789473685" />
         <entry key="../../src_sudo/Sudoku/app/src/main/res/layout/view_data_item.xml" value="0.1" />
+        <entry key="../../src_sudo/Sudoku/app/src/main/res/layout/view_game_boar.xml" value="0.21240942028985507" />
+        <entry key="../../src_sudo/Sudoku/app/src/main/res/layout/view_game_menu.xml" value="0.21240942028985507" />
+        <entry key="../../src_sudo/Sudoku/app/src/main/res/layout/view_number_item.xml" value="0.21240942028985507" />
         <entry key="../../src_sudo/Sudoku/app/src/main/res/menu/menu_bottom_navigation.xml" value="0.34322916666666664" />
       </map>
     </option>

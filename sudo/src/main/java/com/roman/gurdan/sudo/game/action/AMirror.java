@@ -1,23 +1,22 @@
 package com.roman.gurdan.sudo.game.action;
 
-import com.roman.gurdan.sudo.game.cell.Cell;
-
 public abstract class AMirror {
 
-    public Cell[][] data;
+    public String data;
     public boolean openNote = false;
-
-    public AMirror(Cell[][] data) {
+    public int touchedRow = -1;
+    public int touchedCol = -1;
+    public AMirror(String data) {
         this.data = data;
     }
 
-    public AMirror(Cell[][] data, boolean openNote) {
+    public AMirror(String data, boolean openNote) {
         this.data = data;
         this.openNote = openNote;
     }
 
     public boolean valid() {
-        return this.data != null;
+        return this.data != null && !this.data.isEmpty();
     }
 
 }

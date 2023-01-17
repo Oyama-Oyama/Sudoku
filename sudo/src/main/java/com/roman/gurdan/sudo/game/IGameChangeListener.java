@@ -4,4 +4,6 @@ public interface IGameChangeListener {
 
     void onGameChanged();
 
+    void onUndoAction(int row, int col);
+
 }

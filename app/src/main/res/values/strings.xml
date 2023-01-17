@@ -17,6 +17,8 @@
     <string name="rateDetail">您的评价是促使我们前进的动力</string>
     <string name="welcome">Welcome</string>
     <string name="leftChange">本周有%d个挑战等待你完成</string>
+    <string name="startChallenge">马上开始</string>
+    <string name="restartChange">再次挑战</string>
 
     <string name="challengeTip">挑战内容由简单到困难的4道题目组成，必须完成所有题目才能完成挑战</string>
     
@@ -34,6 +36,21 @@
     <string name="weeklyCount">周挑战完成次数</string>
     <string name="weeklyWinRate">周挑战胜率</string>
     <string name="weeklyFinishRate">周挑战完成率</string>
+
+    <string name="error">Error</string>
+    <string name="createError">游戏创建失败: %s \n重新创建？</string>
+    <string name="sure">确定</string>
+    <string name="cancel">取消</string>
+    <string name="tip">提示</string>
+    <string name="invalidCell">未选中任一单于格</string>
+    <string name="invalidValue">无效的值</string>
+    <string name="invalidUndo">无效的回退</string>
+
+    <string name="setHighLightSameNumber">高亮相同数字</string>
+    <string name="setHighLightRowColumn">高亮相同行、列</string>
+    <string name="setHighLightGroup">高亮相同相同组</string>
+    <string name="setHighLightError">高亮冲突数字</string>
+    <string name="setting">设置</string>
 
 
 </resources>

@@ -17,7 +17,7 @@ import com.AAChartCore.AAChartCoreLib.AAChartEnum.AAChartType;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AADataLabels;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAPie;
 import com.roman.gurdan.sudo.game.GameSize;
-import com.roman.gurdan.sudo.pro.DateUtil;
+import com.roman.gurdan.sudo.pro.util.DateUtil;
 import com.roman.gurdan.sudo.pro.R;
 import com.roman.gurdan.sudo.pro.data.db.GameData;
 
