@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">Sudoku</string>
+
+
+    <string name="home">Home</string>
+    <string name="challenge">Challenge</string>
+    <string name="data">Data</string>
+    <string name="classic">Classic</string>
+    <string name="beginner">Beginner</string>
+    <string name="easy">Easy</string>
+    <string name="medium">Medium</string>
+    <string name="hard">Hard</string>
+    <string name="expert">Expert</string>
+    <string name="more">More</string>
+    <string name="rate">Rate Us</string>
+    <string name="rateTitle">Suggestions for improvement</string>
+    <string name="rateDetail">Suggestions for improvement are welcome, we will continue to work hard</string>
+    <string name="welcome">Welcome</string>
+    <string name="leftChange">There are %d challenges waiting for you to complete this week</string>
+    <string name="startChallenge">Start immediately</string>
+    <string name="restartChange">Challenge again</string>
+
+    <string name="challengeTip">The content of the challenge consists of 4 questions from simple to difficult, and all questions must be completed to complete the challenge</string>
+
+    <string name="titleWeekly">weekly</string>
+    <string name="title4x4">4x4</string>
+    <string name="title6x6">6x6</string>
+    <string name="title8x8">8x8</string>
+    <string name="title9x9">9x9</string>
+    <string name="nan">NAN</string>
+
+    <string name="total">Total</string>
+    <string name="totalWin">Victory</string>
+    <string name="totalFail">Fail</string>
+    <string name="winRate">winning percentage</string>
+    <string name="weeklyCount">Weekly Challenge Completions</string>
+    <string name="weeklyWinRate">Weekly Challenge Win Rate</string>
+    <string name="weeklyFinishRate">Weekly Challenge Completion Rate</string>
+
+    <string name="recent15day">15 days of games</string>
+    <string name="recent15dayWinRate">Last 15 days win rate</string>
+    <string name="challengeWinRate">challenge win rate</string>
+    <string name="challengeWinRateTrends">Challenge Win Rate Trends</string>
+    <string name="winn">Win</string>
+    <string name="fail">Fail</string>
+
+    <string name="error">Error</string>
+    <string name="createError">Game creation failed: %s \n Recreate?</string>
+    <string name="sure">Sure</string>
+    <string name="cancel">Cancel</string>
+    <string name="tip">hint</string>
+    <string name="invalidCell">None selected</string>
+    <string name="invalidValue">Invalid value</string>
+    <string name="invalidUndo">Invalid fallback</string>
+
+    <string name="setHighLightSameNumber">Highlight the same number</string>
+    <string name="setHighLightRowColumn">Highlight identical rows and columns</string>
+    <string name="setHighLightGroup">Highlight same same group</string>
+    <string name="setHighLightError">Highlight conflicting numbers</string>
+    <string name="setting">Settings</string>
+    <string name="resetGame">Are you sure to reset the game? All input records will be cleared</string>
+    <string name="giveUp">OK to give up the game？</string>
+    <string name="win">Game victory</string>
+
+
+</resources>

@@ -38,7 +38,7 @@ public class DataFragment extends BaseFragment {
         total = view.findViewById(R.id.total);
         totalWin = view.findViewById(R.id.totalWin);
         setup();
-        Easy.Companion.showInterstitial();
+        Easy.Companion.showInterstitial(getActivity());
     }
 
     @Override

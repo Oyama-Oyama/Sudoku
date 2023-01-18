@@ -106,7 +106,7 @@ public class ChartView extends CardView {
         float fail = TEST_MODE ? (1 - win) : GameData.of(getContext().getApplicationContext()).gameDao().getGamesResultCount(0);
         AAChartModel aaChartModel = new AAChartModel()
                 .chartType(AAChartType.Pie)
-                .title("综合胜率")
+                .title(getContext().getString(R.string.winRate))
                 .backgroundColor("#c4c6c9")
                 .tooltipEnabled(false)
                 .dataLabelsEnabled(true)
@@ -121,8 +121,8 @@ public class ChartView extends CardView {
                                         .distance(5)
                                         .format("<b>{point.name}</b>: <br> {point.percentage:.1f} %"))
                                 .data(new Object[][]{
-                                {"Win", win},
-                                {"Fail", fail}
+                                {getContext().getString(R.string.winn), win},
+                                {getContext().getString(R.string.fail), fail}
                         })
                 });
         return aaChartModel;
@@ -145,7 +145,7 @@ public class ChartView extends CardView {
 
         return new AAChartModel()
                 .chartType(AAChartType.Line)
-                .title("最近15天游戏次数")
+                .title(getContext().getString(R.string.recent15day))
                 .backgroundColor("#c4c6c9")
                 .categories(categories)
                 .dataLabelsEnabled(false)
@@ -195,7 +195,7 @@ public class ChartView extends CardView {
         }
         return new AAChartModel()
                 .chartType(AAChartType.Line)
-                .title("最近15天胜率")
+                .title(getContext().getString(R.string.recent15dayWinRate))
                 .backgroundColor("#c4c6c9")
                 .categories(categories)
                 .dataLabelsEnabled(false)
@@ -230,7 +230,7 @@ public class ChartView extends CardView {
         }
         return new AAChartModel()
                 .chartType(AAChartType.Spline)
-                .title("挑战胜率")
+                .title(getContext().getString(R.string.weeklyWinRate))
                 .markerSymbolStyle(AAChartSymbolStyleType.BorderBlank)
                 .backgroundColor("#c4c6c9")
                 .tooltipEnabled(false)
@@ -238,11 +238,11 @@ public class ChartView extends CardView {
                 .dataLabelsEnabled(false)
                 .series(new AASeriesElement[]{
                         new AASeriesElement()
-                                .name("挑战胜率")
+                                .name(getContext().getString(R.string.challengeWinRate))
                                 .type(AAChartType.Columnrange)
                                 .data(range),
                         new AASeriesElement()
-                                .name("挑战胜率趋势")
+                                .name(getContext().getString(R.string.challengeWinRateTrends))
                                 .allowPointSelect(true)
                                 .borderRadius(1)
                                 .data(rate)

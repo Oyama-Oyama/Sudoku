@@ -7,9 +7,12 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.roman.garden.ad.base.AdStatus;
 import com.roman.garden.core.Easy;
+import com.roman.garden.core.ad.AdListener;
 import com.roman.gurdan.sudo.game.Difficulty;
 import com.roman.gurdan.sudo.game.Game;
 import com.roman.gurdan.sudo.game.GameSize;
@@ -27,7 +30,6 @@ import com.roman.gurdan.sudo.util.LogUtil;
 import com.roman.gurdan.sudo.view.BoardView;
 import com.roman.gurdan.sudo.view.IBoardEvent;
 
-import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -60,7 +62,7 @@ public abstract class BaseGameActivity extends BaseActivity {
 
     protected abstract void addRecord();
 
-    protected boolean isGameWin(){
+    protected boolean isGameWin() {
         return boardView == null ? false : boardView.isGameOver();
     }
 
@@ -70,8 +72,8 @@ public abstract class BaseGameActivity extends BaseActivity {
         this.giveUp();
     }
 
-    protected void giveUp(){
-        if (boardView.isGameOver()){
+    protected void giveUp() {
+        if (boardView.isGameOver()) {
             finish();
         } else {
             new AlertDialog.Builder(this)
@@ -112,12 +114,35 @@ public abstract class BaseGameActivity extends BaseActivity {
                 .setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        if (boardView != null){
-                            boardView.resetGame();
+                        if (Easy.Companion.hasInterstitial()) {
+                            Easy.Companion.setInterstitialListener(new AdListener() {
+                                @Override
+                                public void onAdClose() {
+                                    super.onAdClose();
+                                    realResetGame();
+                                }
+
+                                @Override
+                                public void onAdShowFail(@NonNull AdStatus reason) {
+                                    super.onAdShowFail(reason);
+                                    realResetGame();
+                                }
+                            });
+                            Easy.Companion.showInterstitial(BaseGameActivity.this);
                         }
+
                         dialogInterface.dismiss();
                     }
                 }).show();
+    }
+
+    private void realResetGame(){
+        if (boardView != null) {
+            boardView.resetGame();
+        }
+        if (timerUtil != null) {
+            timerUtil.reset();
+        }
     }
 
     protected void alertTip(int msgId) {
@@ -135,7 +160,7 @@ public abstract class BaseGameActivity extends BaseActivity {
 
     protected void onGameOver() {
         timerUtil.cancel();
-        Easy.Companion.showInterstitial();
+        Easy.Companion.showInterstitial(this);
         new AlertDialog.Builder(this)
                 .setTitle(R.string.tip)
                 .setIcon(R.mipmap.img_trophy)

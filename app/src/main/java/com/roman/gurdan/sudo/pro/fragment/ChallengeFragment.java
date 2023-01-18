@@ -3,6 +3,7 @@ package com.roman.gurdan.sudo.pro.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,6 +37,7 @@ public class ChallengeFragment extends BaseFragment {
     private CompositeDisposable disposable = new CompositeDisposable();
 
     private MaterialButton start;
+    private ImageView adTag;
 
     private String selectedDate;
 
@@ -47,6 +49,7 @@ public class ChallengeFragment extends BaseFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        adTag = view.findViewById(R.id.adTag);
         subtitle = view.findViewById(R.id.subtitle);
         weekDates[0] = view.findViewById(R.id.sunDate);
         weekDates[1] = view.findViewById(R.id.monDate);
@@ -187,6 +190,7 @@ public class ChallengeFragment extends BaseFragment {
                                     start.setText(aBoolean ? R.string.restartChange : R.string.startChallenge);
                                     start.setTag(aBoolean);
                                 }
+                                if (adTag != null) adTag.setVisibility(aBoolean ? View.VISIBLE : View.INVISIBLE);
                             }
                         }));
             } catch (Exception e) {
