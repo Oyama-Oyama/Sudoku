@@ -74,6 +74,10 @@ public abstract class IGameCreator {
      */
     public abstract GameSize getGameSize();
 
+    public Difficulty getDifficulty() {
+        return _difficulty;
+    }
+
     /**
      * 初始化棋盘
      */
@@ -365,7 +369,7 @@ public abstract class IGameCreator {
      * @param cell
      * @return
      */
-    protected boolean checkValid(Cell cell) {
+    protected void checkValid(Cell cell) {
         int row = cell.row;
         int col = cell.col;
         int group = cell.group;
@@ -377,14 +381,14 @@ public abstract class IGameCreator {
                     } else {
                         if (data[i][j].value == cell.value) {
                             cell.valid = false;
-                            return false;
+                            return;
                         }
                     }
                 }
             }
         }
         cell.valid = true;
-        return true;
+        return;
     }
 
     /**
@@ -476,7 +480,17 @@ public abstract class IGameCreator {
             return false;
         }
         // 检测此单元格状态
-        return checkValid(cell);
+        checkValid(cell);
+        if (cell.valid) {
+            for (int i = 0; i < getGameSize().getValue(); i++) {
+                for (int j = 0; j < getGameSize().getValue(); j++) {
+                    if (i == cell.row || j == cell.col || cell.group == data[i][j].group) {
+                        checkValid(data[i][j]);
+                    }
+                }
+            }
+        }
+        return true;
     }
 
     /**
@@ -594,7 +608,6 @@ public abstract class IGameCreator {
                 }
             }
         }
-
     }
 
     /**

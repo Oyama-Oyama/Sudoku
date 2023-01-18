@@ -12,6 +12,7 @@ import com.roman.gurdan.sudo.game.GameSize;
 import com.roman.gurdan.sudo.pro.R;
 import com.roman.gurdan.sudo.pro.activity.GameActivity;
 import com.roman.gurdan.sudo.pro.base.BaseFragment;
+import com.roman.gurdan.sudo.pro.util.AppStoreUtil;
 
 public class HomeFragment extends BaseFragment {
 
@@ -51,6 +52,12 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 startGame(GameSize.SIZE_NINE, Difficulty.RANDOM);
+            }
+        });
+        view.findViewById(R.id.rateUs).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppStoreUtil.openPlayStore(view.getContext(), view.getContext().getPackageName());
             }
         });
     }

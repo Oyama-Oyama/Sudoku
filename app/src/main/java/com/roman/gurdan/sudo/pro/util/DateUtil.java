@@ -66,5 +66,13 @@ public class DateUtil {
         }
     }
 
+    public static String millSecondToDate(long millSecond) {
+        long seconds = millSecond / 1000;
+        long second = seconds % 60;
+        long minutes = seconds / 60 % 60;
+        long hours = seconds / 60 / 60;
+        return (hours >= 10 ? hours : "0" + hours) + ":" + (minutes >= 10 ? minutes : "0" + minutes) + ":" + (second >= 10 ? second : "0" + second);
+    }
+
 
 }

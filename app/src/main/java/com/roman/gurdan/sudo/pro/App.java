@@ -2,6 +2,7 @@ package com.roman.gurdan.sudo.pro;
 
 import android.app.Application;
 
+import com.roman.garden.core.Easy;
 import com.roman.gurdan.sudo.pro.util.DateUtil;
 import com.tencent.mmkv.MMKV;
 
@@ -16,7 +17,7 @@ public class App extends Application {
 
         MMKV.initialize(this);
         DateUtil.resetWeekTag();
-
+        Easy.Companion.init(this);
     }
 
 

@@ -14,10 +14,29 @@ android {
 
     }
 
+    signingConfigs {
+        release {
+            storeFile file('key.keystore')
+            keyAlias = 'com.roman.gurdan.sudo.pro'
+            storePassword '123456'
+            keyPassword '123456'
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            jniDebuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //Zipalign优化
+            zipAlignEnabled true
+            multiDexEnabled true
+            // 移除无用的resource文件
+            shrinkResources false
+            signingConfig signingConfigs.release
         }
     }
     compileOptions {
@@ -64,9 +83,9 @@ dependencies {
 //    implementation 'com.diogobernardino.williamchart:tooltip-slider:3.10.1'
 //    implementation 'com.diogobernardino.williamchart:tooltip-points:3.10.1'
 
-//    implementation 'com.easy:ad-core:1.0.2'
-//    implementation 'com.easy:ad-unity:1.0.0'
-//    implementation 'com.easy:ad-admob:1.0.2'
-//    implementation 'com.easy:common:1.0.0'
+    implementation 'com.easy:ad-core:1.0.2'
+    implementation 'com.easy:ad-unity:1.0.0'
+    implementation 'com.easy:ad-admob:1.0.2'
+    implementation 'com.easy:common:1.0.0'
 
 }

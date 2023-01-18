@@ -6,6 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.roman.garden.core.Easy;
 import com.roman.gurdan.sudo.pro.App;
 import com.roman.gurdan.sudo.pro.R;
 import com.roman.gurdan.sudo.pro.base.BaseFragment;
@@ -37,6 +38,7 @@ public class DataFragment extends BaseFragment {
         total = view.findViewById(R.id.total);
         totalWin = view.findViewById(R.id.totalWin);
         setup();
+        Easy.Companion.showInterstitial();
     }
 
     @Override

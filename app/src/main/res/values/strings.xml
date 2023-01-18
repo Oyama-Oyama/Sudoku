@@ -51,6 +51,9 @@
     <string name="setHighLightGroup">高亮相同相同组</string>
     <string name="setHighLightError">高亮冲突数字</string>
     <string name="setting">设置</string>
+    <string name="resetGame">确定重置游戏？所有输入记录会被清空</string>
+    <string name="giveUp">确定放弃游戏？</string>
+    <string name="win">游戏胜利</string>
 
 
 </resources>

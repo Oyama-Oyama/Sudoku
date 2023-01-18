@@ -39,10 +39,16 @@ public class Game {
         this.creator.createGame();
     }
 
-    public int getGameSize() {
+    public GameSize getGameSize() {
         if (this.creator == null)
             throw new NullPointerException("Game creator can't be null");
-        return this.creator.getGameSize().getValue();
+        return this.creator.getGameSize();
+    }
+
+    public Difficulty getGameDifficulty() {
+        if (this.creator == null)
+            throw new NullPointerException("Game creator can't be null");
+        return this.creator.getDifficulty();
     }
 
     public Cell[][] getGameData() {
@@ -143,6 +149,10 @@ public class Game {
     public void destroy() {
         if (this.creator != null) {
             this.creator.destroy();
+        }
+        this.creator = null;
+        if (this.actionManager != null){
+            this.actionManager.clear();
         }
         this.actionManager = null;
     }

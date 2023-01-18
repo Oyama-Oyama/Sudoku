@@ -39,7 +39,7 @@ public interface GameDao {
     int getGamesResultCount(int result);
 
     //近30天
-    @Query("select * from game where DATE('YYYY-MM-DD', '-30 day') <= date group by date order by date DESC")
+    @Query("select * from game where DATE('yyyy-MM-dd', '-30 day') <= date group by date order by date DESC")
     List<Game> getGamesByDate();
 
     @Query("select count(id) from game where gameType = :gameType and date = :date")

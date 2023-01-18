@@ -78,8 +78,8 @@ public class BoardView extends IBoardEvent {
         if (game != null) {
             this.curCell = game.getCell(0, 0);
             cellS = width < height ? width / DEFAULT_MAX_CELL_NUMBER_IN_LINE : height / DEFAULT_MAX_CELL_NUMBER_IN_LINE;
-            startX = (width - game.getGameSize() * cellS) / 2;
-            startY = (height - game.getGameSize() * cellS) / 2;
+            startX = (width - game.getGameSize().getValue() * cellS) / 2;
+            startY = (height - game.getGameSize().getValue() * cellS) / 2;
         }
         this.postInvalidate();
     }
@@ -137,7 +137,7 @@ public class BoardView extends IBoardEvent {
     }
 
     private float getNoteX(int col, int value) {
-        if (game.getGameSize() == GameSize.SIZE_FOUR.getValue()) {
+        if (game.getGameSize().getValue() == GameSize.SIZE_FOUR.getValue()) {
             return startX + col * cellS + (cellS / 2) * (1 - value % 2) + cellS / 4;
         }  else {
             int index = value % 3 - 1;
@@ -147,11 +147,11 @@ public class BoardView extends IBoardEvent {
     }
 
     private float getNoteY(int row, int value) {
-        if (game.getGameSize() == GameSize.SIZE_FOUR.getValue()) {
+        if (game.getGameSize().getValue() == GameSize.SIZE_FOUR.getValue()) {
             float tmp = value / 2.0f;
             int index = tmp <= 1 ? 0 : 1;
             return startY + row * cellS + (cellS / 2) * index + cellS / 3;
-        } else if (game.getGameSize() == GameSize.SIZE_SIX.getValue()) {
+        } else if (game.getGameSize().getValue() == GameSize.SIZE_SIX.getValue()) {
             float tmp = value / 3.0f;
             int index = tmp <= 1 ? 0 : (tmp <= 2 ? 1 : 2);
             return startY + row * cellS + (cellS / 2) * index + cellS / 3;
@@ -202,23 +202,23 @@ public class BoardView extends IBoardEvent {
         //内部九宫格分割线
         int rowStep;
         int colStep;
-        if (game.getGameSize() == GameSize.SIZE_NINE.getValue()) {
+        if (game.getGameSize().getValue() == GameSize.SIZE_NINE.getValue()) {
             rowStep = 3;
             colStep = 3;
         } else {
             rowStep = 2;
-            colStep = game.getGameSize() / 2;
+            colStep = game.getGameSize().getValue() / 2;
         }
-        for (int i = 1; i < game.getGameSize(); i++) {
+        for (int i = 1; i < game.getGameSize().getValue(); i++) {
             if (i % rowStep == 0) {
-                canvas.drawLine(startX, startY + i * cellS, cellS * game.getGameSize() + startX, startY + i * cellS, paint);
+                canvas.drawLine(startX, startY + i * cellS, cellS * game.getGameSize().getValue() + startX, startY + i * cellS, paint);
             }
             if (i % colStep == 0) {
-                canvas.drawLine(startX + i * cellS, startY, startX + i * cellS, startY + cellS * game.getGameSize(), paint);
+                canvas.drawLine(startX + i * cellS, startY, startX + i * cellS, startY + cellS * game.getGameSize().getValue(), paint);
             }
         }
         //外边框
-        canvas.drawRect(startX, startY, startX + cellS * game.getGameSize(), startY + cellS * game.getGameSize(), paint);
+        canvas.drawRect(startX, startY, startX + cellS * game.getGameSize().getValue(), startY + cellS * game.getGameSize().getValue(), paint);
     }
 
     private void drawInnerLine(Canvas canvas) {
@@ -227,19 +227,19 @@ public class BoardView extends IBoardEvent {
         paint.setStrokeWidth(cellS * 0.01f);
         int rowStep;
         int colStep;
-        if (game.getGameSize() == GameSize.SIZE_NINE.getValue()) {
+        if (game.getGameSize().getValue() == GameSize.SIZE_NINE.getValue()) {
             rowStep = 3;
             colStep = 3;
         } else {
             rowStep = 2;
-            colStep = game.getGameSize() / 2;
+            colStep = game.getGameSize().getValue() / 2;
         }
-        for (int i = 1; i < game.getGameSize(); i++) {
+        for (int i = 1; i < game.getGameSize().getValue(); i++) {
             if (i % rowStep != 0) {
-                canvas.drawLine(startX, startY + i * cellS, cellS * game.getGameSize() + startX, startY + i * cellS, paint);
+                canvas.drawLine(startX, startY + i * cellS, cellS * game.getGameSize().getValue() + startX, startY + i * cellS, paint);
             }
             if (i % colStep != 0) {
-                canvas.drawLine(startX + i * cellS, startY, startX + i * cellS, startY + cellS * game.getGameSize(), paint);
+                canvas.drawLine(startX + i * cellS, startY, startX + i * cellS, startY + cellS * game.getGameSize().getValue(), paint);
             }
         }
     }

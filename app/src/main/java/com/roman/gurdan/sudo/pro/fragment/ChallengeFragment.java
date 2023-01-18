@@ -9,9 +9,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.google.android.material.button.MaterialButton;
+import com.roman.garden.ad.base.AdStatus;
+import com.roman.garden.core.Easy;
+import com.roman.garden.core.ad.AdListener;
 import com.roman.gurdan.sudo.pro.App;
 import com.roman.gurdan.sudo.pro.R;
-import com.roman.gurdan.sudo.pro.activity.SettingActivity;
+import com.roman.gurdan.sudo.pro.activity.ChallengeGameActivity;
 import com.roman.gurdan.sudo.pro.base.BaseFragment;
 import com.roman.gurdan.sudo.pro.data.db.GameData;
 import com.roman.gurdan.sudo.pro.util.DateUtil;
@@ -34,6 +37,8 @@ public class ChallengeFragment extends BaseFragment {
 
     private MaterialButton start;
 
+    private String selectedDate;
+
     @Override
     protected int getLayoutId() {
         return R.layout.fragment_challenge;
@@ -55,18 +60,45 @@ public class ChallengeFragment extends BaseFragment {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), SettingActivity.class));
-                Boolean tag = false;
-                try {
-                    tag = (Boolean) view.getTag();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                if (tag) {
+                disposable.add(Observable.just(selectedDate)
+                        .map(new Function<String, Boolean>() {
+                            @Override
+                            public Boolean apply(String s) throws Throwable {
+                                int count = GameData.of(App.instance)
+                                        .weekDao()
+                                        .getWeekly(s);
+                                return count > 0;
+                            }
+                        })
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Consumer<Boolean>() {
+                            @Override
+                            public void accept(Boolean aBoolean) throws Throwable {
+                                if (aBoolean) {
+                                    if (Easy.Companion.hasRewardedVideo()) {
+                                        Easy.Companion.setRewardedVideoListener(new AdListener() {
 
-                } else {
+                                            @Override
+                                            public void onAdShowFail(@NonNull AdStatus reason) {
+                                                super.onAdShowFail(reason);
+                                                getContext().startActivity(new Intent(getContext(), ChallengeGameActivity.class));
+                                            }
 
-                }
+                                            @Override
+                                            public void onUserRewarded() {
+                                                super.onUserRewarded();
+                                                getContext().startActivity(new Intent(getContext(), ChallengeGameActivity.class));
+                                            }
+                                        });
+                                    } else {
+                                        getContext().startActivity(new Intent(getContext(), ChallengeGameActivity.class));
+                                    }
+                                } else {
+                                    getContext().startActivity(new Intent(getContext(), ChallengeGameActivity.class));
+                                }
+                            }
+                        }));
             }
         });
     }
@@ -78,14 +110,14 @@ public class ChallengeFragment extends BaseFragment {
     }
 
     private void setupStatus() {
-        String currentDate = DateUtil.getDate();
+        selectedDate = DateUtil.getDate();
         String[][] date = DateUtil.getWeek();
         for (int i = 0; i < date.length; i++) {
             String[] item = date[i];
             dates[i] = item[0];
             weekDates[i].setText(item[1]);
             weekDates[i].setTag(i);
-            weekDates[i].setSelected(item[0].equals(currentDate));
+            weekDates[i].setSelected(item[0].equals(selectedDate));
             weekDates[i].setOnClickListener(clickListener);
         }
         disposable.add(Observable.just(dates)
@@ -97,7 +129,7 @@ public class ChallengeFragment extends BaseFragment {
                             int _count = GameData.of(App.instance)
                                     .weekDao()
                                     .getWeekly(s);
-                            if (_count > 0) count++;
+                            if (_count <= 0) count++;
                         }
                         return count;
                     }
@@ -119,6 +151,7 @@ public class ChallengeFragment extends BaseFragment {
             int tag = (int) view.getTag();
             try {
                 String date = dates[tag];
+                selectedDate = date;
                 disposable.add(Observable.just(date)
                         .map(new Function<String, Boolean>() {
                             @Override

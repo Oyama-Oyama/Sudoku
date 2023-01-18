@@ -4,7 +4,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.roman.gurdan.sudo.game.Difficulty;
 import com.roman.gurdan.sudo.game.Game;
+import com.roman.gurdan.sudo.game.GameSize;
 import com.roman.gurdan.sudo.game.IGameChangeListener;
 import com.roman.gurdan.sudo.game.cell.Cell;
 
@@ -44,8 +46,16 @@ public abstract class IBoardEvent extends View implements IGameChangeListener {
         this.game.setListener(this);
     }
 
+    public GameSize getGameSize() {
+     return game.getGameSize();
+    }
+
+    public Difficulty getGameDifficulty() {
+        return game.getGameDifficulty();
+    }
+
     public boolean setValue(int value) throws Exception {
-        if (value < 0 || value > game.getGameSize())
+        if (value < 0 || value > game.getGameSize().getValue())
             throw new IllegalArgumentException(INVALID_VALUE);
         if (getCurCell() == null)
             throw new NullPointerException(INVALID_CELL);
@@ -74,7 +84,7 @@ public abstract class IBoardEvent extends View implements IGameChangeListener {
 
     public void resetGame() {
         this.game.resetGame();
-
+        this.clearMirrorImage();
     }
 
     public void solve() {

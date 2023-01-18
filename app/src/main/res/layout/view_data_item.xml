@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="@color/likeMain"
+        android:textColor="@color/lightMain"
         android:textSize="@dimen/sp14"
         app:layout_constraintBottom_toTopOf="@id/msg"
         app:layout_constraintLeft_toLeftOf="parent"

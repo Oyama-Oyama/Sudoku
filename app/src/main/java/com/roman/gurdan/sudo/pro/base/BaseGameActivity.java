@@ -4,10 +4,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.roman.garden.core.Easy;
 import com.roman.gurdan.sudo.game.Difficulty;
 import com.roman.gurdan.sudo.game.Game;
 import com.roman.gurdan.sudo.game.GameSize;
@@ -17,6 +19,7 @@ import com.roman.gurdan.sudo.game.factory.IGameCreator;
 import com.roman.gurdan.sudo.pro.R;
 import com.roman.gurdan.sudo.pro.activity.SettingActivity;
 import com.roman.gurdan.sudo.pro.util.CacheId;
+import com.roman.gurdan.sudo.pro.util.DateUtil;
 import com.roman.gurdan.sudo.pro.util.TimerUtil;
 import com.roman.gurdan.sudo.pro.view.GameBoard;
 import com.roman.gurdan.sudo.pro.view.GameMenu;
@@ -37,14 +40,15 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public abstract class BaseGameActivity extends BaseActivity {
 
-    private TimerUtil timerUtil = new TimerUtil();
+    protected TimerUtil timerUtil = new TimerUtil();
     private CompositeDisposable disposables = new CompositeDisposable();
-    private GameSize gameSize;
-    private Difficulty difficulty;
+    protected GameSize gameSize;
+    protected Difficulty difficulty;
 
     protected BoardView boardView;
     protected GameBoard gameBoard;
     protected GameMenu gameMenu;
+    protected TextView durationTxt;
 
     protected abstract int getLayoutId();
 
@@ -54,8 +58,66 @@ public abstract class BaseGameActivity extends BaseActivity {
 
     protected abstract void onGameCreated(Game game);
 
+    protected abstract void addRecord();
+
+    protected boolean isGameWin(){
+        return boardView == null ? false : boardView.isGameOver();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        this.giveUp();
+    }
+
+    protected void giveUp(){
+        if (boardView.isGameOver()){
+            finish();
+        } else {
+            new AlertDialog.Builder(this)
+                    .setTitle(R.string.tip)
+                    .setMessage(R.string.giveUp)
+                    .setCancelable(false)
+                    .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                            finish();
+                        }
+                    }).show();
+        }
+    }
+
     protected void openSettingPage() {
         startActivity(new Intent(this, SettingActivity.class));
+    }
+
+    protected void resetGame() {
+        new AlertDialog.Builder(this)
+                .setTitle(R.string.tip)
+                .setMessage(R.string.resetGame)
+                .setCancelable(false)
+                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                })
+                .setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if (boardView != null){
+                            boardView.resetGame();
+                        }
+                        dialogInterface.dismiss();
+                    }
+                }).show();
     }
 
     protected void alertTip(int msgId) {
@@ -72,15 +134,18 @@ public abstract class BaseGameActivity extends BaseActivity {
     }
 
     protected void onGameOver() {
+        timerUtil.cancel();
+        Easy.Companion.showInterstitial();
         new AlertDialog.Builder(this)
                 .setTitle(R.string.tip)
                 .setIcon(R.mipmap.img_trophy)
-                .setMessage("Game WIN")
+                .setMessage(R.string.win)
                 .setCancelable(false)
                 .setPositiveButton(R.string.sure, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.dismiss();
+                        finish();
                     }
                 }).show();
     }
@@ -104,7 +169,7 @@ public abstract class BaseGameActivity extends BaseActivity {
                 }).show();
     }
 
-    private void getIntentMessage(Intent intent) {
+    protected void getIntentMessage(Intent intent) {
         if (intent == null) {
             gameSize = GameSize.SIZE_FOUR;
             difficulty = Difficulty.randDifficulty();
@@ -129,6 +194,9 @@ public abstract class BaseGameActivity extends BaseActivity {
         createGame();
         resizeGameBoard();
         setupTimer();
+        timerUtil.reset();
+        FrameLayout banner = findViewById(R.id.bottomBanner);
+        Easy.Companion.showBanner(banner);
     }
 
     @Override
@@ -153,8 +221,11 @@ public abstract class BaseGameActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
+        timerUtil.cancel();
         if (disposables != null && !disposables.isDisposed()) disposables.dispose();
+        addRecord();
         super.onDestroy();
+        Easy.Companion.hideBanner();
     }
 
     private void setupTimer() {
@@ -162,9 +233,10 @@ public abstract class BaseGameActivity extends BaseActivity {
                 .map(new Function<Long, String>() {
                     @Override
                     public String apply(Long aLong) throws Throwable {
-                        long duration = timerUtil.getDuration();
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-                        return dateFormat.format(duration);
+//                        long duration = timerUtil.getDuration();
+//                        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+//                        return dateFormat.format(duration);
+                        return DateUtil.millSecondToDate(timerUtil.getDuration());
                     }
                 }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -222,7 +294,7 @@ public abstract class BaseGameActivity extends BaseActivity {
     protected void onMenu(int integer) {
         try {
             if (integer == 0) {
-                boardView.resetGame();
+                resetGame();
             } else if (integer == 1) {
                 if (boardView.hasUndo()) {
                     boardView.Undo();

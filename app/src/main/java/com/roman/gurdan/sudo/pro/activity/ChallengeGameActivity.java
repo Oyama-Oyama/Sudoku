@@ -1,20 +1,26 @@
 package com.roman.gurdan.sudo.pro.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 
+import com.roman.gurdan.sudo.game.Difficulty;
 import com.roman.gurdan.sudo.game.Game;
+import com.roman.gurdan.sudo.game.GameSize;
 import com.roman.gurdan.sudo.pro.App;
 import com.roman.gurdan.sudo.pro.R;
 import com.roman.gurdan.sudo.pro.base.BaseGameActivity;
 import com.roman.gurdan.sudo.pro.data.db.GameData;
+import com.roman.gurdan.sudo.pro.data.entry.Weekly;
+import com.roman.gurdan.sudo.pro.util.DateUtil;
 import com.roman.gurdan.sudo.pro.view.IGameMenuListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class GameActivity extends BaseGameActivity {
+public class ChallengeGameActivity extends BaseGameActivity {
 
+    private int challengeStep = 0;
 
     @Override
     protected int getLayoutId() {
@@ -51,6 +57,21 @@ public class GameActivity extends BaseGameActivity {
     }
 
     @Override
+    protected void getIntentMessage(Intent intent) {
+        //super.getIntentMessage(intent);
+        if (challengeStep == 0) {
+            gameSize = GameSize.SIZE_FOUR;
+        } else if (challengeStep == 1) {
+            gameSize = GameSize.SIZE_SIX;
+        } else if (challengeStep == 2) {
+            gameSize = GameSize.SIZE_EIGHT;
+        } else if (challengeStep == 3) {
+            gameSize = GameSize.SIZE_NINE;
+        }
+        difficulty = Difficulty.randDifficulty();
+    }
+
+    @Override
     protected void onGameCreated(Game game) {
         boardView.post(new Runnable() {
             @Override
@@ -61,20 +82,28 @@ public class GameActivity extends BaseGameActivity {
     }
 
     @Override
+    protected void onGameOver() {
+        if (challengeStep < 3) {
+            boardView.destroy();
+            challengeStep++;
+            getIntentMessage(null);
+            this.createGame();
+            this.resizeGameBoard();
+        } else {
+            super.onGameOver();
+        }
+    }
+
+    @Override
     protected void addRecord() {
         try {
-            boolean status = isGameWin();
-            long duration = timerUtil.getDuration();
-            com.roman.gurdan.sudo.pro.data.entry.Game game = new com.roman.gurdan.sudo.pro.data.entry.Game();
-            game.result = status ? 1 : 0;
-            game.duration = duration;
-            game.gameType = boardView.getGameSize().getValue();
-            game.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-            game.difficulty = boardView.getGameDifficulty()._difficulty;
-            GameData.of(App.instance)
-                    .gameDao()
-                    .insert(game);
-        } catch (Exception e) {
+            Weekly weekly = new Weekly();
+            weekly.result = challengeStep >= 4 ? 1 : 0;
+            weekly.duration = timerUtil.getDuration();
+            weekly.date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            weekly.week = DateUtil.getWeeklyTag();
+            GameData.of(App.instance).weekDao().insert(weekly);
+        } catch (Exception e){
             e.printStackTrace();
         }
     }
@@ -92,5 +121,6 @@ public class GameActivity extends BaseGameActivity {
             onNumber(integer);
         }
     };
+
 
 }

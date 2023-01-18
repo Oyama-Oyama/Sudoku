@@ -25,11 +25,17 @@ public class TimerUtil {
     }
 
     public void cancel() {
+        if (isCanceled()) return;
         this.pause();
     }
 
     public boolean isCanceled() {
         return canceled;
+    }
+
+    public void reset() {
+        duration = 0;
+        this.start();
     }
 
     public long getDuration() {
