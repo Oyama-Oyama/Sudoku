@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "895648497389",
+    "project_id": "sudo-bfb4d",
+    "storage_bucket": "sudo-bfb4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:895648497389:android:16d45121cdcbfadbfe56e4",
+        "android_client_info": {
+          "package_name": "com.roman.gurdan.sudo.pro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "895648497389-2o1ev4an6vuuijihjop67snvfovkas45.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.roman.gurdan.sudo.pro",
+            "certificate_hash": "cebf22d206030bd1a45e530a26633afa198e0446"
+          }
+        },
+        {
+          "client_id": "895648497389-bs293d5pv98421p8l4tlepvpjgbkfo5m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgmsJYEsM0ucjo_OR_bi8M6W8zoiWRyf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "895648497389-bs293d5pv98421p8l4tlepvpjgbkfo5m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

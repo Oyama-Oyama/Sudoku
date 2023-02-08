@@ -1,6 +1,7 @@
 package com.roman.gurdan.sudo.view;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -85,6 +86,10 @@ public abstract class IBoardEvent extends View implements IGameChangeListener {
     public void resetGame() {
         this.game.resetGame();
         this.clearMirrorImage();
+    }
+
+    public Game getGame(){
+        return this.game;
     }
 
     public void solve() {

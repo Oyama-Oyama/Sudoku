@@ -2,6 +2,7 @@ package com.roman.gurdan.sudo.pro.fragment;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewStub;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,66 +23,74 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class DataFragment extends BaseFragment {
 
-    private DataView total;
-    private DataView totalWin;
+  private DataView total;
+  private DataView totalWin;
+  private ViewStub stubChart;
+  private ViewStub stubEmpty;
 
-    private CompositeDisposable disposables = new CompositeDisposable();
+  private CompositeDisposable disposables = new CompositeDisposable();
 
-    @Override
-    protected int getLayoutId() {
-        return R.layout.fragment_data;
+  @Override
+  protected int getLayoutId() {
+    return R.layout.fragment_data;
+  }
+
+  @Override
+  public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    super.onViewCreated(view, savedInstanceState);
+    total = view.findViewById(R.id.total);
+    totalWin = view.findViewById(R.id.totalWin);
+    stubChart = view.findViewById(R.id.stubChart);
+    stubEmpty = view.findViewById(R.id.stubEmpty);
+    setup();
+    Easy.Companion.getInstance().showInterstitial();
+
+    Easy.Companion.getInstance().logEvent("dataView", null);
+  }
+
+  @Override
+  public void onDestroyView() {
+    if (disposables != null && !disposables.isDisposed()) {
+      disposables.dispose();
     }
+    super.onDestroyView();
+  }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        total = view.findViewById(R.id.total);
-        totalWin = view.findViewById(R.id.totalWin);
-        setup();
-        Easy.Companion.showInterstitial(getActivity());
-    }
-
-    @Override
-    public void onDestroyView() {
-        if (disposables != null && !disposables.isDisposed()) {
-            disposables.dispose();
+  private void setup() {
+    disposables.add(Observable.just(1)
+      .map(new Function<Integer, Integer>() {
+        @Override
+        public Integer apply(Integer integer) throws Throwable {
+          return GameData.of(App.instance)
+            .gameDao().getCount();
         }
-        super.onDestroyView();
-    }
-
-    private void setup() {
-        disposables.add(Observable.just(1)
-                .map(new Function<Integer, Integer>() {
-                    @Override
-                    public Integer apply(Integer integer) throws Throwable {
-                        return GameData.of(App.instance)
-                                .gameDao().getCount();
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Throwable {
-                        if (total != null) total.setMsg(String.valueOf(integer));
-                    }
-                }));
-        disposables.add(Observable.just(1)
-                .map(new Function<Integer, Integer>() {
-                    @Override
-                    public Integer apply(Integer integer) throws Throwable {
-                        return GameData.of(App.instance)
-                                .gameDao().getGamesResultCount(1);
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Integer>() {
-                    @Override
-                    public void accept(Integer integer) throws Throwable {
-                        if (totalWin != null) totalWin.setMsg(String.valueOf(integer));
-                    }
-                }));
-    }
+      })
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribe(new Consumer<Integer>() {
+        @Override
+        public void accept(Integer integer) throws Throwable {
+          if (total != null) total.setMsg(String.valueOf(integer));
+          if (integer > 0 && stubChart != null) stubChart.inflate();
+          else if (stubEmpty != null) stubEmpty.inflate();
+        }
+      }));
+    disposables.add(Observable.just(1)
+      .map(new Function<Integer, Integer>() {
+        @Override
+        public Integer apply(Integer integer) throws Throwable {
+          return GameData.of(App.instance)
+            .gameDao().getGamesResultCount(1);
+        }
+      })
+      .subscribeOn(Schedulers.io())
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribe(new Consumer<Integer>() {
+        @Override
+        public void accept(Integer integer) throws Throwable {
+          if (totalWin != null) totalWin.setMsg(String.valueOf(integer));
+        }
+      }));
+  }
 
 }

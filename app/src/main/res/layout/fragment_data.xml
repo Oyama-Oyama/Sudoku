@@ -56,48 +56,26 @@
             app:layout_constraintWidth_percent="0.45"
             app:vTitle="@string/totalWin" />
 
-        <com.roman.gurdan.sudo.pro.view.ChartView
-            android:id="@+id/totalWinRate"
-            style="@style/Card"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:chartType="totalWinRate"
-            app:layout_constraintDimensionRatio="h,1:1"
+        <ViewStub
+            android:id="@+id/stubChart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout="@layout/layout_chart"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/total" />
 
-        <com.roman.gurdan.sudo.pro.view.ChartView
-            android:id="@+id/total30DayWinRate"
-            style="@style/Card"
+        <ViewStub
+            android:id="@+id/stubEmpty"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:chartType="type15DayCount"
-            app:layout_constraintDimensionRatio="h,1:1"
+            android:layout_height="wrap_content"
+            android:layout="@layout/empty_text"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/totalWinRate" />
+            app:layout_constraintTop_toBottomOf="@id/total"
+            app:layout_constraintWidth_default="percent"
+            app:layout_constraintWidth_percent="0.75" />
 
-        <com.roman.gurdan.sudo.pro.view.ChartView
-            android:id="@+id/type30DayWinRate"
-            style="@style/Card"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:chartType="type15DayWinRate"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/total30DayWinRate" />
-
-        <com.roman.gurdan.sudo.pro.view.ChartView
-            android:id="@+id/weeklyWinRate"
-            style="@style/Card"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:chartType="weeklyWinRate"
-            app:layout_constraintDimensionRatio="h,1:1"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/type30DayWinRate" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.core.widget.NestedScrollView>
