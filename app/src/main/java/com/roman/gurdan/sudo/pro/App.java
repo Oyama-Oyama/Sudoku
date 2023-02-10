@@ -19,7 +19,7 @@ public class App extends Application implements LifecycleObserver {
 
     MMKV.initialize(this);
     DateUtil.resetWeekTag();
-    Easy.Companion.getInstance().init(this, BuildConfig.DEBUG);
+    Easy.Companion.getInstance().init(this, false);
   }
 
 
