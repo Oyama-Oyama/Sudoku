@@ -25,6 +25,7 @@
             android:id="@+id/beginner"
             style="@style/Card"
             android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toTopOf="@id/easy"
             app:layout_constraintLeft_toLeftOf="parent"

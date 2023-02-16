@@ -28,5 +28,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Sudoku"
 include ':app'
-include ':sudo'
+//include ':sudo'
 include ':AAChart'
+include ':base'

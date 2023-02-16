@@ -39,14 +39,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/total30DayWinRate" />
 
-    <com.roman.gurdan.sudo.pro.view.ChartView
-        android:id="@+id/weeklyWinRate"
-        style="@style/Card"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:chartType="weeklyWinRate"
-        app:layout_constraintDimensionRatio="h,1:1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/type30DayWinRate" />
+<!--    <com.roman.gurdan.sudo.pro.view.ChartView-->
+<!--        android:id="@+id/weeklyWinRate"-->
+<!--        style="@style/Card"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:chartType="weeklyWinRate"-->
+<!--        app:layout_constraintDimensionRatio="h,1:1"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintRight_toRightOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/type30DayWinRate" />-->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -61,7 +61,8 @@
     <string name="resetGame">Are you sure to reset the game? All input records will be cleared</string>
     <string name="giveUp">OK to give up the game？</string>
     <string name="win">Game victory</string>
+    <string name="winner">WINNER</string>
     <string name="noRecordData">There is no game record yet! Go and build your way through the barriers</string>
-
+    <string name="createNewGame">Creating game, please wait patiently</string>
 
 </resources>

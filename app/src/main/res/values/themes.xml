@@ -15,6 +15,10 @@
 
         <item name="android:windowBackground">@color/mainColor</item>
 
+
+        <item name="buttonBarPositiveButtonStyle">@style/positiveBtnStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/negativeBtnstyle</item>
+
     </style>
 
     <style name="NumberItem">
@@ -68,6 +72,16 @@
         <item name="android:textSize">@dimen/sp16</item>
         <item name="android:textColor">@color/lightMain</item>
         <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="positiveBtnStyle">
+        <item name="android:textColor">@color/teal_200</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+    <style name="negativeBtnstyle">
+        <item name="android:textColor">@color/secondColor</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
 </resources>

@@ -3,8 +3,9 @@ plugins {
     id 'com.android.application' version '7.4.1' apply false
     id 'com.android.library' version '7.4.1' apply false
     id 'com.google.gms.google-services' version '4.3.15'
+    id 'org.jetbrains.kotlin.android' version '1.7.10' apply false
 }
-
+apply from: 'setup.gradle'
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

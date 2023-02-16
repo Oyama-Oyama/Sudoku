@@ -13,7 +13,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/AAChart" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/sudo" />
+            <option value="$PROJECT_DIR$/base" />
           </set>
         </option>
       </GradleProjectSettings>

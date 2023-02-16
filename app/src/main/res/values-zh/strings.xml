@@ -61,6 +61,8 @@
     <string name="resetGame">确定重置游戏？所有输入记录会被清空</string>
     <string name="giveUp">确定放弃游戏？</string>
     <string name="win">游戏胜利</string>
+    <string name="winner">恭喜你</string>
     <string name="noRecordData">还没有游戏记录哦！快去建立你的闯关之路吧</string>
+    <string name="createNewGame">正在创建游戏，请耐心等待...</string>
 
 </resources>
