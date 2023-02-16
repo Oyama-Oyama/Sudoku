@@ -32,12 +32,12 @@
 
 package com.AAChartCore.AAChartCoreLib.AAChartCreator;
 
-import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAOptions;
 import com.AAChartCore.AAChartCoreLib.AAChartEnum.AAChartAnimationType;
 import com.AAChartCore.AAChartCoreLib.AAChartEnum.AAChartStackingType;
 import com.AAChartCore.AAChartCoreLib.AAChartEnum.AAChartSymbolStyleType;
 import com.AAChartCore.AAChartCoreLib.AAChartEnum.AAChartType;
 import com.AAChartCore.AAChartCoreLib.AAChartEnum.AAChartZoomType;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAOptions;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAScrollablePlotArea;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAStyle;
 

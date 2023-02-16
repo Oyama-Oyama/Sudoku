@@ -35,30 +35,30 @@
 
 package com.AAChartCore.AAChartCoreLib.AAChartCreator;
 
-import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAAnimation;
-import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AABar;
-import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAColumnrange;
-import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AADataLabels;
-import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAItemStyle;
-import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAOptions;
-import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAPlotOptions;
-import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AASeries;
-import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AASubtitle;
-import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AATooltip;
-import com.AAChartCore.AAChartCoreLib.AATools.AAColor;
 import com.AAChartCore.AAChartCoreLib.AAChartEnum.AAChartAnimationType;
 import com.AAChartCore.AAChartCoreLib.AAChartEnum.AAChartSymbolStyleType;
 import com.AAChartCore.AAChartCoreLib.AAChartEnum.AAChartType;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAAnimation;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AABar;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAChart;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAColumn;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAColumnrange;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AADataLabels;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAItemStyle;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AALabels;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AALegend;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAMarker;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAOptions;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAPie;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAPlotOptions;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AASeries;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAStyle;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AASubtitle;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AATitle;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AATooltip;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAXAxis;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAYAxis;
+import com.AAChartCore.AAChartCoreLib.AATools.AAColor;
 
 public class AAOptionsConstructor
 {

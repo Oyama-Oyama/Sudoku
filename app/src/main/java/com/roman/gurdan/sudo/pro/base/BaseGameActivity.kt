@@ -114,6 +114,7 @@ abstract class BaseGameActivity : BaseActivity() {
                             realResetGame()
                         }
                     })
+                    Easy.instance.showRewarded()
                 } else realResetGame()
             }.show()
     }
@@ -183,12 +184,12 @@ abstract class BaseGameActivity : BaseActivity() {
 
     protected open fun getIntentMessage(intent: Intent?) {
         if (intent == null) {
-            gameSize = GameSize.SIZE_FOUR;
-            difficulty = Difficulty.randDifficulty();
+            gameSize = GameSize.SIZE_FOUR
+            difficulty = Difficulty.randDifficulty()
         } else {
-            val value = intent.getIntExtra("gameSize", 0);
-            gameSize = GameSize.getGameSize(value);
-            val diff = intent.getIntExtra("gameDiff", 0);
+            val value = intent.getIntExtra("gameSize", 0)
+            gameSize = GameSize.getGameSize(value)
+            val diff = intent.getIntExtra("gameDiff", 0)
             difficulty =
                 if (diff == 0) Difficulty.randDifficulty() else Difficulty.getDifficulty(diff)
         }
@@ -299,6 +300,7 @@ abstract class BaseGameActivity : BaseActivity() {
             }
         }
         Easy.instance.showBanner()
+        Easy.instance.showInterstitial()
     }
 
     override fun onResume() {

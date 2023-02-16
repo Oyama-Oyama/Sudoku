@@ -33,10 +33,10 @@
 package com.AAChartCore.AAChartCoreLib.AAChartCreator;
 
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AADataLabels;
+import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAMarker;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAShadow;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AATooltip;
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAZonesElement;
-import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAMarker;
 
 /**
  * Created by anan on 2018/4/16.

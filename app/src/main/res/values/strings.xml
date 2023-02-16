@@ -64,5 +64,10 @@
     <string name="winner">WINNER</string>
     <string name="noRecordData">There is no game record yet! Go and build your way through the barriers</string>
     <string name="createNewGame">Creating game, please wait patiently</string>
-
+    <string name="newPlayer1">First contact with sudoku game？</string>
+    <string name="newPlayer2">newbie? It\'s okay, it\'s not as difficult as you think, come to a game first to understand the rules</string>
+    <string name="newPlayer3">Master? Here you will face a challenge, let\'s start</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="start">Start</string>
 </resources>

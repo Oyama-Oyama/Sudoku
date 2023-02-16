@@ -42,7 +42,6 @@ import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-
 import com.AAChartCore.AAChartCoreLib.AAOptionsModel.AAOptions;
 import com.AAChartCore.AAChartCoreLib.AATools.AAJSStringPurer;
 import com.google.gson.Gson;

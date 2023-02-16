@@ -64,5 +64,12 @@
     <string name="winner">恭喜你</string>
     <string name="noRecordData">还没有游戏记录哦！快去建立你的闯关之路吧</string>
     <string name="createNewGame">正在创建游戏，请耐心等待...</string>
+    <string name="newPlayer1">第一次接触数独游戏？</string>
+    <string name="newPlayer2">新手？没关系，没你想的那么困难，先来一局了解下规则</string>
+    <string name="newPlayer3">高手？在这里你将迎来挑战，快开始吧</string>
+    <string name="no">不是的</string>
+    <string name="yes">是的</string>
+    <string name="start">开始吧</string>
+
 
 </resources>
