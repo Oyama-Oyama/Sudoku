@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
-import com.roman.garden.base.log.Logger
 import com.roman.garden.core.Easy
 import com.roman.garden.core.listener.IAdListener
 import com.roman.garden.sudo.base.Game
@@ -100,8 +99,9 @@ abstract class BaseGameActivity : BaseActivity() {
             }
             .setPositiveButton(R.string.sure) { d, _ ->
                 if (Easy.instance.hasRewarded()) {
-                    Easy.instance.addRewardedListener(object : IAdListener {
-                        override fun onClosed() {
+                    Easy.instance.setRewardedListener(object : IAdListener {
+                        override fun onClosed(rewarded: Boolean) {
+                            super.onClosed(rewarded)
                             d.dismiss()
                         }
 

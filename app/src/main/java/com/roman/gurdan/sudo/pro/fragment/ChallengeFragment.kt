@@ -47,17 +47,20 @@ class ChallengeFragment : BaseFragment() {
             when (adTag.visibility) {
                 View.VISIBLE -> {
                     if (Easy.instance.hasRewarded()) {
-                        Easy.instance.addRewardedListener(object : IAdListener {
-                            override fun onUserRewarded() {
-                                super.onUserRewarded()
-                                Intent(
-                                    context,
-                                    ChallengeGameActivity::class.java
-                                ).apply { context?.startActivity(this) }
+                        Easy.instance.setRewardedListener(object : IAdListener {
+                            override fun onClosed(rewarded: Boolean) {
+                                super.onClosed(rewarded)
+                                if (rewarded) {
+                                    Intent(
+                                        context,
+                                        ChallengeGameActivity::class.java
+                                    ).apply { context?.startActivity(this) }
+                                }
                             }
 
                             override fun onShowFail(reason: String?) {
                                 super.onShowFail(reason)
+                                Logger.e("showFail")
                                 Intent(
                                     context,
                                     ChallengeGameActivity::class.java

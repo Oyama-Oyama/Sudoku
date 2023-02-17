@@ -28,6 +28,8 @@ class MainActivity : BaseActivity() {
 
     }
 
+
+
     private fun newPlayerRequired() {
         val status = Cache.getCache().decodeBool("isFirstGame", true)
         Cache.getCache().encode("isFirstGame", false)

@@ -2,6 +2,8 @@ package com.roman.gurdan.sudo.pro.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.animation.LinearInterpolator
+import android.widget.ImageView
 import com.roman.gurdan.sudo.pro.R
 import com.roman.gurdan.sudo.pro.base.BaseActivity
 import kotlinx.coroutines.*
@@ -28,6 +30,11 @@ class SplashActivity : BaseActivity(), CoroutineScope by MainScope() {
             }
         }
 
+        val anim = findViewById<ImageView>(R.id.splash).animate()
+        anim.duration = 1500
+        anim.alphaBy(1.0f)
+        anim.interpolator = LinearInterpolator()
+        anim.start()
     }
 
     override fun onDestroy() {

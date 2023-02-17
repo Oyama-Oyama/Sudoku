@@ -28,7 +28,7 @@ import java.util.*
 class ChartView(context: Context, attrs: AttributeSet?) :
     CardView(context, attrs) {
 
-    private val TEST_MODE = BuildConfig.DEBUG
+    private val TEST_MODE = false//BuildConfig.DEBUG
     private var random = Random()
     private var chartType: Int = 0
     private lateinit var chartView: AAChartView
