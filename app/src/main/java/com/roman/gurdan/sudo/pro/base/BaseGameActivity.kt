@@ -97,16 +97,13 @@ abstract class BaseGameActivity : BaseActivity() {
             .setNegativeButton(R.string.cancel) { d, _ ->
                 d.dismiss()
             }
-            .setPositiveButton(R.string.sure) { d, _ ->
+
+            .setPositiveButton(getString(R.string.sure) + "(ad)") { d, _ ->
                 if (Easy.instance.hasRewarded()) {
                     Easy.instance.setRewardedListener(object : IAdListener {
                         override fun onClosed(rewarded: Boolean) {
                             super.onClosed(rewarded)
                             d.dismiss()
-                        }
-
-                        override fun onShowFail(reason: String?) {
-                            realResetGame()
                         }
 
                         override fun onUserRewarded() {
@@ -115,7 +112,7 @@ abstract class BaseGameActivity : BaseActivity() {
                         }
                     })
                     Easy.instance.showRewarded()
-                } else realResetGame()
+                } else toast(R.string.noAd)
             }.show()
     }
 

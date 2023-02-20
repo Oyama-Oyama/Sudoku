@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.button.MaterialButton
 import com.roman.garden.base.log.Logger
 import com.roman.garden.core.Easy
@@ -57,26 +58,11 @@ class ChallengeFragment : BaseFragment() {
                                     ).apply { context?.startActivity(this) }
                                 }
                             }
-
-                            override fun onShowFail(reason: String?) {
-                                super.onShowFail(reason)
-                                Logger.e("showFail")
-                                Intent(
-                                    context,
-                                    ChallengeGameActivity::class.java
-                                ).apply { context?.startActivity(this) }
-                            }
                         })
                         Easy.instance.showRewarded()
                     }
                 }
-                else -> {
-                    Intent(
-                        context,
-                        ChallengeGameActivity::class.java
-                    ).apply { context?.startActivity(this) }
-                    adTag.visibility = View.VISIBLE
-                }
+                else -> Toast.makeText(this.context, R.string.noAd, Toast.LENGTH_SHORT).show()
             }
         }
     }

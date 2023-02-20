@@ -70,4 +70,6 @@
     <string name="no">No</string>
     <string name="yes">Yes</string>
     <string name="start">Start</string>
+    <string name="noAd">No advertisement, try again later</string>
+
 </resources>

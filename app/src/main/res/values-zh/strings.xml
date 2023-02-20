@@ -70,6 +70,6 @@
     <string name="no">不是的</string>
     <string name="yes">是的</string>
     <string name="start">开始吧</string>
-
+    <string name="noAd">暂时没有广告，稍后再试</string>
 
 </resources>
