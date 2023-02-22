@@ -48,6 +48,16 @@ internal abstract class ICreator constructor(var gameSize: GameSize) {
 
     abstract fun getCellCount(): Int
 
+    /**
+     *  使用到几个区域
+     */
+    open fun getUsedArea():Int = 0
+
+    /**
+     *  返回指定区域起始 行、列坐标
+     */
+    open fun getArea(area: Int): Pair<Int, Int> = Pair(0, 0)
+
     fun getEmptyCellCount(): Int {
         return when (difficulty) {
             Difficulty.EASY -> (getCellCount() * getRate(
@@ -66,7 +76,7 @@ internal abstract class ICreator constructor(var gameSize: GameSize) {
         }
     }
 
-    private fun getRate(max: Float, min: Float): Float = min + random.nextFloat() * (max - min);
+    private fun getRate(max: Float, min: Float): Float = min + random.nextFloat() * (max - min)
 
 
 }

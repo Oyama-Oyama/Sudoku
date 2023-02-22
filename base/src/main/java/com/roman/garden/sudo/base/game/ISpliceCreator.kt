@@ -16,7 +16,11 @@ internal abstract class ISpliceCreator(gameSize: GameSize) : ICreator(gameSize) 
     private var lastSelectedArea = -1
     protected var countCells = 0
 
-
+    protected val AREA_FIRST = 1
+    protected val AREA_SECOND = 2
+    protected val AREA_THIRD = 3
+    protected val AREA_FOURTH = 4
+    protected val AREA_FIFTH = 5
 
     override fun createGame() {
         val measureTime = measureTimeMillis {
@@ -24,8 +28,8 @@ internal abstract class ISpliceCreator(gameSize: GameSize) : ICreator(gameSize) 
             solvedCells.clear()
             var count = getEmptyCellCount()
             while (count > 0) {
-                val row = random.nextInt(gameSize.value)
-                val col = random.nextInt(gameSize.value)
+                val row = random.nextInt(gameSize.row)
+                val col = random.nextInt(gameSize.col)
                 data[row][col]?.let { it ->
                     it.value = 0
                     it.valid = false
@@ -161,8 +165,8 @@ internal abstract class ISpliceCreator(gameSize: GameSize) : ICreator(gameSize) 
     }
 
     override fun printGame() {
-        for (i in 0 until gameSize.value) {
-            for (j in 0 until gameSize.value) {
+        for (i in 0 until gameSize.row) {
+            for (j in 0 until gameSize.col) {
                 data[i][j]?.let {
                     print("${it.value} ")
                 } ?: print("  ")
@@ -287,7 +291,7 @@ internal abstract class ISpliceCreator(gameSize: GameSize) : ICreator(gameSize) 
             iMirror?.let {
                 if (!iMirror.valid()) throw IllegalArgumentException("decode game error: invalid mirror")
                 val array = JSONArray(it.data)
-                if (array.length() != gameSize.value)
+                if (array.length() != gameSize.row)
                     throw IllegalArgumentException("decode game error: invalid mirror")
                 for (i in 0 until array.length()) {
                     val rows = array.getJSONArray(i)
@@ -350,18 +354,12 @@ internal abstract class ISpliceCreator(gameSize: GameSize) : ICreator(gameSize) 
         return list
     }
 
-
-    /**
-     *  返回指定区域起始 行、列坐标
-     */
-    protected abstract fun getArea(area: Int): Pair<Int, Int>
+    protected abstract fun realCreateGame()
 
     /**
      *  返回包含 传入 行、列 坐标的区域
      */
     protected abstract fun getCellAreas(row: Int, col: Int): Array<Int>
-
-    protected abstract fun realCreateGame()
 
     /**
      *  根据行、列坐标获得cell所在区域

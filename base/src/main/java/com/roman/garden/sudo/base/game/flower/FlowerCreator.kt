@@ -32,17 +32,10 @@ import com.roman.garden.sudo.base.util.GameSize
  */
 internal class FlowerCreator(gameSize: GameSize) : ISpliceCreator(gameSize) {
 
-    private val AREA_FIRST = 1
-    private val AREA_SECOND = 2
-    private val AREA_THIRD = 3
-    private val AREA_FOURTH = 4
-    private val AREA_FIFTH = 5
-
     init {
-        data = Array(gameSize.value) { row ->
-            Array(gameSize.value) { col ->
-                val area = getCellArea(row, col)
-                if (area > 0) {
+        data = Array(gameSize.row) { row ->
+            Array(gameSize.col) { col ->
+                if (getCellArea(row, col) > 0) {
                     countCells++
                     val group = calGroup(row, col)
                     Cell(row, col, group, 0)
@@ -60,6 +53,8 @@ internal class FlowerCreator(gameSize: GameSize) : ISpliceCreator(gameSize) {
         this.buildGame(AREA_FOURTH)
         this.buildGame(AREA_FIFTH)
     }
+
+    override fun getUsedArea(): Int  = 5
 
     override fun getCellArea(row: Int, col: Int): Int {
         if (row in 0..8 && col in 0..8) return AREA_FIRST

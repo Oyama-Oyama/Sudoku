@@ -9,9 +9,8 @@ import com.roman.garden.base.util.GpUtil
 import com.roman.garden.sudo.base.util.Difficulty
 import com.roman.garden.sudo.base.util.GameSize
 import com.roman.gurdan.sudo.pro.R
-import com.roman.gurdan.sudo.pro.activity.FlowerActivity
+import com.roman.gurdan.sudo.pro.activity.SpliceActivity
 import com.roman.gurdan.sudo.pro.activity.GameActivity
-import com.roman.gurdan.sudo.pro.activity.WindmillActivity
 import com.roman.gurdan.sudo.pro.base.BaseFragment
 
 class HomeFragment : BaseFragment() {
@@ -42,7 +41,7 @@ class HomeFragment : BaseFragment() {
 
         view.findViewById<CardView>(R.id.flower)
             .setOnClickListener {
-                Intent(context, FlowerActivity::class.java).apply {
+                Intent(context, SpliceActivity::class.java).apply {
                     putExtra("gameSize", GameSize.SIZE_FLOWER.tag)
                     putExtra("gameDiff", Difficulty.RANDOM.value)
                     context?.startActivity(this)
@@ -50,7 +49,7 @@ class HomeFragment : BaseFragment() {
             }
         view.findViewById<CardView>(R.id.windmill)
             .setOnClickListener {
-                Intent(context, WindmillActivity::class.java).apply {
+                Intent(context, SpliceActivity::class.java).apply {
                     putExtra("gameSize", GameSize.SIZE_WINDMILL.tag)
                     putExtra("gameDiff", Difficulty.RANDOM.value)
                     context?.startActivity(this)

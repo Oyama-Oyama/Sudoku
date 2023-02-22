@@ -207,7 +207,7 @@ abstract class BaseGameActivity : BaseActivity() {
         )
     }
 
-    protected fun resizeGameBoard() = gameBoard.updateGameSize(gameSize.value)
+    protected fun resizeGameBoard() = gameBoard.updateGameSize(gameSize.col)
 
     protected fun onMenu(key: Int) {
         try {

@@ -16,8 +16,8 @@ internal abstract class SquareGameCreator constructor(gameSize: GameSize) : ICre
 
 
     init {
-        data = Array(gameSize.value) { row ->
-            Array<Cell>(gameSize.value) { col ->
+        data = Array(gameSize.row) { row ->
+            Array(gameSize.col) { col ->
                 val group = calGroup(row, col)
                 Cell(row, col, group, 0)
             }
@@ -25,7 +25,7 @@ internal abstract class SquareGameCreator constructor(gameSize: GameSize) : ICre
     }
 
     override fun getCellCount(): Int {
-        return gameSize.value * gameSize.value
+        return gameSize.row * gameSize.col
     }
 
     override fun createGame() {
@@ -34,8 +34,8 @@ internal abstract class SquareGameCreator constructor(gameSize: GameSize) : ICre
             solvedCells.clear()
             var count = getEmptyCellCount()
             while (count > 0) {
-                val row = random.nextInt(gameSize.value)
-                val col = random.nextInt(gameSize.value)
+                val row = random.nextInt(gameSize.row)
+                val col = random.nextInt(gameSize.col)
                 if (data[row][col].value != 0) {
                     data[row][col].value = 0
                     data[row][col].valid = false
@@ -207,7 +207,7 @@ internal abstract class SquareGameCreator constructor(gameSize: GameSize) : ICre
     }
 
     private fun getLeftValues(cell: Cell): MutableList<Int> {
-        val allValues = MutableList(gameSize.value) { index -> index + 1 }
+        val allValues = MutableList(gameSize.row) { index -> index + 1 }
         data.forEach { it ->
             it.forEach { item ->
                 if (item.value != 0 &&
@@ -295,7 +295,7 @@ internal abstract class SquareGameCreator constructor(gameSize: GameSize) : ICre
             iMirror?.let {
                 if (!iMirror.valid()) throw IllegalArgumentException("decode game error: invalid mirror")
                 val array = JSONArray(it.data)
-                if (array.length() != gameSize.value)
+                if (array.length() != gameSize.row)
                     throw IllegalArgumentException("decode game error: invalid mirror")
                 for (i in 0 until array.length()) {
                     val rows = array.getJSONArray(i)

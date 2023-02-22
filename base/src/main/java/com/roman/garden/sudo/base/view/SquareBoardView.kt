@@ -16,8 +16,8 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
                 this@SquareBoardView.selectedCell = it.getCell(first, second)
             }
             cellS = boardSize / DEFAULT_MAX_CELL_NUMBER_IN_LINE
-            startX = (mwidth - it.gameSize.value * cellS) / 2
-            startY = (mheight - it.gameSize.value * cellS) / 2
+            startX = (mwidth - it.gameSize.row * cellS) / 2
+            startY = (mheight - it.gameSize.col * cellS) / 2
             this.postInvalidate()
         }
     }
@@ -142,17 +142,17 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
                 }
                 else -> {
                     rowStep = 2
-                    colStep = g.gameSize.value / 2
+                    colStep = g.gameSize.row / 2
                 }
             }
-            for (i in 0..g.gameSize.value) {
+            for (i in 0..g.gameSize.row) {
                 paint.color = colorUtil.COLOR_INNER_LINE
                 paint.strokeWidth = cellS * 0.01f
                 if (i % rowStep != 0) {
                     canvas.drawLine(
                         startX,
                         startY + i * cellS,
-                        cellS * g.gameSize.value + startX,
+                        cellS * g.gameSize.row + startX,
                         startY + i * cellS,
                         paint
                     )
@@ -162,7 +162,7 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
                         startX + i * cellS,
                         startY,
                         startX + i * cellS,
-                        startY + cellS * g.gameSize.value,
+                        startY + cellS * g.gameSize.row,
                         paint
                     )
                 }
@@ -173,7 +173,7 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
                     canvas.drawLine(
                         startX,
                         startY + i * cellS,
-                        cellS * g.gameSize.value + startX,
+                        cellS * g.gameSize.row + startX,
                         startY + i * cellS,
                         paint
                     )
@@ -183,7 +183,7 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
                         startX + i * cellS,
                         startY,
                         startX + i * cellS,
-                        startY + cellS * g.gameSize.value,
+                        startY + cellS * g.gameSize.row,
                         paint
                     )
                 }

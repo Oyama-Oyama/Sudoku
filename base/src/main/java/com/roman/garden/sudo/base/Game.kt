@@ -4,12 +4,17 @@ import com.roman.garden.sudo.base.action.MirrorManager
 import com.roman.garden.sudo.base.game.Cell
 import com.roman.garden.sudo.base.game.ICreator
 import com.roman.garden.sudo.base.game.IGameListener
+import com.roman.garden.sudo.base.game.butterfly.ButterflyCreator
+import com.roman.garden.sudo.base.game.cross.CrossCreator
 import com.roman.garden.sudo.base.game.flower.FlowerCreator
 import com.roman.garden.sudo.base.game.square.Square4Creator
 import com.roman.garden.sudo.base.game.square.Square6Creator
 import com.roman.garden.sudo.base.game.square.Square8Creator
 import com.roman.garden.sudo.base.game.square.Square9Creator
+import com.roman.garden.sudo.base.game.triple.TripleCreator
+import com.roman.garden.sudo.base.game.triple.TripleCreator2
 import com.roman.garden.sudo.base.game.windmill.WindmillCreator
+import com.roman.garden.sudo.base.game.windmill.WindmillCreator2
 import com.roman.garden.sudo.base.util.Difficulty
 import com.roman.garden.sudo.base.util.GameSize
 import kotlinx.coroutines.CoroutineScope
@@ -121,7 +126,12 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
             GameSize.SIZE_EIGHT -> Square8Creator(gameSize)
             GameSize.SIZE_NINE -> Square9Creator(gameSize)
             GameSize.SIZE_FLOWER -> FlowerCreator(gameSize)
+            GameSize.SIZE_CROSS -> CrossCreator(gameSize)
+            GameSize.SIZE_BUTTERFLY -> ButterflyCreator(gameSize)
             GameSize.SIZE_WINDMILL -> WindmillCreator(gameSize)
+            GameSize.SIZE_WINDMILL_2 -> WindmillCreator2(gameSize)
+            GameSize.SIZE_TRIPLE -> TripleCreator(gameSize)
+            GameSize.SIZE_TRIPLE_2 -> TripleCreator2(gameSize)
             else -> null
         }
     }
@@ -132,7 +142,12 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
                 0,
                 0
             )
-            GameSize.SIZE_FLOWER, GameSize.SIZE_WINDMILL -> Pair(10, 10)
+            GameSize.SIZE_FLOWER, GameSize.SIZE_CROSS -> Pair(10, 10)
+            GameSize.SIZE_BUTTERFLY -> Pair(4, 10)
+            GameSize.SIZE_WINDMILL -> Pair(6, 6)
+            GameSize.SIZE_WINDMILL_2 -> Pair(6, 6)
+            GameSize.SIZE_TRIPLE -> Pair(0, 0)
+            GameSize.SIZE_TRIPLE_2 -> Pair(0, 0)
         }
     }
 
@@ -145,5 +160,12 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
             mirrorManager?.addMirror(this)
         }
     }
+
+    open fun getUsedArea(): Int? = creator?.getUsedArea()
+
+    /**
+     *  返回指定区域起始 行、列坐标
+     */
+    open fun getArea(area: Int): Pair<Int, Int>? = creator?.getArea(area)
 
 }

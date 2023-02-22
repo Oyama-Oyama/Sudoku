@@ -73,7 +73,7 @@
         app:layout_constraintWidth_default="percent"
         app:layout_constraintWidth_percent="1">
 
-        <com.roman.garden.sudo.base.view.FlowerBoardView
+        <com.roman.garden.sudo.base.view.SpliceBoardView
             android:id="@+id/boardViewReal"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
