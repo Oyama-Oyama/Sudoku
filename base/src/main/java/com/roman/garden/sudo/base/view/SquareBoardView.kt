@@ -12,10 +12,12 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
 
     override fun initBoardSize() {
         this.game?.let {
-            this.selectedCell = it.getCell(0, 0)
+            it.setupDefaultSelectedCell().apply {
+                this@SquareBoardView.selectedCell = it.getCell(first, second)
+            }
             cellS = boardSize / DEFAULT_MAX_CELL_NUMBER_IN_LINE
-            startX = (width - it.gameSize.value * cellS) / 2
-            startY = (height - it.gameSize.value * cellS) / 2
+            startX = (mwidth - it.gameSize.value * cellS) / 2
+            startY = (mheight - it.gameSize.value * cellS) / 2
             this.postInvalidate()
         }
     }
@@ -47,7 +49,7 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
                 drawCellBg(it)
                 drawCellNumber(it)
                 drawInnerLine(it)
-                drawOuterLine(it)
+              //  drawOuterLine(it)
             }
         }
     }
@@ -143,7 +145,9 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
                     colStep = g.gameSize.value / 2
                 }
             }
-            for (i in 1..g.gameSize.value) {
+            for (i in 0..g.gameSize.value) {
+                paint.color = colorUtil.COLOR_INNER_LINE
+                paint.strokeWidth = cellS * 0.01f
                 if (i % rowStep != 0) {
                     canvas.drawLine(
                         startX,
@@ -162,27 +166,9 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
                         paint
                     )
                 }
-            }
-        }
-    }
 
-    private fun drawOuterLine(canvas: Canvas) {
-        this.game?.let { g ->
-            paint.color = colorUtil.COLOR_OUTER_LINE
-            paint.strokeWidth = cellS * 0.05f
-            var rowStep: Int
-            var colStep: Int
-            when (g.gameSize) {
-                GameSize.SIZE_NINE -> {
-                    rowStep = 3
-                    colStep = 3
-                }
-                else -> {
-                    rowStep = 2
-                    colStep = g.gameSize.value / 2
-                }
-            }
-            for (i in 1..g.gameSize.value) {
+                paint.color = colorUtil.COLOR_OUTER_LINE
+                paint.strokeWidth = cellS * 0.05f
                 if (i % rowStep == 0) {
                     canvas.drawLine(
                         startX,
@@ -202,21 +188,13 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
                     )
                 }
             }
-            //外边框
-            canvas.drawRect(
-                startX,
-                startY,
-                startX + cellS * g.gameSize.value,
-                startY + cellS * g.gameSize.value,
-                paint
-            )
         }
     }
 
     private fun getNoteX(col: Int, value: Int): Float {
         return this.game?.let { g ->
-            when (g.gameSize.value) {
-                GameSize.SIZE_FOUR.value -> startX + col * cellS + (cellS / 2) * (1 - value % 2) + cellS / 4
+            when (g.gameSize.tag) {
+                GameSize.SIZE_FOUR.tag -> startX + col * cellS + (cellS / 2) * (1 - value % 2) + cellS / 4
                 else -> {
                     var index = value % 3 - 1
                     if (index < 0) index = 2
@@ -228,13 +206,13 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
 
     private fun getNoteY(row: Int, value: Int): Float {
         return this.game?.let { g ->
-            when (g.gameSize.value) {
-                GameSize.SIZE_FOUR.value -> {
+            when (g.gameSize.tag) {
+                GameSize.SIZE_FOUR.tag -> {
                     val tmp = value / 2.0f
                     val index = if (tmp <= 1) 0 else 1
                     return startY + row * cellS + (cellS / 2) * index + cellS / 3
                 }
-                GameSize.SIZE_SIX.value -> {
+                GameSize.SIZE_SIX.tag -> {
                     val tmp = value / 3.0f
                     val index = if (tmp <= 1) 0 else (if (tmp <= 2) 1 else 2)
                     return startY + row * cellS + (cellS / 2) * index + cellS / 3
@@ -255,7 +233,7 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
 
         } else {
             try {
-                selectedCell = game?.getCell(row, col);
+                selectedCell = game?.getCell(row, col)
             } catch (e: Exception) {
                 e.printStackTrace()
             } finally {

@@ -43,6 +43,10 @@
         <activity android:name=".activity.GameActivity" />
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.ChallengeGameActivity" />
+
+        <activity android:name=".activity.FlowerActivity"/>
+        <activity android:name=".activity.WindmillActivity"/>
+
     </application>
 
 </manifest>

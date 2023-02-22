@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import android.widget.FrameLayout
 import com.roman.garden.sudo.base.Game
 import com.roman.garden.sudo.base.game.Cell
 import com.roman.garden.sudo.base.game.IGameListener
@@ -66,9 +67,10 @@ abstract class IBoardView(context: Context?, attrs: AttributeSet?) : View(contex
     }
 
     override fun onGameUnd(row: Int, col: Int) {
-        val cell = game?.getCell(row, col)
-        if (cell != null) selectedCell = cell
-        postInvalidate()
+        game?.getCell(row, col)?.let { it ->
+            selectedCell = it
+            postInvalidate()
+        }
     }
 
     protected abstract fun initBoardSize()

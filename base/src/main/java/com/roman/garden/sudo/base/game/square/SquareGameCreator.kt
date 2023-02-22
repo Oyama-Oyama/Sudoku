@@ -3,20 +3,17 @@ package com.roman.garden.sudo.base.game.square
 import com.roman.garden.sudo.base.action.IMirror
 import com.roman.garden.sudo.base.game.Cell
 import com.roman.garden.sudo.base.game.ICreator
-import com.roman.garden.sudo.base.util.Difficulty
 import com.roman.garden.sudo.base.util.GameSize
 import com.roman.garden.sudo.base.util.LogUtil
 import org.json.JSONArray
 import java.util.*
-import kotlin.math.pow
-import kotlin.math.roundToInt
 import kotlin.system.measureTimeMillis
 
 internal abstract class SquareGameCreator constructor(gameSize: GameSize) : ICreator(gameSize) {
 
-    private lateinit var data: Array<Array<Cell>>
+    private var data: Array<Array<Cell>>
     private var solvedCells: Stack<Cell> = Stack()
-    private val random: Random = Random()
+
 
     init {
         data = Array(gameSize.value) { row ->
@@ -25,6 +22,10 @@ internal abstract class SquareGameCreator constructor(gameSize: GameSize) : ICre
                 Cell(row, col, group, 0)
             }
         }
+    }
+
+    override fun getCellCount(): Int {
+        return gameSize.value * gameSize.value
     }
 
     override fun createGame() {
@@ -51,7 +52,7 @@ internal abstract class SquareGameCreator constructor(gameSize: GameSize) : ICre
                 }
             }
         }
-        LogUtil.d("createGame ${gameSize.value}, diff:${difficulty.value} used: $measureTime")
+        LogUtil.d("createGame ${gameSize.tag}, diff:${difficulty.value} used: $measureTime")
     }
 
     override fun printGame() {
@@ -76,7 +77,7 @@ internal abstract class SquareGameCreator constructor(gameSize: GameSize) : ICre
 
     override fun getCell(row: Int, col: Int): Cell? = data[row][col]
 
-    override fun getData(): Array<Array<Cell>> = data
+    override fun getGameData(): Array<Array<Cell>>? = data
 
     override fun setValue(cell: Cell, value: Int, isNote: Boolean) {
         if (cell.preSet) return
@@ -138,7 +139,7 @@ internal abstract class SquareGameCreator constructor(gameSize: GameSize) : ICre
         return list
     }
 
-    override fun getRelatedCells(cell: Cell, containSelf: Boolean): List<Cell> {
+    private fun getRelatedCells(cell: Cell, containSelf: Boolean): List<Cell> {
         val list = mutableListOf<Cell>()
         data.forEach { it ->
             it.forEach { item ->
@@ -252,25 +253,6 @@ internal abstract class SquareGameCreator constructor(gameSize: GameSize) : ICre
         } while (true)
     }
 
-    private fun getEmptyCellCount(): Int {
-        return when (difficulty) {
-            Difficulty.EASY -> ((gameSize.value * 1.0).pow(2.0) * getRate(
-                0.35f,
-                0.2f
-            )).roundToInt()
-            Difficulty.MEDIUM -> ((gameSize.value * 1.0).pow(2.0) * getRate(
-                0.55f,
-                0.3f
-            )).roundToInt()
-            Difficulty.HARD -> ((gameSize.value * 1.0).pow(2.0) * getRate(
-                0.95f,
-                0.5f
-            )).roundToInt()
-            else -> ((gameSize.value * 1.0).pow(2.0) / 2).roundToInt()
-        }
-    }
-
-    private fun getRate(max: Float, min: Float): Float = min + random.nextFloat() * (max - min);
 
     private fun checkCellValid(cell: Cell) {
         getRelatedCells(cell, false).forEach { item ->

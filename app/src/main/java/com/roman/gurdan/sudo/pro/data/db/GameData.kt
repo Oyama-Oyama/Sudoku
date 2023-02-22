@@ -9,7 +9,7 @@ import com.roman.gurdan.sudo.pro.data.dao.WeekDao
 import com.roman.gurdan.sudo.pro.data.entry.Game
 import com.roman.gurdan.sudo.pro.data.entry.Weekly
 
-@Database(entities = [Game::class, Weekly::class], version = 1, exportSchema = false)
+@Database(entities = [Game::class, Weekly::class], version = 2, exportSchema = false)
 abstract class GameData : RoomDatabase() {
 
     abstract fun gameDao(): GameDao
@@ -20,10 +20,13 @@ abstract class GameData : RoomDatabase() {
         val instance: GameData by lazy(LazyThreadSafetyMode.SYNCHRONIZED) {
             Room.databaseBuilder(App.instance, GameData::class.java, "Sudoku")
                 .allowMainThreadQueries()
+
                 .fallbackToDestructiveMigration()
                 .enableMultiInstanceInvalidation()
                 .build();
         }
+
+
     }
 
 

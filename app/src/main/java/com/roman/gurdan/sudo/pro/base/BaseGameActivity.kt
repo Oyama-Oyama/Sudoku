@@ -65,7 +65,7 @@ abstract class BaseGameActivity : BaseActivity() {
             }
             try {
                 Bundle().apply {
-                    putString("size", game?.gameSize?.value.toString())
+                    putString("size", game?.gameSize?.tag.toString())
                     putString("difficulty", game?.difficulty?.value.toString())
                     Easy.instance.logEvent("giveUpGame", this)
                 }
@@ -123,7 +123,7 @@ abstract class BaseGameActivity : BaseActivity() {
         }
         try {
             Bundle().apply {
-                putString("size", game?.gameSize?.value.toString())
+                putString("size", game?.gameSize?.tag.toString())
                 putString("difficulty", game?.difficulty?.value.toString())
                 Easy.instance.logEvent("resetGame", this)
             }
@@ -146,13 +146,14 @@ abstract class BaseGameActivity : BaseActivity() {
         timerUtil.cancel()
         try {
             Bundle().apply {
-                putString("size", game?.gameSize?.value.toString())
+                putString("size", game?.gameSize?.tag.toString())
                 putString("difficulty", game?.difficulty?.value.toString())
                 Easy.instance.logEvent("win", this)
             }
         } catch (e: Exception) {
             e.printStackTrace()
         }
+        Easy.instance.showInterstitial()
         AlertDialog.Builder(this)
             .setTitle(R.string.winner)
             .setMessage(R.string.win)
@@ -160,6 +161,7 @@ abstract class BaseGameActivity : BaseActivity() {
             .setCancelable(false)
             .setPositiveButton(R.string.sure) { d, _ ->
                 d.dismiss()
+                this@BaseGameActivity.finish()
             }
             .show()
     }

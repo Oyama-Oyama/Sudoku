@@ -115,13 +115,13 @@ class ChartView(context: Context, attrs: AttributeSet?) :
             val targetDate = DateUtil.getDate(-1 * i)
             categories[14 - i] = targetDate
             four[14 - i] = if (TEST_MODE) random.nextInt(100) else GameData.instance.gameDao()
-                .getGames(GameSize.SIZE_FOUR.value, targetDate)
+                .getGames(GameSize.SIZE_FOUR.tag, targetDate)
             six[14 - i] = if (TEST_MODE) random.nextInt(100) else GameData.instance.gameDao()
-                .getGames(GameSize.SIZE_SIX.value, targetDate)
+                .getGames(GameSize.SIZE_SIX.tag, targetDate)
             eight[14 - i] = if (TEST_MODE) random.nextInt(100) else GameData.instance.gameDao()
-                .getGames(GameSize.SIZE_EIGHT.value, targetDate)
+                .getGames(GameSize.SIZE_EIGHT.tag, targetDate)
             nine[14 - i] = if (TEST_MODE) random.nextInt(100) else GameData.instance.gameDao()
-                .getGames(GameSize.SIZE_NINE.value, targetDate)
+                .getGames(GameSize.SIZE_NINE.tag, targetDate)
         }
         return AAChartModel()
             .chartType(AAChartType.Line)
@@ -155,24 +155,24 @@ class ChartView(context: Context, attrs: AttributeSet?) :
             val targetDate = DateUtil.getDate(-1 * i)
             categories[14 - i] = targetDate
             val win4 =
-                GameData.instance.gameDao().getGames(GameSize.SIZE_FOUR.value, targetDate, 1)
+                GameData.instance.gameDao().getGames(GameSize.SIZE_FOUR.tag, targetDate, 1)
             val fail4 =
-                GameData.instance.gameDao().getGames(GameSize.SIZE_FOUR.value, targetDate, 0)
+                GameData.instance.gameDao().getGames(GameSize.SIZE_FOUR.tag, targetDate, 0)
             four[14 - i] = getRate(win4, win4 + fail4);
             val win6 =
-                GameData.instance.gameDao().getGames(GameSize.SIZE_SIX.value, targetDate, 1)
+                GameData.instance.gameDao().getGames(GameSize.SIZE_SIX.tag, targetDate, 1)
             val fail6 =
-                GameData.instance.gameDao().getGames(GameSize.SIZE_SIX.value, targetDate, 0)
+                GameData.instance.gameDao().getGames(GameSize.SIZE_SIX.tag, targetDate, 0)
             six[14 - i] = getRate(win4, win4 + fail4);
             val win8 =
-                GameData.instance.gameDao().getGames(GameSize.SIZE_EIGHT.value, targetDate, 1)
+                GameData.instance.gameDao().getGames(GameSize.SIZE_EIGHT.tag, targetDate, 1)
             val fail8 =
-                GameData.instance.gameDao().getGames(GameSize.SIZE_EIGHT.value, targetDate, 0)
+                GameData.instance.gameDao().getGames(GameSize.SIZE_EIGHT.tag, targetDate, 0)
             eight[14 - i] = getRate(win4, win4 + fail4);
             val win9 =
-                GameData.instance.gameDao().getGames(GameSize.SIZE_NINE.value, targetDate, 1)
+                GameData.instance.gameDao().getGames(GameSize.SIZE_NINE.tag, targetDate, 1)
             val fail9 =
-                GameData.instance.gameDao().getGames(GameSize.SIZE_NINE.value, targetDate, 0)
+                GameData.instance.gameDao().getGames(GameSize.SIZE_NINE.tag, targetDate, 0)
             nine[14 - i] = getRate(win4, win4 + fail4);
         }
         return AAChartModel()

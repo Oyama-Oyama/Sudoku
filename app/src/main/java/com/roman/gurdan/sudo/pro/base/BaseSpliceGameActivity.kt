@@ -1,23 +1,19 @@
-package com.roman.gurdan.sudo.pro.activity
+package com.roman.gurdan.sudo.pro.base
 
 import android.widget.ImageView
-import android.widget.TextView
 import com.roman.garden.sudo.base.Game
 import com.roman.gurdan.sudo.pro.R
-import com.roman.gurdan.sudo.pro.base.BaseGameActivity
 import com.roman.gurdan.sudo.pro.data.db.GameData
 import java.text.SimpleDateFormat
 import java.util.*
 
-class GameActivity : BaseGameActivity() {
-
-    override fun getLayoutId(): Int = R.layout.activity_game
+abstract class BaseSpliceGameActivity : BaseGameActivity() {
 
     override fun bindViews() {
         durationTxt = findViewById(R.id.duration)
         gameBoard = findViewById(R.id.gameBoard)
         gameMenu = findViewById(R.id.gameMenu)
-        boardView = findViewById(R.id.boardView)
+        boardView = findViewById(R.id.boardViewReal)
 
         gameBoard.listener = gameBoardListener
         gameMenu.listener = gameMenuListener
@@ -27,7 +23,9 @@ class GameActivity : BaseGameActivity() {
     }
 
     override fun onGameCreated(game: Game) {
-        boardView.setupGame(game)
+        boardView.post {
+            boardView.setupGame(game)
+        }
     }
 
     override fun addRecord() {
@@ -45,4 +43,5 @@ class GameActivity : BaseGameActivity() {
             e.printStackTrace()
         }
     }
+
 }

@@ -72,4 +72,7 @@
     <string name="start">开始吧</string>
     <string name="noAd">暂时没有广告，稍后再试</string>
 
+    <string name="spliceType">拼接式数独</string>
+    <string name="flower">花</string>
+    <string name="windmill">风车</string>
 </resources>

@@ -1,18 +1,17 @@
 package com.roman.garden.sudo.base
 
-import android.os.Handler
-import android.os.Looper
 import com.roman.garden.sudo.base.action.MirrorManager
 import com.roman.garden.sudo.base.game.Cell
 import com.roman.garden.sudo.base.game.ICreator
 import com.roman.garden.sudo.base.game.IGameListener
+import com.roman.garden.sudo.base.game.flower.FlowerCreator
 import com.roman.garden.sudo.base.game.square.Square4Creator
 import com.roman.garden.sudo.base.game.square.Square6Creator
 import com.roman.garden.sudo.base.game.square.Square8Creator
 import com.roman.garden.sudo.base.game.square.Square9Creator
+import com.roman.garden.sudo.base.game.windmill.WindmillCreator
 import com.roman.garden.sudo.base.util.Difficulty
 import com.roman.garden.sudo.base.util.GameSize
-import com.roman.garden.sudo.base.util.LogUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.cancel
@@ -25,6 +24,7 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
     private var mirrorManager: MirrorManager? = null
     private var isNoteOn = false
     private var listener: IGameListener? = null
+    private var lastSelectCell = Pair(0, 0)
 
     constructor(gameSize: GameSize, diff: Difficulty) : this(gameSize) {
         this.difficulty = diff
@@ -39,6 +39,7 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
         }
         creator?.let {
             it.difficulty = this.difficulty
+            lastSelectCell = setupDefaultSelectedCell()
             it.createGame()
         } ?: throw NullPointerException("game creator can't be null")
     }
@@ -107,7 +108,9 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
         }
     }
 
-    fun getData() = creator?.getData()
+    fun getData() = creator?.getGameData()
+
+    fun getSpliceData(): Array<Array<Cell?>>? = creator?.getSpliceData()
 
     fun isGameOver(): Boolean = creator?.isGameOver() == true
 
@@ -117,15 +120,28 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
             GameSize.SIZE_SIX -> Square6Creator(gameSize)
             GameSize.SIZE_EIGHT -> Square8Creator(gameSize)
             GameSize.SIZE_NINE -> Square9Creator(gameSize)
+            GameSize.SIZE_FLOWER -> FlowerCreator(gameSize)
+            GameSize.SIZE_WINDMILL -> WindmillCreator(gameSize)
             else -> null
+        }
+    }
+
+    fun setupDefaultSelectedCell(): Pair<Int, Int> {
+        return when (gameSize) {
+            GameSize.SIZE_FOUR, GameSize.SIZE_SIX, GameSize.SIZE_EIGHT, GameSize.SIZE_NINE -> Pair(
+                0,
+                0
+            )
+            GameSize.SIZE_FLOWER, GameSize.SIZE_WINDMILL -> Pair(10, 10)
         }
     }
 
     private fun recordGame(row: Int, col: Int) {
         creator?.recordGame()?.apply {
             isNoteOn = isNoteOn()
-            touchedCol = col
-            touchedRow = row
+            touchedCol = lastSelectCell.second
+            touchedRow = lastSelectCell.first
+            lastSelectCell = Pair(row, col)
             mirrorManager?.addMirror(this)
         }
     }

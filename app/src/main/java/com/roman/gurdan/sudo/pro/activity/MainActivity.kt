@@ -60,10 +60,10 @@ class MainActivity : BaseActivity() {
             .setPositiveButton(R.string.start) { d, _ ->
                 Intent(this@MainActivity, GameActivity::class.java).apply {
                     if (status) {
-                        putExtra("gameSize", GameSize.SIZE_FOUR.value)
+                        putExtra("gameSize", GameSize.SIZE_FOUR.tag)
                         putExtra("gameDiff", Difficulty.EASY.value)
                     } else {
-                        putExtra("gameSize", GameSize.SIZE_NINE.value)
+                        putExtra("gameSize", GameSize.SIZE_NINE.tag)
                         putExtra("gameDiff", Difficulty.HARD.value)
                     }
                     this@MainActivity.startActivity(this)
