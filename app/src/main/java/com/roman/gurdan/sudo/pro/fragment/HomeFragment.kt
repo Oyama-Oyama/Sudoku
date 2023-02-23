@@ -3,9 +3,11 @@ package com.roman.gurdan.sudo.pro.fragment
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.FrameLayout
 import androidx.cardview.widget.CardView
 import com.google.android.material.button.MaterialButton
 import com.roman.garden.base.util.GpUtil
+import com.roman.garden.core.Easy
 import com.roman.garden.sudo.base.util.Difficulty
 import com.roman.garden.sudo.base.util.GameSize
 import com.roman.gurdan.sudo.pro.R
@@ -98,6 +100,9 @@ class HomeFragment : BaseFragment() {
                     context?.startActivity(this)
                 }
             }
+
+        val nativeContainer = view.findViewById<FrameLayout>(R.id.nativeContainer)
+        Easy.instance.showNative(nativeContainer)
     }
 
     private fun startGame(size: GameSize, difficulty: Difficulty) {

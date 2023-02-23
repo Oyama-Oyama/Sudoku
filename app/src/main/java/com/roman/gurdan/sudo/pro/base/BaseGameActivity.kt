@@ -153,7 +153,6 @@ abstract class BaseGameActivity : BaseActivity() {
         } catch (e: Exception) {
             e.printStackTrace()
         }
-        Easy.instance.showInterstitial()
         AlertDialog.Builder(this)
             .setTitle(R.string.winner)
             .setMessage(R.string.win)

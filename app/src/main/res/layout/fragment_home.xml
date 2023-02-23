@@ -336,7 +336,7 @@
             style="@style/Card"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toTopOf="@id/typeMore"
+            app:layout_constraintBottom_toTopOf="@id/nativeContainer"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cross"
@@ -360,6 +360,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.cardview.widget.CardView>
 
+        <FrameLayout
+            android:id="@+id/nativeContainer"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/triple"
+            app:layout_constraintBottom_toTopOf="@id/typeMore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
         <TextView
             android:id="@+id/typeMore"
             android:layout_width="wrap_content"
@@ -371,7 +380,7 @@
             android:textStyle="bold"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/triple" />
+            app:layout_constraintTop_toBottomOf="@id/nativeContainer" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/rate"

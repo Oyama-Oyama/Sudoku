@@ -15,14 +15,14 @@
         {
           "adUnitId": "ca-app-pub-5068274441143120/9628927443",
           "platform": "admob",
-          "price": 2,
+          "price": 2.1,
           "group": "admob",
           "adType": "banner"
         },
         {
           "adUnitId": "ca-app-pub-5068274441143120/8259429120",
           "platform": "admob",
-          "price": 1,
+          "price": 1.1,
           "group": "admob",
           "adType": "banner"
         },
@@ -57,14 +57,14 @@
         {
           "adUnitId": "ca-app-pub-5068274441143120/7772634884",
           "platform": "admob",
-          "price": 2,
+          "price": 2.1,
           "group": "admob",
           "adType": "interstitial"
         },
         {
           "adUnitId": "ca-app-pub-5068274441143120/7972472753",
           "platform": "admob",
-          "price": 1,
+          "price": 1.1,
           "group": "admob",
           "adType": "interstitial"
         },
@@ -113,14 +113,14 @@
         {
           "adUnitId": "Rewarded_Android",
           "platform": "unity",
-          "price": 2,
+          "price": 2.1,
           "group": "unity",
           "adType": "rewarded"
         },
         {
           "adUnitId": "unity_rewarded",
           "platform": "unity",
-          "price": 1,
+          "price": 1.1,
           "group": "unity",
           "adType": "rewarded"
         }
