@@ -60,6 +60,8 @@ class ChallengeFragment : BaseFragment() {
                             }
                         })
                         Easy.instance.showRewarded()
+                    } else {
+                        Toast.makeText(this.context, R.string.noAd, Toast.LENGTH_SHORT).show()
                     }
                 }
                 else -> Toast.makeText(this.context, R.string.noAd, Toast.LENGTH_SHORT).show()
