@@ -75,4 +75,8 @@
     <string name="spliceType">拼接式数独</string>
     <string name="flower">花</string>
     <string name="windmill">风车</string>
+    <string name="stair">阶梯</string>
+    <string name="cross">十字</string>
+    <string name="butterfly">蝴蝶</string>
+    <string name="triple">三角形</string>
 </resources>

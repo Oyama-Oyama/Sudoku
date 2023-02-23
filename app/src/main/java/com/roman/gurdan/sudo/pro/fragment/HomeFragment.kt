@@ -9,12 +9,14 @@ import com.roman.garden.base.util.GpUtil
 import com.roman.garden.sudo.base.util.Difficulty
 import com.roman.garden.sudo.base.util.GameSize
 import com.roman.gurdan.sudo.pro.R
-import com.roman.gurdan.sudo.pro.activity.SpliceActivity
 import com.roman.gurdan.sudo.pro.activity.GameActivity
+import com.roman.gurdan.sudo.pro.activity.SpliceActivity
 import com.roman.gurdan.sudo.pro.base.BaseFragment
+import java.util.*
 
 class HomeFragment : BaseFragment() {
 
+    private val random = Random()
     override fun getLayoutId(): Int = R.layout.fragment_home
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,7 +44,7 @@ class HomeFragment : BaseFragment() {
         view.findViewById<CardView>(R.id.flower)
             .setOnClickListener {
                 Intent(context, SpliceActivity::class.java).apply {
-                    putExtra("gameSize", GameSize.SIZE_STAIR_2.tag)
+                    putExtra("gameSize", GameSize.SIZE_FLOWER.tag)
                     putExtra("gameDiff", Difficulty.RANDOM.value)
                     context?.startActivity(this)
                 }
@@ -50,7 +52,48 @@ class HomeFragment : BaseFragment() {
         view.findViewById<CardView>(R.id.windmill)
             .setOnClickListener {
                 Intent(context, SpliceActivity::class.java).apply {
-                    putExtra("gameSize", GameSize.SIZE_STAIR.tag)
+                    putExtra(
+                        "gameSize",
+                        if (random.nextBoolean()) GameSize.SIZE_WINDMILL.tag else GameSize.SIZE_WINDMILL_2.tag
+                    )
+                    putExtra("gameDiff", Difficulty.RANDOM.value)
+                    context?.startActivity(this)
+                }
+            }
+        view.findViewById<CardView>(R.id.butterfly)
+            .setOnClickListener {
+                Intent(context, SpliceActivity::class.java).apply {
+                    putExtra("gameSize", GameSize.SIZE_BUTTERFLY.tag)
+                    putExtra("gameDiff", Difficulty.RANDOM.value)
+                    context?.startActivity(this)
+                }
+            }
+        view.findViewById<CardView>(R.id.stair)
+            .setOnClickListener {
+                Intent(context, SpliceActivity::class.java).apply {
+                    putExtra(
+                        "gameSize",
+                        if (random.nextBoolean()) GameSize.SIZE_STAIR.tag else GameSize.SIZE_STAIR_2.tag
+                    )
+                    putExtra("gameDiff", Difficulty.RANDOM.value)
+                    context?.startActivity(this)
+                }
+            }
+        view.findViewById<CardView>(R.id.cross)
+            .setOnClickListener {
+                Intent(context, SpliceActivity::class.java).apply {
+                    putExtra("gameSize", GameSize.SIZE_CROSS.tag)
+                    putExtra("gameDiff", Difficulty.RANDOM.value)
+                    context?.startActivity(this)
+                }
+            }
+        view.findViewById<CardView>(R.id.triple)
+            .setOnClickListener {
+                Intent(context, SpliceActivity::class.java).apply {
+                    putExtra(
+                        "gameSize",
+                        if (random.nextBoolean()) GameSize.SIZE_TRIPLE.tag else GameSize.SIZE_TRIPLE_2.tag
+                    )
                     putExtra("gameDiff", Difficulty.RANDOM.value)
                     context?.startActivity(this)
                 }

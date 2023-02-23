@@ -148,12 +148,12 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
             )
             GameSize.SIZE_FLOWER, GameSize.SIZE_CROSS -> Pair(10, 10)
             GameSize.SIZE_BUTTERFLY -> Pair(4, 10)
-            GameSize.SIZE_WINDMILL -> Pair(6, 6)
-            GameSize.SIZE_WINDMILL_2 -> Pair(6, 6)
-            GameSize.SIZE_TRIPLE -> Pair(0, 0)
-            GameSize.SIZE_TRIPLE_2 -> Pair(0, 0)
-            GameSize.SIZE_STAIR -> Pair(0, 0)
-            GameSize.SIZE_STAIR_2 -> Pair(0, 0)
+            GameSize.SIZE_WINDMILL -> Pair(10, 6)
+            GameSize.SIZE_WINDMILL_2 -> Pair(10, 10)
+            GameSize.SIZE_TRIPLE -> Pair(6, 10)
+            GameSize.SIZE_TRIPLE_2 -> Pair(6, 10)
+            GameSize.SIZE_STAIR -> Pair(11, 7)
+            GameSize.SIZE_STAIR_2 -> Pair(11, 7)
         }
     }
 

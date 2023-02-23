@@ -74,5 +74,9 @@
     <string name="spliceType">Splice</string>
     <string name="flower">Flower</string>
     <string name="windmill">Windmill</string>
+    <string name="stair">Stair</string>
+    <string name="cross">Cross</string>
+    <string name="butterfly">Butterfly</string>
+    <string name="triple">Triple</string>
 
 </resources>
