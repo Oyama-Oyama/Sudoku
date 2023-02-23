@@ -11,6 +11,8 @@ import com.roman.garden.sudo.base.game.square.Square4Creator
 import com.roman.garden.sudo.base.game.square.Square6Creator
 import com.roman.garden.sudo.base.game.square.Square8Creator
 import com.roman.garden.sudo.base.game.square.Square9Creator
+import com.roman.garden.sudo.base.game.stair.StairCreator
+import com.roman.garden.sudo.base.game.stair.StairCreator2
 import com.roman.garden.sudo.base.game.triple.TripleCreator
 import com.roman.garden.sudo.base.game.triple.TripleCreator2
 import com.roman.garden.sudo.base.game.windmill.WindmillCreator
@@ -132,6 +134,8 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
             GameSize.SIZE_WINDMILL_2 -> WindmillCreator2(gameSize)
             GameSize.SIZE_TRIPLE -> TripleCreator(gameSize)
             GameSize.SIZE_TRIPLE_2 -> TripleCreator2(gameSize)
+            GameSize.SIZE_STAIR -> StairCreator(gameSize)
+            GameSize.SIZE_STAIR_2 -> StairCreator2(gameSize)
             else -> null
         }
     }
@@ -148,6 +152,8 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
             GameSize.SIZE_WINDMILL_2 -> Pair(6, 6)
             GameSize.SIZE_TRIPLE -> Pair(0, 0)
             GameSize.SIZE_TRIPLE_2 -> Pair(0, 0)
+            GameSize.SIZE_STAIR -> Pair(0, 0)
+            GameSize.SIZE_STAIR_2 -> Pair(0, 0)
         }
     }
 

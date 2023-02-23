@@ -52,7 +52,7 @@ internal class ButterflyCreator(gameSize: GameSize) : ISpliceCreator(gameSize) {
     }
 
     override fun realCreateGame() {
-        buildGame(AREA_FIFTH)
+        buildGame(AREA_FIRST)
         buildGame(AREA_SECOND)
         buildGame(AREA_THIRD)
     }

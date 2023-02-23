@@ -42,7 +42,7 @@ class HomeFragment : BaseFragment() {
         view.findViewById<CardView>(R.id.flower)
             .setOnClickListener {
                 Intent(context, SpliceActivity::class.java).apply {
-                    putExtra("gameSize", GameSize.SIZE_FLOWER.tag)
+                    putExtra("gameSize", GameSize.SIZE_STAIR_2.tag)
                     putExtra("gameDiff", Difficulty.RANDOM.value)
                     context?.startActivity(this)
                 }
@@ -50,7 +50,7 @@ class HomeFragment : BaseFragment() {
         view.findViewById<CardView>(R.id.windmill)
             .setOnClickListener {
                 Intent(context, SpliceActivity::class.java).apply {
-                    putExtra("gameSize", GameSize.SIZE_WINDMILL.tag)
+                    putExtra("gameSize", GameSize.SIZE_STAIR.tag)
                     putExtra("gameDiff", Difficulty.RANDOM.value)
                     context?.startActivity(this)
                 }

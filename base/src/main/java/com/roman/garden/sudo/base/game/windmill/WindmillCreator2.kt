@@ -63,7 +63,7 @@ internal class WindmillCreator2(gameSize: GameSize) : ISpliceCreator(gameSize) {
             AREA_FIRST -> Pair(0, 3)
             AREA_SECOND -> Pair(6, 6)
             AREA_THIRD -> Pair(9, 0)
-            AREA_FOURTH -> Pair(9, 12)
+            AREA_FOURTH -> Pair(12, 9)
             AREA_FIFTH -> Pair(3, 12)
             else -> throw IllegalArgumentException("invalid area:$area")
         }
@@ -85,7 +85,7 @@ internal class WindmillCreator2(gameSize: GameSize) : ISpliceCreator(gameSize) {
         if (row in 0..8 && col in 3..11) return AREA_FIRST
         if (row in 6..14 && col in 6..14) return AREA_SECOND
         if (row in 9..17 && col in 0..8) return AREA_THIRD
-        if (row in 9..17 && col in 12..20) return AREA_FOURTH
+        if (row in 12..20 && col in 9..17) return AREA_FOURTH
         if (row in 3..11 && col in 12..20) return AREA_FIFTH
         return -1
     }

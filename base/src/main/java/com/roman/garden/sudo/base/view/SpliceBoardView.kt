@@ -18,6 +18,8 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
     private val tStartPoint = Point()
 
     override fun initBoardSize() {
+        startX = 24.0f
+        startY = 24.0f
         this.game?.let {
             it.setupDefaultSelectedCell().let { p ->
                 this.selectedCell = it.getCell(p.first, p.second)
@@ -31,10 +33,9 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
         this.game?.let {
             mwidth = ScreenUtil.getScreenWidth(context)
             cellS = mwidth * 1.0f / (DEFAULT_MAX_CELL_NUMBER_IN_LINE + 1)
-            mwidth = (cellS * it.gameSize.col + 144 * 2.0f).toInt()
-            mheight = (cellS * it.gameSize.row + 144 * 2.0f).toInt()
-            startX = 144.0f
-            startY = 144.0f
+            mwidth = (cellS * it.gameSize.col + startX * 2.0f).toInt()
+            mheight = (cellS * it.gameSize.row + startY * 2.0f).toInt()
+
         }
         setMeasuredDimension(mwidth, mheight)
     }

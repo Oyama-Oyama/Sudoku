@@ -16,18 +16,21 @@ import com.roman.garden.sudo.base.util.GameSize
  *      1 1 1  2 2 2  2 2 2  2 2 2
  *      1 1 1  2 2 2  2 2 2  2 2 2
  *      1 1 1  2 2 2  2 2 2  2 2 2
- *             2 2 2  2 2 2  3 3 3  3 3 3  3 3 3
- *             2 2 2  2 2 2  3 3 3  3 3 3  3 3 3
- *             2 2 2  2 2 2  3 3 3  3 3 3  3 3 3
- *             2 2 2  2 2 2  3 3 3  3 3 3  3 3 3
- *             2 2 2  2 2 2  3 3 3  3 3 3  3 3 3
- *             2 2 2  2 2 2  3 3 3  3 3 3  3 3 3
- *                           3 3 3  3 3 3  3 3 3
- *                           3 3 3  3 3 3  3 3 3
- *                           3 3 3  3 3 3  3 3 3
+ *             2 2 2  2 2 2  2 2 2
+ *             2 2 2  2 2 2  2 2 2
+ *             2 2 2  2 2 2  2 2 2
+ *             2 2 2  3 3 3  3 3 3  3 3 3
+ *             2 2 2  3 3 3  3 3 3  3 3 3
+ *             2 2 2  3 3 3  3 3 3  3 3 3
+ *                    3 3 3  3 3 3  3 3 3
+ *                    3 3 3  3 3 3  3 3 3
+ *                    3 3 3  3 3 3  3 3 3
+ *                    3 3 3  3 3 3  3 3 3
+ *                    3 3 3  3 3 3  3 3 3
+ *                    3 3 3  3 3 3  3 3 3
  *
  */
-internal class StairCreator(gameSize: GameSize) : ISpliceCreator(gameSize) {
+internal class StairCreator2(gameSize: GameSize) : ISpliceCreator(gameSize) {
 
     init {
         data = Array(gameSize.row) { row ->
@@ -55,23 +58,24 @@ internal class StairCreator(gameSize: GameSize) : ISpliceCreator(gameSize) {
         return when (area) {
             AREA_FIRST -> Pair(0, 0)
             AREA_SECOND -> Pair(6, 3)
-            AREA_THIRD -> Pair(9, 9)
+            AREA_THIRD -> Pair(12, 6)
             else -> throw IllegalArgumentException("invalid area:$area")
         }
     }
 
     override fun getCellAreas(row: Int, col: Int): Array<Int> {
         if (row in 6..8 && col in 3..8) return arrayOf(AREA_SECOND, AREA_FIFTH)
-        if (row in 9..14 && col in 9..11) return arrayOf(AREA_SECOND, AREA_THIRD)
+        if (row in 12..14 && col in 6..11) return arrayOf(AREA_SECOND, AREA_THIRD)
         return arrayOf(getCellArea(row, col))
     }
 
     override fun getCellArea(row: Int, col: Int): Int {
-        if (row in 9..17 && col in 0..2) return -1
-        if (row in 15..17 && col in 0..8) return -1
+        if (row in 9..20 && col in 0..2) return -1
+        if (row in 15..20 && col in 0..5) return -1
         if (row in 0..8 && col in 0..8) return AREA_FIRST
         else if (row in 6..14 && col in 3..11) return AREA_SECOND
-        else if (row in 9..17 && col in 9..17) return AREA_THIRD
+        else if (row in 12..20 && col in 6..14) return AREA_THIRD
         return -1
     }
+
 }

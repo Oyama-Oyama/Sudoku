@@ -12,7 +12,9 @@ enum class GameSize constructor(val tag: Int, val row: Int, val col: Int) {
     SIZE_WINDMILL(5, 21, 21),
     SIZE_WINDMILL_2(7, 21, 21),
     SIZE_TRIPLE(10, 15, 21),
-    SIZE_TRIPLE_2(11, 12, 21);
+    SIZE_TRIPLE_2(11, 12, 21),
+    SIZE_STAIR(12, 18, 18),
+    SIZE_STAIR_2(13, 21, 15);
 
     companion object {
         fun getGameSize(tag: Int): GameSize {
@@ -28,6 +30,8 @@ enum class GameSize constructor(val tag: Int, val row: Int, val col: Int) {
                 SIZE_WINDMILL_2.tag -> SIZE_WINDMILL_2
                 SIZE_TRIPLE.tag -> SIZE_TRIPLE
                 SIZE_TRIPLE_2.tag -> SIZE_TRIPLE_2
+                SIZE_STAIR.tag -> SIZE_STAIR
+                SIZE_STAIR_2.tag -> SIZE_STAIR_2
                 else -> SIZE_FOUR
             }
         }
