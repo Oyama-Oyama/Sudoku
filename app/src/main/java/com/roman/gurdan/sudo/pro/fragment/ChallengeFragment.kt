@@ -67,6 +67,7 @@ class ChallengeFragment : BaseFragment() {
                 else -> Toast.makeText(this.context, R.string.noAd, Toast.LENGTH_SHORT).show()
             }
         }
+        Easy.instance.showInterstitial()
     }
 
     private fun setupStatus() {

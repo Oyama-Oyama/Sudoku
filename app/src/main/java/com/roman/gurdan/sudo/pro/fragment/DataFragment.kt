@@ -30,7 +30,7 @@ class DataFragment : BaseFragment() {
         stubChart = view.findViewById(R.id.stubChart)
         stubEmpty = view.findViewById(R.id.stubEmpty)
         setup()
-        Easy.instance.showInterstitial()
+
     }
 
     private fun setup() {

@@ -49,7 +49,6 @@ internal abstract class ISpliceCreator(gameSize: GameSize) : ICreator(gameSize) 
             }
         }
         LogUtil.e("splice game:${gameSize.tag}  created cost:$measureTime ")
-        printGame()
     }
 
     override fun destroy() {

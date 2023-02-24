@@ -5,7 +5,6 @@ import android.graphics.Canvas
 import android.graphics.Point
 import android.util.AttributeSet
 import android.view.MotionEvent
-import com.roman.garden.sudo.base.util.LogUtil
 import com.roman.garden.sudo.base.util.ScreenUtil
 import com.roman.garden.sudo.base.util.Util
 import kotlin.math.abs
@@ -25,6 +24,9 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
                 this.selectedCell = it.getCell(p.first, p.second)
             }
             this.requestLayout()
+            this.post {
+
+            }
         }
     }
 
@@ -35,7 +37,6 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
             cellS = mwidth * 1.0f / (DEFAULT_MAX_CELL_NUMBER_IN_LINE + 1)
             mwidth = (cellS * it.gameSize.col + startX * 2.0f).toInt()
             mheight = (cellS * it.gameSize.row + startY * 2.0f).toInt()
-
         }
         setMeasuredDimension(mwidth, mheight)
     }
@@ -84,7 +85,6 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
     private fun findTouchedCell(x: Float, y: Float) {
         val row = ((y - startY) / cellS).toInt()
         val col = ((x - startX) / cellS).toInt()
-        LogUtil.e("touched cell: $row, $col, preselected:${selectedCell.toString()}")
         if (selectedCell != null && selectedCell!!.row == row && selectedCell!!.col == col) {
 
         } else {
@@ -176,7 +176,7 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
         }
     }
 
-    private fun drawDivideLine(canvas: Canvas){
+    private fun drawDivideLine(canvas: Canvas) {
         this.game?.let { g ->
             g.getUsedArea()?.let { count ->
                 for (area in 1..count) {
@@ -189,17 +189,41 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
     }
 
     protected fun drawLattice(pair: Pair<Int, Int>, canvas: Canvas) {
-        for (i in 0..9){
-            if (i % 3 != 0){
+        for (i in 0..9) {
+            if (i % 3 != 0) {
                 paint.color = colorUtil.COLOR_INNER_LINE
                 paint.strokeWidth = cellS * 0.01f
-                canvas.drawLine(pair.second * cellS + startX, (pair.first + i) * cellS + startY, (pair.second + 9) * cellS + startX, (pair.first + i) * cellS + startY, paint)
-                canvas.drawLine((pair.second + i) * cellS + startX, pair.first * cellS + startY, (pair.second + i) * cellS + startX, (pair.first + 9) * cellS + startY, paint)
+                canvas.drawLine(
+                    pair.second * cellS + startX,
+                    (pair.first + i) * cellS + startY,
+                    (pair.second + 9) * cellS + startX,
+                    (pair.first + i) * cellS + startY,
+                    paint
+                )
+                canvas.drawLine(
+                    (pair.second + i) * cellS + startX,
+                    pair.first * cellS + startY,
+                    (pair.second + i) * cellS + startX,
+                    (pair.first + 9) * cellS + startY,
+                    paint
+                )
             } else {
                 paint.color = colorUtil.COLOR_OUTER_LINE
                 paint.strokeWidth = cellS * 0.05f
-                canvas.drawLine(pair.second * cellS + startX, (pair.first + i) * cellS + startY, (pair.second + 9) * cellS + startX, (pair.first + i) * cellS + startY, paint)
-                canvas.drawLine((pair.second + i) * cellS + startX, pair.first * cellS + startY, (pair.second + i) * cellS + startX, (pair.first + 9) * cellS + startY, paint)
+                canvas.drawLine(
+                    pair.second * cellS + startX,
+                    (pair.first + i) * cellS + startY,
+                    (pair.second + 9) * cellS + startX,
+                    (pair.first + i) * cellS + startY,
+                    paint
+                )
+                canvas.drawLine(
+                    (pair.second + i) * cellS + startX,
+                    pair.first * cellS + startY,
+                    (pair.second + i) * cellS + startX,
+                    (pair.first + 9) * cellS + startY,
+                    paint
+                )
             }
         }
     }

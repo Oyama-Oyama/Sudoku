@@ -325,6 +325,7 @@ abstract class BaseGameActivity : BaseActivity() {
         if (!dispsables.isDisposed) dispsables.dispose()
         Easy.instance.closeBanner()
         addRecord()
+        game?.destroy()
         super.onDestroy()
     }
 

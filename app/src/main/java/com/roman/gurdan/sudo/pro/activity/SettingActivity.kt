@@ -3,6 +3,7 @@ package com.roman.gurdan.sudo.pro.activity
 import android.os.Bundle
 import android.widget.ImageView
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.roman.garden.core.Easy
 import com.roman.gurdan.sudo.pro.R
 import com.roman.gurdan.sudo.pro.base.BaseActivity
 import com.roman.gurdan.sudo.pro.util.Cache
@@ -13,9 +14,10 @@ class SettingActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
         setupSwitchStatus()
+        Easy.instance.showInterstitial()
     }
 
-    fun setupSwitchStatus() {
+    private fun setupSwitchStatus() {
         findViewById<ImageView>(R.id.back).setOnClickListener { finish() }
         val one = findViewById<SwitchMaterial>(R.id.switchOne)
         val status1 = Cache.getCache().decodeBool(Cache.SETTING_HIGH_LIGHT_SAME_ROW_COLUMN, true)
