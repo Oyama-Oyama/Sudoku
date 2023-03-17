@@ -1,6 +1,7 @@
 package com.roman.gurdan.sudo.pro
 
 import android.app.Application
+import com.roman.garden.base.BaseImpl
 import com.roman.garden.core.Easy
 import com.roman.gurdan.sudo.pro.util.DateUtil
 

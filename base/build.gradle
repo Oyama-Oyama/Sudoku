@@ -34,4 +34,11 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
 
+
+    api 'com.easy:Core:1.0.4.2'
+    implementation 'com.easy:unity:1.0.4.2'
+    implementation 'com.easy:admob:1.0.4.2'
+    implementation 'com.easy:vungle:1.0.4.2'
+    implementation 'com.easy:adCore:1.0.4.2'
+    implementation 'com.easy:firebase:1.0.4.2'
 }

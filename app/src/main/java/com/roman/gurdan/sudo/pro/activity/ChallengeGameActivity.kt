@@ -53,19 +53,19 @@ class ChallengeGameActivity : BaseGameActivity() {
     override fun getIntentMessage(intent: Intent?) {
         when (challengeStep) {
             0 -> {
-                gameSize = GameSize.SIZE_FOUR;
+                gameSize = GameSize.SIZE_FOUR
             }
             1 -> {
-                gameSize = GameSize.SIZE_SIX;
+                gameSize = GameSize.SIZE_SIX
             }
             2 -> {
-                gameSize = GameSize.SIZE_EIGHT;
+                gameSize = GameSize.SIZE_EIGHT
             }
             3 -> {
-                gameSize = GameSize.SIZE_NINE;
+                gameSize = GameSize.SIZE_NINE
             }
         }
-        difficulty = Difficulty.randDifficulty()
+        difficulty = Difficulty.randDifficulty(gameSize.tag)
     }
 
     override fun onGameOver() {

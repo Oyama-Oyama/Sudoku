@@ -64,7 +64,13 @@ class ChallengeFragment : BaseFragment() {
                         Toast.makeText(this.context, R.string.noAd, Toast.LENGTH_SHORT).show()
                     }
                 }
-                else -> Toast.makeText(this.context, R.string.noAd, Toast.LENGTH_SHORT).show()
+                else -> {
+                    Intent(
+                        context,
+                        ChallengeGameActivity::class.java
+                    ).apply { context?.startActivity(this) }
+                    adTag.visibility = View.VISIBLE
+                }
             }
         }
         Easy.instance.showInterstitial()
@@ -85,7 +91,6 @@ class ChallengeFragment : BaseFragment() {
                         view.isSelected = true
                         MainScope().launch {
                             flowOf(it).map { d ->
-                                Logger.e("flow:${Thread.currentThread().name}")
                                 val count = GameData.instance.weekDao().getWeekly(d)
                                 return@map count > 0
                             }

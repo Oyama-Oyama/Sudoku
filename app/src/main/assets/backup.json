@@ -92,7 +92,7 @@
         {
           "adUnitId": "FULL-7920408",
           "platform": "vungle",
-          "price": 1.5,
+          "price": 2.1,
           "group": "vungle",
           "adType": "interstitial"
         }
@@ -141,7 +141,7 @@
         {
           "adUnitId": "VIDEO-8588004",
           "platform": "vungle",
-          "price": 2,
+          "price": 2.2,
           "group": "vungle",
           "adType": "rewarded"
         }

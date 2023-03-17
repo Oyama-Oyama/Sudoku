@@ -11,8 +11,8 @@ android {
         applicationId "com.roman.gurdan.sudo.pro"
         minSdk 21
         targetSdk 33
-        versionCode 34
-        versionName "4.0.4"
+        versionCode 36
+        versionName "2023.03.17"
 
     }
 
@@ -86,11 +86,7 @@ dependencies {
     // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
     api 'io.reactivex.rxjava3:rxjava:3.1.5'
 
-    implementation 'com.easy:Core:1.0.3.21'
-    implementation 'com.easy:unity:1.0.3.21'
-    implementation 'com.easy:admob:1.0.3.21'
-    implementation 'com.easy:adCore:1.0.3.21'
-    implementation 'com.easy:firebase:1.0.3.21'
+
 
 }
 apply plugin: 'com.google.gms.google-services'

@@ -119,7 +119,13 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
 
     fun getSpliceData(): Array<Array<Cell?>>? = creator?.getSpliceData()
 
-    fun isGameOver(): Boolean = creator?.isGameOver() == true
+    fun isGameOver(): Boolean {
+        val result = creator?.isGameOver() == true
+        if (result) {
+            Difficulty.resetDifficulty(difficulty, gameSize.tag)
+        }
+        return result
+    }
 
     private fun createGameCreator(): ICreator? {
         return when (gameSize) {
@@ -173,5 +179,6 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
      *  返回指定区域起始 行、列坐标
      */
     open fun getArea(area: Int): Pair<Int, Int>? = creator?.getArea(area)
+
 
 }

@@ -97,7 +97,6 @@ abstract class BaseGameActivity : BaseActivity() {
             .setNegativeButton(R.string.cancel) { d, _ ->
                 d.dismiss()
             }
-
             .setPositiveButton(getString(R.string.sure) + "(ad)") { d, _ ->
                 if (Easy.instance.hasRewarded()) {
                     Easy.instance.setRewardedListener(object : IAdListener {
@@ -183,13 +182,13 @@ abstract class BaseGameActivity : BaseActivity() {
     protected open fun getIntentMessage(intent: Intent?) {
         if (intent == null) {
             gameSize = GameSize.SIZE_FOUR
-            difficulty = Difficulty.randDifficulty()
+            difficulty = Difficulty.randDifficulty(gameSize.tag)
         } else {
             val value = intent.getIntExtra("gameSize", 0)
             gameSize = GameSize.getGameSize(value)
             val diff = intent.getIntExtra("gameDiff", 0)
             difficulty =
-                if (diff == 0) Difficulty.randDifficulty() else Difficulty.getDifficulty(diff)
+                if (diff == 0) Difficulty.randDifficulty(gameSize.tag) else Difficulty.getDifficulty(diff)
         }
     }
 
