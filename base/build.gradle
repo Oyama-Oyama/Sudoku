@@ -1,0 +1,45 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.roman.garden.sudo.base'
+    compileSdk rootProject.ext.versions.compileSdk
+
+    defaultConfig {
+        minSdk rootProject.ext.versions.minSdk
+        targetSdk rootProject.ext.versions.targetSdk
+
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+    implementation 'androidx.core:core-ktx:1.13.0'
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0"
+    api "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
+
+
+//    api 'com.easy:Core:1.0.4.11'
+////    api 'com.easy:unity:1.0.4.9'
+//    api 'com.easy:admob:1.0.4.11'
+////    api 'com.easy:vungle:1.0.4.9'
+//    api 'com.easy:adCore:1.0.4.11'
+//    api 'com.easy:firebase:1.0.4.11'
+//    implementation 'androidx.core:core-ktx:+'
+}

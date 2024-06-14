@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/background_bottom_dialog">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/modeNewbie"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp42"
+        android:layout_marginTop="@dimen/dp32"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dp4"
+        app:cardElevation="@dimen/dp6"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.95">
+
+        <TextView
+            style="@style/Text.Page.Title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.8"
+            android:fontFamily="serif"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp12"
+            android:text="@string/newbie" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/modeTrainee"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp42"
+        android:layout_marginTop="@dimen/dp8"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dp4"
+        app:cardElevation="@dimen/dp6"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/modeNewbie"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.95">
+
+        <TextView
+            style="@style/Text.Page.Title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.8"
+            android:fontFamily="serif"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp12"
+            android:text="@string/trainee" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/modePrimary"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp42"
+        android:layout_marginTop="@dimen/dp8"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dp4"
+        app:cardElevation="@dimen/dp6"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/modeTrainee"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.95">
+
+        <TextView
+            style="@style/Text.Page.Title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.8"
+            android:fontFamily="serif"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp12"
+            android:text="@string/primary" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/modeEasy"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp42"
+        android:layout_marginTop="@dimen/dp8"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dp4"
+        app:cardElevation="@dimen/dp6"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/modePrimary"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.95">
+
+        <TextView
+            style="@style/Text.Page.Title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="serif"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp12"
+            android:text="@string/easy"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/modeMedium"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp42"
+        android:layout_marginTop="@dimen/dp8"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dp4"
+        app:cardElevation="@dimen/dp6"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/modeEasy"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.95">
+
+        <TextView
+            style="@style/Text.Page.Title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="serif"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp12"
+            android:text="@string/medium"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/modeHard"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp42"
+        android:layout_marginTop="@dimen/dp8"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dp4"
+        app:cardElevation="@dimen/dp6"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/modeMedium"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.95">
+
+        <TextView
+            style="@style/Text.Page.Title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="serif"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp12"
+            android:text="@string/hard"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/modeExpert"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp42"
+        android:layout_marginTop="@dimen/dp8"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/dp4"
+        app:cardElevation="@dimen/dp6"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/modeHard"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.95">
+
+        <TextView
+            style="@style/Text.Page.Title"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="serif"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/dp12"
+            android:text="@string/expert"
+            android:textStyle="bold" />
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp32"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/modeExpert" />
+</androidx.constraintlayout.widget.ConstraintLayout>

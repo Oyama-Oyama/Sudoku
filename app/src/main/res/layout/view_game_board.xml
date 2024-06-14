@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.roman.gurdan.sudo.pro.view.GameBoard xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_constraintBottom_toTopOf="@id/bottomBanner"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/gameMenu">
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/num1"
+        style="@style/NumberItem"
+        android:text="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/num2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/num2"
+        style="@style/NumberItem"
+        android:text="2"
+        app:layout_constraintLeft_toRightOf="@id/num1"
+        app:layout_constraintRight_toLeftOf="@id/num3"
+        app:layout_constraintTop_toTopOf="@id/num1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/num3"
+        style="@style/NumberItem"
+        android:text="3"
+        app:layout_constraintLeft_toRightOf="@id/num2"
+        app:layout_constraintRight_toLeftOf="@id/num4"
+        app:layout_constraintTop_toTopOf="@id/num1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/num4"
+        style="@style/NumberItem"
+        android:text="4"
+        app:layout_constraintLeft_toRightOf="@id/num3"
+        app:layout_constraintRight_toLeftOf="@id/num5"
+        app:layout_constraintTop_toTopOf="@id/num1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/num5"
+        style="@style/NumberItem"
+        android:text="5"
+        app:layout_constraintLeft_toRightOf="@id/num4"
+        app:layout_constraintRight_toLeftOf="@id/num6"
+        app:layout_constraintTop_toTopOf="@id/num1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/num6"
+        style="@style/NumberItem"
+        android:text="6"
+        app:layout_constraintLeft_toRightOf="@id/num5"
+        app:layout_constraintRight_toLeftOf="@id/num7"
+        app:layout_constraintTop_toTopOf="@id/num1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/num7"
+        style="@style/NumberItem"
+        android:text="7"
+        app:layout_constraintLeft_toRightOf="@id/num6"
+        app:layout_constraintRight_toLeftOf="@id/num8"
+        app:layout_constraintTop_toTopOf="@id/num1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/num8"
+        style="@style/NumberItem"
+        android:text="8"
+        app:layout_constraintLeft_toRightOf="@id/num7"
+        app:layout_constraintRight_toLeftOf="@id/num9"
+        app:layout_constraintTop_toTopOf="@id/num1" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/num9"
+        style="@style/NumberItem"
+        android:text="9"
+        app:layout_constraintLeft_toRightOf="@id/num8"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/num1" />
+
+</com.roman.gurdan.sudo.pro.view.GameBoard>

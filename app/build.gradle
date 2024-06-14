@@ -1,0 +1,104 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+android {
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "com.roman.gurdan.sudo.pro"
+        minSdk 21
+        targetSdk 34
+        versionCode 52
+        versionName "2023.05.19"
+
+    }
+
+    signingConfigs {
+        release {
+            storeFile file('key.keystore')
+            keyAlias = 'com.roman.gurdan.sudo.pro'
+            storePassword '123456'
+            keyPassword '123456'
+        }
+    }
+
+    buildTypes {
+        release {
+//            jniDebuggable false
+//            minifyEnabled true
+//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+//            //Zipalign优化
+//            zipAlignEnabled true
+//            multiDexEnabled true
+//            // 移除无用的resource文件
+//            shrinkResources false
+            signingConfig signingConfigs.release
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lint {
+        baseline = file("lint-baseline.xml")
+    }
+}
+
+dependencies {
+
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation 'androidx.core:core-ktx:1.13.0'
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.0"
+
+//    implementation project(path: ':sudo')
+  //  implementation project(path: ':AAChart')
+//    implementation project(path: ':base')
+    implementation 'androidx.work:work-runtime:2.8.1'
+    implementation project(path: ':AlarmNotification')
+//    implementation 'androidx.room:room-ktx:2.4.2'
+//    kapt "androidx.room:room-compiler:2.5.1"
+    implementation "androidx.room:room-runtime:2.5.1"
+//    implementation 'androidx.room:room-common:2.4.2'
+
+    implementation 'androidx.navigation:navigation-common:2.6.0'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.6.0'
+    implementation 'androidx.navigation:navigation-runtime-ktx:2.6.0'
+
+//    implementation "androidx.work:work-runtime:2.5.0"
+//    implementation 'androidx.work:work-rxjava3:2.5.0'
+//
+//    implementation 'androidx.lifecycle:lifecycle-common:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.6.2'
+//    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-compose:2.6.2'
+    implementation 'androidx.lifecycle:lifecycle-process:2.6.2'
+//    implementation "androidx.lifecycle:lifecycle-runtime:2.3.1"
+
+    implementation 'com.tencent:mmkv:1.2.15'
+
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
+
+
+//    implementation "com.google.android.gms:play-services-games:20.0.1"
+//    implementation "com.google.android.gms:play-services-auth:17.0.0"
+
+
+    api 'com.easy:Core:1.0.4.11'
+//    api 'com.easy:unity:1.0.4.9'
+    api 'com.easy:admob:1.0.4.11'
+//    api 'com.easy:vungle:1.0.4.9'
+    api 'com.easy:adCore:1.0.4.11'
+    api 'com.easy:firebase:1.0.4.11'
+//    implementation 'androidx.core:core-ktx:+'
+
+
+}
+apply plugin: 'com.google.gms.google-services'
