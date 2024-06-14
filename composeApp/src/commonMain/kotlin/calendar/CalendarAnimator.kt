@@ -1,0 +1,95 @@
+package calendar
+
+
+import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.pager.PagerState
+import io.wojciechosak.calendar.utils.copy
+
+
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.LocalDate
+import kotlinx.datetime.daysUntil
+import kotlinx.datetime.periodUntil
+import kotlinx.datetime.plus
+import kotlin.math.floor
+
+/**
+ * Class for animating the transition between dates in a calendar.
+ *
+ * @property startDate The initial start date of the calendar.
+ */
+@OptIn(ExperimentalFoundationApi::class)
+class CalendarAnimator(private val day: Day, private val initPagerIndex:Int) {
+    enum class AnimationMode {
+        MONTH,
+        DAY,
+        WEEK,
+    }
+
+    private var pagerState: PagerState? = null
+
+    private var mode: AnimationMode = AnimationMode.MONTH
+
+    internal fun updatePagerState(pagerState: PagerState) {
+        this.pagerState = pagerState
+    }
+
+    internal fun setAnimationMode(mode: AnimationMode) {
+        this.mode = mode
+    }
+
+    suspend fun animateTo(
+        target: Day,
+        pageOffsetFraction: Float = 0f,
+        animationSpec: AnimationSpec<Float> = spring(stiffness = Spring.StiffnessMediumLow),
+    ) {
+        val initialPage = initPagerIndex
+        val currentDate =
+            when (mode) {
+                AnimationMode.MONTH ->
+                    day.plus(
+                        (pagerState?.targetPage ?: 0) - initialPage,
+                        30,
+                    )
+
+                AnimationMode.DAY -> {
+                    day.plus(
+                        (pagerState?.targetPage ?: 0) - initialPage,
+                        1,
+                    )
+                }
+
+                AnimationMode.WEEK ->
+                    day.plus(
+                        (pagerState?.targetPage ?: 0) - initialPage,
+                        7,
+                    )
+            }
+        val targetDate =
+            target.run {
+                if (mode == AnimationMode.MONTH) {
+                    copy(dayOfMonth = currentDate.dayOfMonth)
+                } else {
+                    this
+                }
+            }
+//        val diff = currentDate.periodUntil(targetDate)
+        val offset =
+            when (mode) {
+                AnimationMode.MONTH -> 1 + 0 * 12
+                AnimationMode.DAY -> currentDate.daysUntil(targetDate)
+                AnimationMode.WEEK -> floor(currentDate.daysUntil(targetDate) / 7f).toInt()
+                else -> 0
+            }
+        if (initialPage + offset > 0) {
+            pagerState?.animateScrollToPage(
+                page = (pagerState?.settledPage ?: initialPage) + offset,
+                pageOffsetFraction = pageOffsetFraction,
+                animationSpec = animationSpec,
+            )
+        }
+    }
+}
