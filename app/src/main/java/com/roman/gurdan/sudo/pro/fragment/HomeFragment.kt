@@ -37,8 +37,11 @@ class HomeFragment : BaseFragment() {
             this.text = DateUtil.getDate()
         }
 
-        view.findViewById<CardView>(R.id.playDate).setOnClickListener {
-
+        view.findViewById<CardView>(R.id.playDate).setOnClickListener { v ->
+            Intent(v.context, GameActivity::class.java).apply {
+                this.putExtra("playDate", DateUtil.getDate())
+                startActivity(this)
+            }
         }
 
         view.findViewById<CardView>(R.id.newGame).setOnClickListener {
@@ -62,7 +65,6 @@ class HomeFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.e("adadadada", "resume");
         val unfinishedGame = LocalStorage.decode("LastUnFinishedGame", "")
         RecoverGame(unfinishedGame!!).apply {
             this.ToSelf(this.str)?.let {

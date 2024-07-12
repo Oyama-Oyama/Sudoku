@@ -131,7 +131,7 @@ abstract class BaseGameActivity : BaseActivity() {
     }
 
     protected fun addRecord(isGameFailure: Boolean = false) {
-        if (splitPlayDate() != null) {
+        if (playDate != null) {
             game?.let {
                 it.copy()?.let { copy ->
                     GameBackUp(
@@ -140,7 +140,7 @@ abstract class BaseGameActivity : BaseActivity() {
                         timerUtil.getDuration(),
                         copy
                     ).apply {
-                        LocalStorage.encode("LastUnFinishedGame", this.ToStr())
+                        LocalStorage.encode(playDate!!, this.ToStr())
                     }
                 }
             }
@@ -282,7 +282,7 @@ abstract class BaseGameActivity : BaseActivity() {
                 timerUtil.resume()
                 dialog.dismiss()
             }.bindTextView(R.id.inactive, R.string.restart) { _, dialog ->
-                resetGame()
+                realResetGame()
                 dialog.dismiss()
             }.show()
     }
@@ -391,14 +391,6 @@ abstract class BaseGameActivity : BaseActivity() {
                 val unfinishedGame = LocalStorage.decode("LastUnFinishedGame", "")
                 RecoverGame(unfinishedGame!!).apply {
                     this.ToSelf(this.str)?.let {
-//                        val diff = when (it.difficulty) {
-//                            Difficulty.EASY -> getString(R.string.easy)
-//                            Difficulty.MEDIUM -> getString(R.string.medium)
-//                            Difficulty.HARD -> getString(R.string.hard)
-//                            Difficulty.EXPERT -> getString(R.string.expert)
-//                            else -> getString(R.string.hard)
-//                        }
-                        val duration = DateUtil.millSecondToDate(it.duration)
                         gameViewModel.updateGameSize(it.gameSize.tag)
                         gameViewModel.updateGameDifficulty(it.difficulty)
                         timerUtil.reset()
@@ -410,7 +402,7 @@ abstract class BaseGameActivity : BaseActivity() {
                                 onGameCreated(g)
                             }
 
-                           // boardView.postInvalidate()
+                            // boardView.postInvalidate()
                             setupTimer()
 
                         }
@@ -419,13 +411,35 @@ abstract class BaseGameActivity : BaseActivity() {
                     }
                 }
 
+            } else if (intent.hasExtra("playDate")) {
+                isRecover = true
+                playDate = intent.getStringExtra("playDate")
+                playDate?.let { date ->
+                    val unfinishedGame = LocalStorage.decode(date, "")
+                    RecoverGame(unfinishedGame!!).apply {
+                        this.ToSelf(this.str)?.let {
+                            gameViewModel.updateGameSize(it.gameSize.tag)
+                            gameViewModel.updateGameDifficulty(it.difficulty)
+                            timerUtil.reset()
+                            timerUtil.plus(it.duration)
+                            game = Game(it.gameSize, it.difficulty)
+                            game?.let { g ->
+                                g.setupGame(it.mirror)
+                                boardView.post {
+                                    onGameCreated(g)
+                                }
+                                // boardView.postInvalidate()
+                                setupTimer()
+                            }
+                        } ?: run {
+                            throw IllegalStateException("")
+                        }
+                    }
+                }
             } else {
                 isRecover = false
                 val value = intent.getIntExtra("gameSize", 0)
                 val diff = intent.getIntExtra("gameDiff", 0)
-                if (intent.hasExtra("playDate")) {
-                    playDate = intent.getStringExtra("playDate")
-                }
                 gameViewModel.updateGameSize(value)
                 gameViewModel.updateGameDifficulty(
                     Difficulty.getDifficulty(
