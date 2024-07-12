@@ -1,5 +1,6 @@
 package com.roman.gurdan.sudo.pro.game
 
+import com.roman.gurdan.sudo.pro.game.action.IMirror
 import com.roman.gurdan.sudo.pro.game.action.MirrorManager
 import com.roman.gurdan.sudo.pro.game.game.Cell
 import com.roman.gurdan.sudo.pro.game.game.ICreator
@@ -35,6 +36,30 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
 
     constructor(gameSize: GameSize, diff: Difficulty) : this(gameSize) {
         this.difficulty = diff
+    }
+
+    fun setupGame(data: IMirror) {
+        if (creator == null) {
+            creator = createGameCreator()
+        }
+        if (mirrorManager == null) {
+            mirrorManager = MirrorManager()
+        }
+        creator?.recoverGame(data)
+        this.isNoteOn = false
+    }
+
+    fun setupGame(data: String) {
+        if (creator == null) {
+            creator = createGameCreator()
+        }
+        if (mirrorManager == null) {
+            mirrorManager = MirrorManager()
+        }
+        IMirror(data).apply {
+            creator?.recoverGame(this)
+        }
+        this.isNoteOn = false
     }
 
     fun createGame() {
@@ -75,6 +100,19 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
         }
     }
 
+    fun hint(cell: Cell?) {
+        creator?.let { it ->
+            cell?.let { c ->
+                val value = it.getValidValue(c)
+                if (value != 0) {
+                    recordGame(c.row, c.col)
+                    it.setValue(c, value, false)
+                    listener?.onGameRefresh()
+                }
+            }
+        }
+    }
+
     fun getRelatedCells(
         cell: Cell,
         highLightLineOrRow: Boolean,
@@ -104,6 +142,8 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
     }
 
     fun clearMirror() = mirrorManager?.clear()
+
+    fun copy(): IMirror? = creator?.recordGame()
 
     fun destroy() {
         launch {
@@ -152,6 +192,7 @@ class Game(val gameSize: GameSize) : CoroutineScope by MainScope() {
                 0,
                 0
             )
+
             GameSize.SIZE_FLOWER, GameSize.SIZE_CROSS -> Pair(10, 10)
             GameSize.SIZE_BUTTERFLY -> Pair(4, 10)
             GameSize.SIZE_WINDMILL -> Pair(10, 6)

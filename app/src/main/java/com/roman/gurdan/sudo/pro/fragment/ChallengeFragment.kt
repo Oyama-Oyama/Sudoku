@@ -85,7 +85,7 @@ class ChallengeFragment : BaseFragment() {
                                         super.onClosed(rewarded)
                                         if (rewarded) {
                                             val count = 8 + Random.nextInt(0, 5)
-                                            LocalStorage.addStar(count)
+                                           // LocalStorage.addStar(count)
                                             starCount?.text = "x${
                                                 LocalStorage.decode(
                                                     LocalStorage.STAR_COUNT, LocalStorage.DEFAULT_STAR_COUNT

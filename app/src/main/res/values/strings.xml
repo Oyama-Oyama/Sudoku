@@ -20,6 +20,12 @@
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
     <string name="expert">Expert</string>
+    <string name="guide1">never played</string>
+    <string name="guide2">Played before, not proficient</string>
+    <string name="guide3">Master! I am a master</string>
+    <string name="pause">PAUSE</string>
+    <string name="pause_info">Game is paused!\nProper use of prompts will help you complete the questions more smoothly.</string>
+
     <string name="startChallenge">Play Now</string>
     <string name="restartChange">try again(AD)</string>
     <string name="nan">NAN</string>
@@ -49,6 +55,7 @@
     <string name="triple">Triple</string>
     <string name="rate">Rate</string>
     <string name="rateContent">May you have a light in the dark, an umbrella in the rain, and someone to accompany you on the way. Looking forward to your five-star review!</string>
+    <string name="about">About</string>
     <string name="giveUp">Quit</string>
     <string name="giveUpContent">Giving up halfway is not a good habit. Are you sure you want to do this?</string>
     <string name="yes">Yes</string>
@@ -61,7 +68,7 @@
     <string name="guide">Guide</string>
     <string name="revive">Unfortunately</string>
     <string name="reviveContent">I am not afraid of pain or failure, only afraid that when I die, I will still be trapped in this cage, without time or opportunity to prove my bravery.</string>
-    <string name="reviveAd">Advertising Revival(AD)</string>
+    <string name="reviveAd">Revival(AD)</string>
     <string name="reviveStar">x%d to revival</string>
     <string name="noEnoughStar">Prop Star not enough</string>
     <string name="moreStar">Earn Star</string>
@@ -83,7 +90,7 @@
     <string name="exit">Are you leaving now? Come back quickly! I\'m still waiting for you here.</string>
     <string name="ok">OK</string>
     <string name="noExit">Stay a little longer</string>
-    <string name="permission">ALLOW</string>
+    <string name="permission">PERMISSION ALLOW</string>
     <string name="permissionRequire">In order to provide you with better service, we need some permission</string>
     <string name="signIn">Sign In</string>
     <string name="signInDetail">Welcome back, we have prepared some small gifts for your return.</string>

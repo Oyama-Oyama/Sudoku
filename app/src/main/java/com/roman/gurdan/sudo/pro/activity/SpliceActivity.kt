@@ -7,5 +7,4 @@ class SpliceActivity : BaseSpliceGameActivity() {
 
     override fun getLayoutId(): Int = R.layout.activity_splice
 
-
 }

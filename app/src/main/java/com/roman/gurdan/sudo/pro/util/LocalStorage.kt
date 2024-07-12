@@ -1,6 +1,15 @@
 package com.roman.gurdan.sudo.pro.util
 
+import com.roman.gurdan.sudo.pro.game.util.Difficulty
+import com.roman.gurdan.sudo.pro.game.util.GameSize
 import com.tencent.mmkv.MMKV
+import java.util.Date
+
+
+data class GameRecord(val gameSize: GameSize, val difficulty: Difficulty, val duration: Long)
+data class DateGameRecord(val gameSize: GameSize, val difficulty: Difficulty, val duration: Long)
+
+
 
 class LocalStorage {
 
@@ -38,19 +47,6 @@ class LocalStorage {
         fun encode(key: String, value: Long) = getImpl().encode(key, value)
 
         fun decode(key: String, defaultValue: Long): Long = getImpl().decodeLong(key, defaultValue)
-
-
-        fun addStar(num: Int): Int {
-            var count = getImpl().decodeInt(STAR_COUNT, DEFAULT_STAR_COUNT)
-            count += num
-            if (count < 0) count = 0
-            getImpl().encode(STAR_COUNT, count)
-            return count
-        }
-
-        fun hasStar(num: Int): Boolean {
-            return getImpl().decodeInt(STAR_COUNT, DEFAULT_STAR_COUNT) > num
-        }
 
     }
 

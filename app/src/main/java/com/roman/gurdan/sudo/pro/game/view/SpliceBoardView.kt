@@ -5,6 +5,7 @@ import android.graphics.Canvas
 import android.graphics.Point
 import android.util.AttributeSet
 import android.view.MotionEvent
+import android.view.ScaleGestureDetector
 import com.roman.gurdan.sudo.pro.game.util.ScreenUtil
 import com.roman.gurdan.sudo.pro.game.util.Util
 import kotlin.math.abs
@@ -20,9 +21,9 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
         startX = 24.0f
         startY = 24.0f
         this.game?.let {
-            it.setupDefaultSelectedCell().let { p ->
-                this.selectedCell = it.getCell(p.first, p.second)
-            }
+//            it.setupDefaultSelectedCell().let { p ->
+//                this.selectedCell = it.getCell(p.first, p.second)
+//            }
             this.requestLayout()
             this.post {
 
@@ -41,13 +42,47 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
         setMeasuredDimension(mwidth, mheight)
     }
 
+    var lineAlpha = 0
+    var curAniRow = 0
+    var curAniNumberRow = 0
+
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
-        this.game?.let { _ ->
+        this.game?.let { g ->
             canvas?.let { c ->
-                drawCellBg(c)
-                drawCellNumber(c)
-                drawDivideLine(c)
+                if (isFirstIn) {
+                    if (lineAlpha < 255) {
+                        drawDivideLine(canvas, alpha = lineAlpha)
+                        lineAlpha += 5
+                        handler.postDelayed({
+                            postInvalidate()
+                        }, 5)
+                    } else {
+                        paint.alpha = 255
+                        drawDivideLine(canvas)
+
+                        val maxRow = g.gameSize.row + 5
+                        if (curAniRow <= maxRow) {
+                            drawAnimCellBg(canvas, curAniRow)
+                            curAniRow += 1
+                            handler.postDelayed({ postInvalidate() }, 50)
+                        } else {
+                            if (curAniNumberRow <= g.gameSize.row) {
+                                drawAnimNumber(canvas, curAniNumberRow)
+                                curAniNumberRow += 1
+                                handler.postDelayed({ postInvalidate() }, 50)
+                            } else {
+                                drawAnimNumber(canvas, g.gameSize.row)
+                                isFirstIn = false
+                                boardViewListener?.onReady()
+                            }
+                        }
+                    }
+                } else {
+                    drawCellBg(c)
+                    drawCellNumber(c)
+                    drawDivideLine(c)
+                }
             }
         }
     }
@@ -61,6 +96,7 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
                 tStartPoint.x = tStartX.toInt()
                 tStartPoint.y = tStartY.toInt()
             }
+
             MotionEvent.ACTION_MOVE -> {
                 val offsetX = event.rawX - tStartX
                 val offsetY = event.rawY - tStartY
@@ -69,6 +105,7 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
                 tStartY = event.rawY
 
             }
+
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                 val point = Point(event.rawX.toInt(), event.rawY.toInt())
                 Util.distance(tStartPoint, point).let {
@@ -77,6 +114,7 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
                     }
                 }
             }
+
             else -> return false
         }
         return true//super.onTouchEvent(event)
@@ -95,6 +133,64 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
                 e.printStackTrace()
             } finally {
                 postInvalidate()
+            }
+        }
+    }
+
+    private fun drawAnimCellBg(canvas: Canvas, curRow: Int) {
+        game?.let { g ->
+            g.getSpliceData()?.let { cells ->
+                cells.forEach { rows ->
+                    rows.forEach { rowItem ->
+                        rowItem?.let { cell ->
+                            if (cell.row > curRow) {
+
+                            } else {
+                                val offset = curRow - cell.row
+                                when (offset) {
+                                    0 -> animCellPaint.alpha = 255
+                                    1 -> animCellPaint.alpha = 200
+                                    2 -> animCellPaint.alpha = 125
+                                    3 -> animCellPaint.alpha = 75
+                                    4 -> animCellPaint.alpha = 25
+                                    else -> animCellPaint.alpha = 0
+                                }
+                                canvas.drawRect(
+                                    cellS * cell.col + startX + cellS * 0.02f,
+                                    cellS * cell.row + startY + cellS * 0.02f,
+                                    cellS * cell.col + startX + cellS - cellS * 0.02f,
+                                    cellS * cell.row + startY + cellS - cellS * 0.02f,
+                                    animCellPaint
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun drawAnimNumber(canvas: Canvas, curRow: Int) {
+        game?.let { g ->
+            g.getSpliceData()?.let { cells ->
+                cells.forEach { rows ->
+                    rows.forEach { rowItem ->
+                        rowItem?.let { cell ->
+                            if (cell.row < curRow) {
+                                numberPaint.textSize = cellS / 2
+                                if (cell.value != 0) {
+                                    numberPaint.color = colorUtil.COLOR_PRESET_VALUE
+                                    canvas.drawText(
+                                        cell.value.toString(),
+                                        cell.col * cellS + startX + cellS / 2,
+                                        cell.row * cellS + startY + cellS / 2 + cellS / 5,
+                                        numberPaint
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -176,22 +272,23 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
         }
     }
 
-    private fun drawDivideLine(canvas: Canvas) {
+    private fun drawDivideLine(canvas: Canvas, alpha: Int = 255) {
         this.game?.let { g ->
             g.getUsedArea()?.let { count ->
                 for (area in 1..count) {
                     g.getArea(area)?.let { pair ->
-                        drawLattice(pair, canvas)
+                        drawLattice(pair, canvas, alpha)
                     }
                 }
             }
         }
     }
 
-    protected fun drawLattice(pair: Pair<Int, Int>, canvas: Canvas) {
+    protected fun drawLattice(pair: Pair<Int, Int>, canvas: Canvas, alpha: Int = 255) {
         for (i in 0..9) {
             if (i % 3 != 0) {
                 paint.color = colorUtil.COLOR_INNER_LINE
+                paint.alpha = alpha
                 paint.strokeWidth = cellS * 0.01f
                 canvas.drawLine(
                     pair.second * cellS + startX,
@@ -210,6 +307,7 @@ class SpliceBoardView(context: Context?, attrs: AttributeSet?) :
             } else {
                 paint.color = colorUtil.COLOR_OUTER_LINE
                 paint.strokeWidth = cellS * 0.05f
+                paint.alpha = alpha
                 canvas.drawLine(
                     pair.second * cellS + startX,
                     (pair.first + i) * cellS + startY,

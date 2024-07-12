@@ -8,6 +8,7 @@
         android:id="@+id/topMenu"
         android:layout_width="0dp"
         android:layout_height="@dimen/dp48"
+        android:paddingRight="@dimen/dp8"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,11 +26,37 @@
             app:tint="@color/black" />
 
         <ImageView
+            android:id="@+id/pause"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_pause"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintBottom_toBottomOf="@id/setting"
+            app:layout_constraintTop_toTopOf="@id/setting"
+            app:layout_constraintRight_toLeftOf="@id/restart"
+            app:tint="@color/black" />
+
+        <ImageView
+            android:id="@+id/restart"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerInside"
+            android:src="@mipmap/ic_restart"
+            app:layout_constraintDimensionRatio="w,1:1"
+            app:layout_constraintBottom_toBottomOf="@id/setting"
+            app:layout_constraintTop_toTopOf="@id/setting"
+            app:layout_constraintRight_toLeftOf="@id/setting"
+            app:tint="@color/black" />
+
+        <ImageView
             android:id="@+id/setting"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerInside"
             android:src="@mipmap/img_setting"
+            app:layout_constraintHeight_default="percent"
+            app:layout_constraintHeight_percent="0.8"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="w,1:1"
             app:layout_constraintRight_toRightOf="parent"

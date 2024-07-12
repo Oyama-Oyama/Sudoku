@@ -271,6 +271,11 @@ internal abstract class SquareGameCreator constructor(gameSize: GameSize) : ICre
         }
     }
 
+    override fun getValidValue(cell: Cell): Int {
+        val values = getLeftValues(cell)
+        return if (values.size > 0) values[0] else 0
+    }
+
     private fun encodeGame(): String? {
         try {
             val array = JSONArray()

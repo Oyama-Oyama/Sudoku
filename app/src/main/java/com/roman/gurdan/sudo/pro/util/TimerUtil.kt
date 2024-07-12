@@ -11,6 +11,10 @@ class TimerUtil {
         this.canceled = false
     }
 
+    fun plus(d: Long) {
+        duration += d
+    }
+
     fun resume() {
         this.start()
     }
@@ -28,6 +32,7 @@ class TimerUtil {
     fun isCanceled(): Boolean = canceled
 
     fun reset() {
+        start = 0L
         duration = 0
         this.start()
     }

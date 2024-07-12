@@ -63,4 +63,6 @@ internal class ButterflyCreator(gameSize: GameSize) : ISpliceCreator(gameSize) {
         else if (row in 0..8 && col in 12..20) return AREA_THIRD
         return -1
     }
+
+
 }

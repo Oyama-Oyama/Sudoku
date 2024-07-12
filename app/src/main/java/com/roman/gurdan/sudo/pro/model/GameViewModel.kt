@@ -10,19 +10,17 @@ class GameViewModel(application: Application) : AndroidViewModel(application) {
 
     val gameDifficulty: MutableLiveData<Difficulty> = MutableLiveData<Difficulty>()
     val gameSize: MutableLiveData<GameSize> = MutableLiveData<GameSize>()
+    val error: MutableLiveData<Int> = MutableLiveData<Int>(0)
 
+    fun updateGameDifficulty(diff: Difficulty) = gameDifficulty.postValue(diff)
 
-    fun updateGameDifficulty(diff: Int) {
-        val difficulty =
-            if (diff == 0) Difficulty.randDifficulty(gameSize.value?.tag) else Difficulty.getDifficulty(
-                diff
-            )
-        gameDifficulty.postValue(difficulty)
+    fun updateGameSize(size: Int) = gameSize.postValue(GameSize.getGameSize(size))
+
+    fun addError(num: Int) {
+        val count = error.value!!.plus(num)
+        error.postValue(count)
     }
 
-    fun updateGameSize(size: Int) {
-        gameSize.postValue(GameSize.getGameSize(size))
-    }
-
+    fun setError(num: Int) = error.postValue(num)
 
 }

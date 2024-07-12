@@ -3,6 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="0dp"
+    android:visibility="gone"
+    android:animateLayoutChanges="true"
     app:layout_constraintBottom_toTopOf="@id/gameBoard"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
@@ -11,7 +13,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/menu1"
         style="@style/MenuItem"
-        app:icon="@mipmap/img_restart"
+        app:icon="@mipmap/ic_undo"
+        app:iconTint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/menu2"
@@ -20,7 +23,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/menu2"
         style="@style/MenuItem"
-        app:icon="@mipmap/img_redo"
+        app:icon="@mipmap/img_delete"
+        app:iconTint="@android:color/white"
         app:layout_constraintLeft_toRightOf="@id/menu1"
         app:layout_constraintRight_toLeftOf="@id/menu3"
         app:layout_constraintTop_toTopOf="@id/menu1" />
@@ -36,7 +40,8 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/menu4"
         style="@style/MenuItem"
-        app:icon="@mipmap/img_delete"
+        app:icon="@mipmap/ic_hint"
+        app:iconTint="@android:color/white"
         app:layout_constraintLeft_toRightOf="@id/menu3"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="@id/menu1" />

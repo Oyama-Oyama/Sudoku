@@ -3,8 +3,12 @@ package com.roman.gurdan.sudo.pro.activity
 import android.os.Bundle
 import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.roman.garden.base.BaseImpl
 import com.roman.garden.core.Easy
+import com.roman.gurdan.sudo.pro.BuildConfig
 import com.roman.gurdan.sudo.pro.R
 import com.roman.gurdan.sudo.pro.base.BaseActivity
 import com.roman.gurdan.sudo.pro.util.LocalStorage
@@ -15,7 +19,7 @@ class SettingActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
         setupSwitchStatus()
-       // Easy.instance.showInterstitial()
+        // Easy.instance.showInterstitial()
         findViewById<FrameLayout>(R.id.nativeContainer)?.let {
             Easy.instance.showNative(it)
         }
@@ -41,7 +45,7 @@ class SettingActivity : BaseActivity() {
         val status3 = LocalStorage.decode(LocalStorage.SETTING_HIGH_LIGHT_SAME_VALUE, true)
         three.isChecked = status3
         three.setOnCheckedChangeListener { _, b ->
-            LocalStorage.encode(LocalStorage.SETTING_HIGH_LIGHT_SAME_VALUE, b);
+            LocalStorage.encode(LocalStorage.SETTING_HIGH_LIGHT_SAME_VALUE, b)
         }
 
         val four = findViewById<SwitchMaterial>(R.id.switchFour)
@@ -49,6 +53,13 @@ class SettingActivity : BaseActivity() {
         four.isChecked = status4
         four.setOnCheckedChangeListener { _, b ->
             LocalStorage.encode(LocalStorage.SETTING_HIGH_LIGHT_ERROR_VALUE, b)
+        }
+
+        findViewById<TextView>(R.id.rate).setOnClickListener { v ->
+            BaseImpl.rate(v.context, v.context.packageName)
+        }
+        findViewById<TextView>(R.id.about).setOnClickListener { v ->
+            Toast.makeText(v.context, "${getString(R.string.app_name_pro)}-${BuildConfig.VERSION_NAME}", Toast.LENGTH_LONG).show();
         }
 
     }

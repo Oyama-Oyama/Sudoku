@@ -9,11 +9,15 @@ import com.roman.gurdan.sudo.pro.game.game.Cell
 import com.roman.gurdan.sudo.pro.game.game.IGameListener
 import com.roman.gurdan.sudo.pro.game.util.ColorUtil
 
+interface IBoardViewListener {
+    fun onReady()
+}
+
 abstract class IBoardView(context: Context?, attrs: AttributeSet?) : View(context, attrs),
     IGameListener {
 
     protected val DEFAULT_MAX_CELL_NUMBER_IN_LINE = 9
-
+    protected var isFirstIn = true
     protected var mwidth = 0
     protected var mheight = 0
     protected var boardSize = 0.0f
@@ -30,18 +34,24 @@ abstract class IBoardView(context: Context?, attrs: AttributeSet?) : View(contex
         isAntiAlias = true
         style = Paint.Style.FILL
     }
+
+    protected var animCellPaint: Paint = Paint().apply {
+        isAntiAlias = true
+        color = android.graphics.Color.parseColor("#4646EF")
+        style = Paint.Style.FILL
+    }
     protected var cellS: Float = 0.0f
     protected var startX: Float = 0.0f
     protected var startY: Float = 0.0f
     var selectedCell: Cell? = null
     protected lateinit var colorUtil: ColorUtil
 
-
     var highLightLineOrRow = true// 高亮相同行、列
     var highLightGroup = true // 高亮相同组
     var highLightSameNumber = true // 高亮相同数字
     var highLightErrorNumber = true // 高亮错误数字
 
+    var boardViewListener: IBoardViewListener? = null
 
     protected var game: Game? = null
 
@@ -73,6 +83,5 @@ abstract class IBoardView(context: Context?, attrs: AttributeSet?) : View(contex
     }
 
     protected abstract fun initBoardSize()
-
 
 }

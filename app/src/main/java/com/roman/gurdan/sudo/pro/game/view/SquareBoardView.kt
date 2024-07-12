@@ -2,9 +2,15 @@ package com.roman.gurdan.sudo.pro.game.view
 
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.MotionEvent
 import com.roman.gurdan.sudo.pro.game.util.GameSize
+import com.roman.gurdan.sudo.pro.game.util.LogUtil
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlin.math.max
 import kotlin.math.min
 
 class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(context, attrs) {
@@ -12,12 +18,15 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
 
     override fun initBoardSize() {
         this.game?.let {
-            it.setupDefaultSelectedCell().apply {
-                this@SquareBoardView.selectedCell = it.getCell(first, second)
-            }
+//            it.setupDefaultSelectedCell().apply {
+//                this@SquareBoardView.selectedCell = it.getCell(first, second)
+//            }
             cellS = boardSize / DEFAULT_MAX_CELL_NUMBER_IN_LINE
             startX = (mwidth - it.gameSize.row * cellS) / 2
             startY = (mheight - it.gameSize.col * cellS) / 2
+//            handler.postDelayed({
+//                postInvalidate()
+//            }, 100)
             this.postInvalidate()
         }
     }
@@ -42,14 +51,102 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
         setMeasuredDimension(mwidth, mheight)
     }
 
+    var lineAlpha = 0
+    var curAniRow = 0
+    var curAniNumberRow = 0
+
     override fun draw(canvas: Canvas) {
         super.draw(canvas)
-        canvas?.let { it ->
-            this.game?.let { _ ->
-                drawCellBg(it)
-                drawCellNumber(it)
-                drawInnerLine(it)
-              //  drawOuterLine(it)
+
+        this.game?.let { g ->
+            if (isFirstIn) {
+
+                if (lineAlpha < 255) {
+                    drawInnerLine(canvas, alpha = lineAlpha)
+                    lineAlpha += 5
+                    handler.postDelayed({
+                        postInvalidate()
+                    }, 5)
+                } else {
+                    paint.alpha = 255
+                    drawInnerLine(canvas)
+
+                    val maxRow = g.gameSize.row + 5
+                    if (curAniRow <= maxRow) {
+                        drawAnimCellBg(canvas, curAniRow)
+                        curAniRow += 1
+                        handler.postDelayed({ postInvalidate() }, 50)
+                    } else {
+                        if (curAniNumberRow <= g.gameSize.row) {
+                            drawAnimNumber(canvas, curAniNumberRow)
+                            curAniNumberRow += 1
+                            handler.postDelayed({ postInvalidate() }, 50)
+                        } else {
+                            drawAnimNumber(canvas, g.gameSize.row)
+                            isFirstIn = false
+                            boardViewListener?.onReady()
+                        }
+                    }
+                }
+            } else {
+                drawCellBg(canvas)
+                drawCellNumber(canvas)
+                drawInnerLine(canvas)
+                //  drawOuterLine(it)
+            }
+        }
+    }
+
+    private fun drawAnimCellBg(canvas: Canvas, curRow: Int) {
+        game?.let { g ->
+            g.getData()?.let { cells ->
+                cells.forEach { rows ->
+                    rows.forEach { cell ->
+                        if (cell.row > curRow) {
+
+                        } else {
+                            val offset = curRow - cell.row
+                            when (offset) {
+                                0 -> animCellPaint.alpha = 255
+                                1 -> animCellPaint.alpha = 200
+                                2 -> animCellPaint.alpha = 125
+                                3 -> animCellPaint.alpha = 75
+                                4 -> animCellPaint.alpha = 25
+                                else -> animCellPaint.alpha = 0
+                            }
+                            canvas.drawRect(
+                                cellS * cell.col + startX + cellS * 0.02f,
+                                cellS * cell.row + startY + cellS * 0.02f,
+                                cellS * cell.col + startX + cellS - cellS * 0.02f,
+                                cellS * cell.row + startY + cellS - cellS * 0.02f,
+                                animCellPaint
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun drawAnimNumber(canvas: Canvas, curRow: Int){
+        game?.let { g ->
+            g.getData()?.let { cells ->
+                cells.forEach { rows ->
+                    rows.forEach { cell ->
+                        if (cell.row < curRow) {
+                            numberPaint.textSize = cellS / 2
+                            if (cell.value != 0) {
+                                numberPaint.color = colorUtil.COLOR_PRESET_VALUE
+                                canvas.drawText(
+                                    cell.value.toString(),
+                                    cell.col * cellS + startX + cellS / 2,
+                                    cell.row * cellS + startY + cellS / 2 + cellS / 5,
+                                    numberPaint
+                                )
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -129,7 +226,7 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
         }
     }
 
-    private fun drawInnerLine(canvas: Canvas) {
+    private fun drawInnerLine(canvas: Canvas, curRow: Int = -1, alpha: Int = 255) {
         this.game?.let { g ->
             paint.color = colorUtil.COLOR_INNER_LINE
             paint.strokeWidth = cellS * 0.01f
@@ -140,13 +237,19 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
                     rowStep = 3
                     colStep = 3
                 }
+
                 else -> {
                     rowStep = 2
                     colStep = g.gameSize.row / 2
                 }
             }
-            for (i in 0..g.gameSize.row) {
+            var _curRow = curRow
+            if (_curRow == -1) {
+                _curRow = g.gameSize.row
+            }
+            for (i in 0.._curRow) {
                 paint.color = colorUtil.COLOR_INNER_LINE
+                paint.alpha = alpha
                 paint.strokeWidth = cellS * 0.01f
                 if (i % rowStep != 0) {
                     canvas.drawLine(
@@ -169,6 +272,7 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
 
                 paint.color = colorUtil.COLOR_OUTER_LINE
                 paint.strokeWidth = cellS * 0.05f
+                paint.alpha = alpha
                 if (i % rowStep == 0) {
                     canvas.drawLine(
                         startX,
@@ -212,11 +316,13 @@ class SquareBoardView(context: Context?, attrs: AttributeSet?) : IBoardView(cont
                     val index = if (tmp <= 1) 0 else 1
                     return startY + row * cellS + (cellS / 2) * index + cellS / 3
                 }
+
                 GameSize.SIZE_SIX.tag -> {
                     val tmp = value / 3.0f
                     val index = if (tmp <= 1) 0 else (if (tmp <= 2) 1 else 2)
                     return startY + row * cellS + (cellS / 2) * index + cellS / 3
                 }
+
                 else -> {
                     val tmp = value / 3.0f
                     val index = if (tmp <= 1) 0 else (if (tmp <= 2) 1 else 2)

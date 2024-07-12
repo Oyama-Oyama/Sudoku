@@ -42,6 +42,8 @@ internal abstract class ICreator constructor(var gameSize: GameSize) {
         highLightSameNumber: Boolean
     ): MutableList<Cell>
 
+    abstract fun getValidValue(cell: Cell): Int
+
     abstract fun recordGame(): IMirror?
 
     abstract fun recoverGame(iMirror: IMirror?)
@@ -51,7 +53,7 @@ internal abstract class ICreator constructor(var gameSize: GameSize) {
     /**
      *  使用到几个区域
      */
-    open fun getUsedArea():Int = 0
+    open fun getUsedArea(): Int = 0
 
     /**
      *  返回指定区域起始 行、列坐标
@@ -60,18 +62,13 @@ internal abstract class ICreator constructor(var gameSize: GameSize) {
 
     fun getEmptyCellCount(): Int {
         return when (difficulty) {
-            Difficulty.EASY -> (getCellCount() * getRate(
-                0.35f,
-                0.2f
-            )).roundToInt()
-            Difficulty.MEDIUM -> (getCellCount() * getRate(
-                0.55f,
-                0.3f
-            )).roundToInt()
-            Difficulty.HARD -> (getCellCount() * getRate(
-                0.95f,
-                0.5f
-            )).roundToInt()
+            Difficulty.EASY -> (getCellCount() * getRate(0.35f, 0.2f)).roundToInt()
+
+            Difficulty.MEDIUM -> (getCellCount() * getRate(0.55f, 0.3f)).roundToInt()
+
+            Difficulty.HARD -> (getCellCount() * getRate(0.75f, 0.5f)).roundToInt()
+
+            Difficulty.EXPERT -> (getCellCount() * getRate(0.95f, 0.7f)).roundToInt()
             else -> (getCellCount() / 2.0f).roundToInt()
         }
     }

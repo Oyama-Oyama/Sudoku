@@ -11,6 +11,7 @@ open class IMirror constructor(open val data: String) {
         this.isNoteOn = isNote
     }
 
+
     fun valid() = data.isNotEmpty()
 
 }

@@ -354,6 +354,12 @@ internal abstract class ISpliceCreator(gameSize: GameSize) : ICreator(gameSize) 
         return list
     }
 
+    override fun getValidValue(cell: Cell): Int {
+        val area = getCellArea(cell.row,cell.col)
+        val values = getLeftValues(area, cell)
+        return if (values.size > 0) values[0] else 0
+    }
+
     protected abstract fun realCreateGame()
 
     /**
