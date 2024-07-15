@@ -215,3 +215,6 @@
 -dontwarn android.app.Activity
 
 -keep class com.github.aachartmodel.aainfographics.** { *; }
+
+-keep class kotlinx.coroutines.** { *; }
+-keep class kotlinx.coroutines.android.** { *; }

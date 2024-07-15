@@ -11,9 +11,9 @@ android {
         applicationId "com.roman.gurdan.sudo.pro"
         minSdk 21
         targetSdk 34
-        versionCode 52
-        versionName "2023.05.19"
-
+        versionCode 53
+        versionName "2024.07.12"
+        multiDexEnabled true
     }
 
     signingConfigs {
@@ -28,7 +28,7 @@ android {
     buildTypes {
         release {
 //            jniDebuggable false
-//            minifyEnabled true
+            minifyEnabled true
 //            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
 //            //Zipalign优化
 //            zipAlignEnabled true
@@ -91,12 +91,12 @@ dependencies {
 //    implementation "com.google.android.gms:play-services-auth:17.0.0"
 
 
-    api 'com.easy:Core:1.0.4.11'
+    api 'com.easy:Core:1.0.5'
 //    api 'com.easy:unity:1.0.4.9'
-    api 'com.easy:admob:1.0.4.11'
+    api 'com.easy:admob:1.0.5'
 //    api 'com.easy:vungle:1.0.4.9'
-    api 'com.easy:adCore:1.0.4.11'
-    api 'com.easy:firebase:1.0.4.11'
+    api 'com.easy:adCore:1.0.5'
+    api 'com.easy:firebase:1.0.5'
 //    implementation 'androidx.core:core-ktx:+'
 
 
